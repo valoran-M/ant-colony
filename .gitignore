@@ -1,7 +1,4 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/c++,cmake,vscode
-# Edit at https://www.toptal.com/developers/gitignore?templates=c++,cmake,vscode
-
 ### C++ ###
 # Prerequisites
 *.d
@@ -67,5 +64,3 @@ CMakeUserPresets.json
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
-
-# End of https://www.toptal.com/developers/gitignore/api/c++,cmake,vscode
