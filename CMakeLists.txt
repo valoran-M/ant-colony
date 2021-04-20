@@ -26,6 +26,8 @@ set(HEADERS
 
 set(TESTS
     tests/tests.cpp
+
+    tests/models/case.cpp
 )
 
 set(LIBS

@@ -1,34 +1,33 @@
 #pragma once
 
 #include <vector>
+#include <array>
 
 class Case
 {
 private:
-    /*
-    pointeur vers les type abstrait
-    Ant *_ant;
-    Nest *_nest;
-    Sugar *_sugar;
-    */
+    std::array<std::size_t, 2> _coordinate;
     std::vector<std::size_t> _pheromoneNest;
     std::size_t _pheromoneSugar;
+    int _ant;
+    int _nest;
+    int _sugar;
 
 public:
-    bool containsSugar();
-    bool containsNest();
-    bool containsAnt();
-    bool isEmpty();
-    // bool isOnTrack(colonie)
+    std::array<std::size_t, 2> coord();
 
+    // predicate
+    bool containsAnt();
+    bool containsNest();
+    bool containsSugar();
+    bool isEmpty();
+
+    //Phermone Fonction
     void changePheromoneNest(std::size_t intensity, std::size_t colony);
     std::size_t getPheromoneNest(std::size_t colony);
 
     void changePheromeSugar(std::size_t intensity);
-    std::size_t getPheromoneSugar(std::size_t colony);
+    std::size_t getPheromoneSugar();
 
-    
-
-    Case();
-    ~Case();
+    Case(std::size_t x, std::size_t y, std::size_t numberColony);
 };
