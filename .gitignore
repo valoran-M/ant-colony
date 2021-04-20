@@ -60,3 +60,6 @@ CMakeUserPresets.json
 ### vscode ###
 .vscode/*
 *.code-workspace
+
+ant_sim
+run_tests
