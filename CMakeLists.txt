@@ -7,11 +7,21 @@ find_package(doctest REQUIRED)
 include(doctest)
 
 set(SRCS
-    
+    src/controllers/manager.cpp
+
+    src/models/case.cpp
+    src/models/grid.cpp
+
+    src/views/display.cpp
 )
 
 set(HEADERS
-    
+    src/controllers/manager.hpp
+
+    src/models/case.hpp
+    src/models/grid.hpp
+
+    src/views/display.hpp
 )
 
 set(TESTS
