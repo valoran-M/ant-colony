@@ -12,5 +12,4 @@ struct Grid
          std::size_t width,
          std::size_t numberColony);
     void reset();
-    ~Grid();
 };

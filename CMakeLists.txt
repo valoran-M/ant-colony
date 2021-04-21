@@ -8,11 +8,11 @@ include(doctest)
 
 set(SRCS
     src/controllers/manager.cpp
-
+    
+    src/models/ant.cpp
     src/models/case.cpp
     src/models/grid.cpp
-    src/models/ant.cpp
-    src/models/colony.cpp
+    src/models/coordinate.cpp
 
 
     src/views/display.cpp
@@ -21,10 +21,10 @@ set(SRCS
 set(HEADERS
     src/controllers/manager.hpp
 
+    src/models/ant.hpp
     src/models/case.hpp
     src/models/grid.hpp
-    src/models/ant.hpp
-    src/models/colony.hpp
+    src/models/coordinate.hpp
 
     src/views/display.hpp
 )

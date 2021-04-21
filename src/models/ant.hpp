@@ -1,10 +1,6 @@
 #pragma once
 
-struct Coord
-{
-    int x;
-    int y;
-};
+#include "models/coordinate.hpp"
 
 
 class Ant
