@@ -5,8 +5,8 @@
 
 struct Grid
 {
-    std::size_t height = 20;
-    std::size_t width = 20;
+    std::size_t height;
+    std::size_t width;
     std::vector<std::vector<Case>> grid;
     Grid(std::size_t height,
          std::size_t width,

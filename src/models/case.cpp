@@ -16,7 +16,7 @@ Case::Case(
     _nestPheromone = std::vector<std::size_t>(numberColony, 0);
 }
 
-// get
+// geter
 std::array<std::size_t, 2> Case::getCoord()
 {
     return _coordinate;

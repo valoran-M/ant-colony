@@ -10,7 +10,3 @@ Grid::Grid(std::size_t height,
     if (numberColony > 6)
         throw std::invalid_argument("To much clolony");
 }
-
-Grid::~Grid()
-{
-}
