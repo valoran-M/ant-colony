@@ -10,12 +10,11 @@ struct Coord
 class Ant
 {
 private:
-    int number;
-    char Team;
-    int Sugar; //surment un pointeur plutard
-    // int lifePoint;
+    int _number;
+    int _sugar; //surment un pointeur plutard
+    int _lifePoint;
     // int energy;          
-    Coord pos;
+    Coord _pos;
 
 public:
     bool inLife() const;
@@ -24,7 +23,8 @@ public:
     bool backHome() const;
     void takeSugar();
     void dropSugar();
-    void move(Coord pos);
-    Coord coord() const;
-    Ant(int number, char team, int sugar, Coord pos);
+    void move(Coord _pos);
+    Coord getCoord() const;
+    int getNumber() const;
+    Ant(int number, Coord pos);
 };

@@ -1,23 +1,43 @@
 #include "models/ant.hpp"
 
 //constructeur
-Ant::Ant()
+Ant::Ant(
+    int number,
+    Coord pos) : _number(number),
+                 _lifePoint(10),
+                 _sugar(0),
+                 _pos(pos)
 {
-    
+
 }
+
+
+//getter
+Coord Ant::getCoord() const
+{
+    return _pos;
+}
+
+
+int Ant::getNumber() const
+{
+    return _number;
+}
+
+//fin des getters
 
 
 //Return un bool en fonction de si la fourmie est en vie
 bool Ant::inLife() const
 {
-    return lifePoint > 0;
+    return _lifePoint > 0;
 }
 
 
 //retourne un bool en fonction de si la fourmie porte un sucre
 bool Ant::haveSugar() const
 {
-    return sugar > 0;
+    return _sugar > 0;
 }
 
 
@@ -36,25 +56,22 @@ bool Ant::backHome() const
 }
 
 
+//Ajoute un sucre a la fourmie
 void Ant::takeSugar()
 {
-
+    _sugar += 1;
 }
 
 
-vois Ant::dropSugar()
+//Enlève tous les sucres que porte la fourmie
+void Ant::dropSugar()
 {
-
+    _sugar = 0;
 }
 
 
-void Ant::move(pos)
+//Déplace la fourmie a la case la plus logique(blabla valéran)
+void Ant::move(Coord _pos)
 {
 
-}
-
-
-Coord Ant::coord() const
-{
-    return pos;
 }

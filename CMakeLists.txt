@@ -11,6 +11,9 @@ set(SRCS
 
     src/models/case.cpp
     src/models/grid.cpp
+    src/models/ant.cpp
+    src/models/colony.cpp
+
 
     src/views/display.cpp
 )
@@ -20,6 +23,8 @@ set(HEADERS
 
     src/models/case.hpp
     src/models/grid.hpp
+    src/models/ant.hpp
+    src/models/colony.hpp
 
     src/views/display.hpp
 )
