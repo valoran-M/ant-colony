@@ -36,7 +36,7 @@ set(TESTS
 )
 
 set(LIBS
-    
+    SDL2
 )
 
 add_executable(ant_sim src/main.cpp ${SRCS} ${HEADERS})
