@@ -3,6 +3,7 @@
 #include <array>
 #include <doctest/doctest.h>
 #include <stdexcept>
+#include <iostream>
 
 DOCTEST_TEST_SUITE_BEGIN("case test");
 
@@ -30,13 +31,18 @@ TEST_CASE("modifier")
     Case caseForTest = Case(0, 0, 3);
     SUBCASE("Ant")
     {
+        CHECK(caseForTest.getAnt() == -1);
         caseForTest.putAnt(1);
         CHECK(caseForTest.getAnt() == 1);
         CHECK_THROWS_AS(caseForTest.putAnt(5),
                         std::invalid_argument);
+        caseForTest.removeAnt();
+        CHECK(caseForTest.getAnt() == -1);
     }
+    caseForTest = Case(0, 0, 3);
     SUBCASE("Sugar")
     {
+        CHECK(caseForTest.getSugar() == -1);
         caseForTest.putSugar(4);
         CHECK(caseForTest.getSugar() == 4);
         CHECK_THROWS_AS(caseForTest.putSugar(5),
@@ -44,8 +50,10 @@ TEST_CASE("modifier")
         caseForTest.removeSugar();
         CHECK(caseForTest.getSugar() == -1);
     }
+    caseForTest = Case(0, 0, 3);
     SUBCASE("Neats")
     {
+        CHECK(caseForTest.getNest() == -1);
         caseForTest.putNeast(4);
         CHECK(caseForTest.getNest() == 4);
         CHECK_THROWS_AS(caseForTest.putNeast(5),
@@ -102,6 +110,20 @@ TEST_CASE("Predicate")
         CHECK(caseForTest.containsSugar());
         caseForTest.removeSugar();
         CHECK_FALSE(caseForTest.containsSugar());
+    }
+
+    SUBCASE("empty")
+    {
+        Case caseForEmptyTest = Case(0, 0, 3);
+        CHECK(caseForEmptyTest.isEmpty());
+        caseForEmptyTest.putAnt(1);
+        CHECK_FALSE(caseForEmptyTest.isEmpty());
+        caseForEmptyTest.removeAnt();
+        caseForEmptyTest.putSugar(1);
+        CHECK_FALSE(caseForEmptyTest.isEmpty());
+        caseForEmptyTest.removeSugar();
+        caseForEmptyTest.putNeast(7);
+        CHECK_FALSE(caseForEmptyTest.isEmpty());
     }
 }
 
