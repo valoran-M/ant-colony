@@ -1,9 +1,9 @@
 #include "models/ant.hpp"
 
 //constructeur
-Ant::Ant(/* args */)
+Ant::Ant()
 {
-
+    
 }
 
 

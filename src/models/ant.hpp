@@ -26,4 +26,5 @@ public:
     void dropSugar();
     void move(Coord pos);
     Coord coord() const;
+    Ant(int number, char team, int sugar, Coord pos);
 };
