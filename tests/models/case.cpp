@@ -14,9 +14,11 @@ TEST_CASE("constructor")
     CHECK(caseForTest.getNest() == -1);
     CHECK(caseForTest.getAnt() == -1);
     CHECK(caseForTest.getSugar() == -1);
-    CHECK(caseForTest.getSugarPhero() == 0);
     for (size_t i = 0; i < 3; i++)
+    {
         CHECK(caseForTest.getNestPhero(i) == 0);
+        CHECK(caseForTest.getSugarPhero(i) == 0);
+    }
     CHECK_FALSE(caseForTest.containsAnt());
     CHECK_FALSE(caseForTest.containsNest());
     CHECK_FALSE(caseForTest.containsSugar());
@@ -63,16 +65,16 @@ TEST_CASE("modifier")
     SUBCASE("Sugar pheromone")
     {
         // put
-        caseForTest.putSugarPheromone(100);
-        CHECK(caseForTest.getSugarPhero() == 100);
+        caseForTest.putSugarPheromone(0, 100);
+        CHECK(caseForTest.getSugarPhero(0) == 100);
 
         // decreases
-        caseForTest.decreasesSugarPheromone(50);
-        CHECK(caseForTest.getSugarPhero() == 50);
-        caseForTest.decreasesSugarPheromone(25);
-        CHECK(caseForTest.getSugarPhero() == 25);
-        caseForTest.decreasesSugarPheromone(50);
-        CHECK(caseForTest.getSugarPhero() == 0);
+        caseForTest.decreasesSugarPheromone(0, 50);
+        CHECK(caseForTest.getSugarPhero(0) == 50);
+        caseForTest.decreasesSugarPheromone(0, 25);
+        CHECK(caseForTest.getSugarPhero(0) == 25);
+        caseForTest.decreasesSugarPheromone(0, 50);
+        CHECK(caseForTest.getSugarPhero(0) == 0);
     }
 }
 
