@@ -29,47 +29,52 @@ std::size_t Case::getNestPhero(std::size_t colony)
     return _nestPheromone[colony];
 }
 
-std::size_t Case::getSugarPhero()
-{
-    return _sugarPheromone;
-}
-
-int Case::getAnt()
-{
-    return _ant;
-}
-
-int Case::gatNest()
-{
-    return _nest;
-}
-
-int Case::getSugar()
-{
-    return _sugar;
-}
+std::size_t Case::getSugarPhero() { return _sugarPheromone; }
+int Case::getAnt() { return _ant; }
+int Case::getNest() { return _nest; }
+int Case::getSugar() { return _sugar; }
 
 //predicate
-bool Case::containsAnt()
-{
-    return _ant != -1;
-}
-
-bool Case::containsNest()
-{
-    return _sugar != -1;
-}
-
-bool Case::containsSugar()
-{
-    return _sugar != -1;
-}
+bool Case::containsAnt() { return _ant != -1; }
+bool Case::containsNest() { return _nest != -1; }
+bool Case::containsSugar() { return _sugar != -1; }
 bool Case::isEmpty()
 {
     return !(containsAnt() || containsNest() || containsSugar());
 }
 
 // modifier
+bool Case::_checkCasePut()
+{
+    if (_ant != -1)
+        throw std::invalid_argument("already a ant");
+    if (_sugar != -1)
+        throw std::invalid_argument("already a sugar");
+    if (_nest != -1)
+        throw std::invalid_argument("already a nest");
+    return true;
+}
+void Case::putAnt(std::size_t ant)
+{
+    if (_checkCasePut())
+        _ant = ant;
+}
+
+void Case::removeAnt() { _ant = -1; }
+
+void Case::putSugar(std::size_t sugar)
+{
+    if (_checkCasePut())
+        _sugar = sugar;
+}
+void Case::removeSugar() { _sugar = -1; }
+
+void Case::putNeast(std::size_t neats)
+{
+    if (_checkCasePut())
+        _nest = neats;
+}
+
 void Case::putNestPheromone(std::size_t colony, std::size_t intensity)
 {
     if (colony >= _nestPheromone.size())
@@ -84,5 +89,8 @@ void Case::putSugarPheromone(std::size_t intensity)
 
 void Case::decreasesSugarPheromone(std::size_t amount)
 {
-    _sugarPheromone -= amount;
+    if (amount >= _sugarPheromone)
+        _sugarPheromone = 0;
+    else
+        _sugarPheromone -= amount;
 }

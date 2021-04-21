@@ -12,6 +12,8 @@ private:
     int _ant;
     int _nest;
     int _sugar;
+    
+    bool _checkCasePut();
 
 public:
     // access
@@ -19,7 +21,7 @@ public:
     std::size_t getNestPhero(std::size_t colony);
     std::size_t getSugarPhero();
     int getAnt();
-    int gatNest();
+    int getNest();
     int getSugar();
 
     // predicate
@@ -28,7 +30,12 @@ public:
     bool containsSugar();
     bool isEmpty();
 
-    // phermone fonction
+    // modifier
+    void putAnt(std::size_t ant);
+    void removeAnt();
+    void putSugar(std::size_t sugar);
+    void removeSugar();
+    void putNeast(std::size_t neats);
     void putNestPheromone(std::size_t colony, std::size_t intensity);
     void putSugarPheromone(std::size_t intensity);
     void decreasesSugarPheromone(std::size_t amount);
