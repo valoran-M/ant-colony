@@ -3,10 +3,12 @@
 #include <vector>
 #include <array>
 
+#include "models/coordinate.hpp"
+
 class Case
 {
 private:
-    std::array<std::size_t, 2> _coordinate;
+    Coord _coordinate;
     std::vector<std::size_t> _nestPheromone;
     std::vector<std::size_t> _sugarPheromone;
     int _ant;
@@ -18,7 +20,7 @@ private:
 
 public:
     // getter
-    std::array<std::size_t, 2> getCoord() { return _coordinate; }
+    Coord getCoord() { return _coordinate; }
     std::size_t getNestPhero(std::size_t colony);
     std::size_t getSugarPhero(std::size_t colony);
     int getAnt() { return _ant; }

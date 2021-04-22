@@ -1,4 +1,5 @@
 #include "models/case.hpp"
+#include "models/coordinate.hpp"
 
 #include <array>
 #include <doctest/doctest.h>
@@ -11,7 +12,7 @@ TEST_CASE("constructor")
 {
     Case caseForTest = Case(0, 0, 3);
     CHECK_FALSE(caseForTest.containsAnt());
-    CHECK(caseForTest.getCoord() == std::array<std::size_t, 2>{0, 0});
+    CHECK(caseForTest.getCoord() == Coord(0, 0));
     CHECK(caseForTest.getNest() == -1);
     CHECK(caseForTest.getAnt() == -1);
     CHECK(caseForTest.getSugar() == -1);

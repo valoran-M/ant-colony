@@ -15,7 +15,7 @@
 Case::Case(
     std::size_t x,
     std::size_t y,
-    std::size_t numberColony) : _coordinate(std::array<std::size_t, 2>{x, y}),
+    std::size_t numberColony) : _coordinate(Coord(x, y)),
                                 _nestPheromone(std::vector<std::size_t>(numberColony, 0)),
                                 _sugarPheromone(std::vector<std::size_t>(numberColony, 0)),
                                 _ant(-1),
