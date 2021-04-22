@@ -11,8 +11,9 @@ set(SRCS
     
     src/models/ant.cpp
     src/models/case.cpp
-    src/models/grid.cpp
+    src/models/colony.cpp
     src/models/coordinate.cpp
+    src/models/grid.cpp
 
 
     src/views/display.cpp
@@ -23,8 +24,9 @@ set(HEADERS
 
     src/models/ant.hpp
     src/models/case.hpp
-    src/models/grid.hpp
+    src/models/colony.hpp
     src/models/coordinate.hpp
+    src/models/grid.hpp
 
     src/views/display.hpp
 )
@@ -33,6 +35,7 @@ set(TESTS
     tests/tests.cpp
 
     tests/models/case.cpp
+    tests/models/coordinate.cpp
 )
 
 set(LIBS
