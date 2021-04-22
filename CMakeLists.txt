@@ -8,6 +8,7 @@ include(doctest)
 
 set(SRCS
     src/controllers/manager.cpp
+    src/controllers/initialize.cpp
     
     src/models/ant.cpp
     src/models/case.cpp

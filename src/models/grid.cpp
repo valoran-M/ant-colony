@@ -9,8 +9,7 @@ Grid::Grid() : height(0),
 }
 
 bool Grid::intialise(std::size_t xMax,
-                     std::size_t yMax,
-                     std::size_t numberColony)
+                     std::size_t yMax)
 {
     width = xMax;
     height = yMax;

@@ -14,6 +14,9 @@ private:
     std::mt19937 gen;
     std::size_t random_index(std::size_t lower,
                              std::size_t heiger);
+    void _inialise();
+    void _getData();
+    void _nestGeneration();
 
 public:
     Manager();

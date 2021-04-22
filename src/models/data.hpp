@@ -18,6 +18,9 @@ struct Data
 
     std::size_t lap;
     std::size_t speed;
+    std::size_t width;
+    std::size_t height;
+    std::size_t numberOfColony;
 
     void addLap() { lap++; }
     void reset();

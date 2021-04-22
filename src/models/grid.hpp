@@ -11,7 +11,6 @@ struct Grid
     std::vector<std::vector<Case>> grid;
     void reset();
     bool intialise(std::size_t xMax,
-                   std::size_t yMax,
-                   std::size_t numberColony);
+                   std::size_t yMax);
     Grid();
 };
