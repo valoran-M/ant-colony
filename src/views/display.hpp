@@ -6,6 +6,7 @@ private:
     SDL_Window *_windowMenu;
 
 public:
+    Display();
     Display(std::size_t height, std::size_t width);
     void close();
 };

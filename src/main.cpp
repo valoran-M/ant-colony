@@ -1,8 +1,8 @@
-#include "views/display.hpp"
+#include "controllers/manager.hpp"
 
 int main(int argc, char const *argv[])
 {
-    //Display window = Display(400, 500);
-    //window.close();
+    Manager simulation{};
+    simulation.start();
     return 0;
 }

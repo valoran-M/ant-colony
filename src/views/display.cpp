@@ -2,6 +2,10 @@
 
 #include <SDL2/SDL.h>
 
+Display::Display()
+{
+}
+
 Display::Display(std::size_t height, std::size_t width)
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)

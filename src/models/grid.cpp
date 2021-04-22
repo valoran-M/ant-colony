@@ -2,11 +2,17 @@
 
 #include "models/grid.hpp"
 
-Grid::Grid(std::size_t height,
-           std::size_t width,
-           std::size_t numberColony) : width(width),
-                                       height(height)
+Grid::Grid() : height(0),
+               width(0),
+               grid()
 {
-    if (numberColony > 6)
-        throw std::invalid_argument("To much clolony");
+}
+
+bool Grid::intialise(std::size_t xMax,
+                     std::size_t yMax,
+                     std::size_t numberColony)
+{
+    width = xMax;
+    height = yMax;
+    return true;
 }

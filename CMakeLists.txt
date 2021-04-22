@@ -13,6 +13,7 @@ set(SRCS
     src/models/case.cpp
     src/models/colony.cpp
     src/models/coordinate.cpp
+    src/models/data.cpp
     src/models/grid.cpp
 
 
@@ -26,6 +27,7 @@ set(HEADERS
     src/models/case.hpp
     src/models/colony.hpp
     src/models/coordinate.hpp
+    src/models/data.hpp
     src/models/grid.hpp
 
     src/views/display.hpp
