@@ -1,4 +1,6 @@
 #include "models/ant.hpp"
+#include "models/coordinate.hpp"
+
 
 //constructeur
 Ant::Ant(
@@ -8,7 +10,6 @@ Ant::Ant(
                  _sugar(0),
                  _pos(pos)
 {
-
 }
 
 
@@ -24,54 +25,14 @@ int Ant::getNumber() const
     return _number;
 }
 
-//fin des getters
-
-
-//Return un bool en fonction de si la fourmie est en vie
-bool Ant::inLife() const
+//Déplace la fourmie d'un vecteur crée par le couple d'entier x , y
+//On verifie seulement que la case vers la qu'elle elle se déplace est valide
+void Ant::move(int x, int y)
 {
-    return _lifePoint > 0;
-}
-
-
-//retourne un bool en fonction de si la fourmie porte un sucre
-bool Ant::haveSugar() const
-{
-    return _sugar > 0;
-}
-
-
-//Les fonctions suvante son suprimable blabla avec valéran
-
-//Retourne True si la fourmie n'as pas de sucre
-bool Ant::research() const
-{
-    return haveSugar();
-}
-
-//Retourne False si la fourmie possède du sucre
-bool Ant::backHome() const
-{
-    return haveSugar();
-}
-
-
-//Ajoute un sucre a la fourmie
-void Ant::takeSugar()
-{
-    _sugar += 1;
-}
-
-
-//Enlève tous les sucres que porte la fourmie
-void Ant::dropSugar()
-{
-    _sugar = 0;
-}
-
-
-//Déplace la fourmie a la case la plus logique(blabla valéran)
-void Ant::move(Coord _pos)
-{
-
+    if ((_pos[0] + x < 0) or (_pos[0] + x >= grid.width))
+        throw std::invalid_argument("You are trying to move outside from the grid");
+    if ((_pos[1] + y < 0) or (_pos[1] + y >= grid.height))
+        throw std::invalid_argument("You are trying to move outside from the grid");
+    _pos[0] += x;
+    _pos[1] += y;
 }

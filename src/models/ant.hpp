@@ -7,21 +7,21 @@ class Ant
 {
 private:
     int _number;
-    int _sugar; //surment un pointeur plutard
+    int _sugar;
     int _lifePoint;
     // int energy;          
     Coord _pos;
 
 public:
 //predicat
-    bool inLife() const;
-    bool haveSugar() const;
-    bool research() const;
-    bool backHome() const;
-//fonction
-    void takeSugar();
-    void dropSugar();
-    void move(Coord _pos);
+    bool inLife() const { return _lifePoint > 1; }
+    bool haveSugar() const { return _sugar > 0; }
+    bool research() const { return haveSugar(); }
+    bool backHome() const { return not(haveSugar()); }
+//fonction qui modifie une caractéristique de la fourmie
+    void takeSugar() { _sugar += 1; };
+    void dropSugar() { _sugar = 0 };
+    void move(int x,int y);
 //getter
     Coord getCoord() const;
     int getNumber() const;

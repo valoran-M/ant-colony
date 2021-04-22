@@ -1,4 +1,4 @@
-#include "views/display.hpp"
+#include "display.hpp"
 
 #include <SDL2/SDL.h>
 

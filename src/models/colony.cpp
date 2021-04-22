@@ -6,16 +6,16 @@
 
 
 //full bug a réparer de toute Urgence
-//Colony::Colony(char nom,
-//                Coord posi) :
-//                            team(nom),
-//                            sugar(100),
-//                            ants(std::vector<Ant>(Ant a(0,pos[0]))),
-//                            pos(std::vector<Coord>(posi))
-//{
-    //if (grid[posi.x][posi.y] != 'None') 
-    //    throwstd::invalid_argument ("La case ou l'on implémente la coloni n'est pas vide")
-//}
+
+Colony::Colony( char nom,
+                Coord posi) :
+                            team(nom),
+                            sugar(100),
+                            ants(std::vector<Ant>(1, Ant(0,pos[0]))),
+                            pos(std::vector<Coord>(1, posi))
+{
+    
+}
 
 
 //Il y a volontairement une erreure dans la création de la fourmie en attendant une vrai struct coord
