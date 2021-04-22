@@ -70,7 +70,7 @@ std::size_t Case::getNestPhero(std::size_t colony)
 {
     if (_checkColony(colony))
         return _nestPheromone[colony];
-    throw;
+    return 0;
 }
 
 /**
@@ -86,7 +86,7 @@ std::size_t Case::getSugarPhero(std::size_t colony)
 {
     if (_checkColony(colony))
         return _sugarPheromone[colony];
-    throw;
+    return 0;
 }
 
 /**
