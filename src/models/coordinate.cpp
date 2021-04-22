@@ -1,13 +1,29 @@
+#include "models/coordinate.hpp"
 #include <stdexcept>
 #include <vector>
 #include <iostream>
-#include "models/coordinate.hpp"
 
+/**
+ * Constructor for Coor
+ * @param std::size_t x
+ * @param std::size_t y
+ * 
+ * @author Valeran MAYTIE
+ * @condifence 5 
+ **/
 Coord::Coord(std::size_t x, std::size_t y) : _x(x),
                                              _y(y)
 {
 }
 
+/**
+ * opetor [] for Coor
+ * @param unsigned accesseur
+ * 
+ * @return std::size_t & adress of x or y coordinate
+ * @author Valeran MAYTIE
+ * @condifence 5 
+ **/
 std::size_t &Coord::operator[](unsigned i)
 {
     if (i == 0)
@@ -18,16 +34,41 @@ std::size_t &Coord::operator[](unsigned i)
         throw std::invalid_argument("The coordinates are in 2 dimension");
 }
 
+/**
+ * opetor == for Coor
+ * @param Coor const & other Coor
+ * 
+ * @return bool true if this == other
+ * @author Valeran MAYTIE
+ * @condifence 5 
+ **/
 bool Coord::operator==(Coord const &other) const
 {
     return _x == other.getX() && _y == other.getY();
 }
 
+/**
+ * opetor != for Coor
+ * @param Coor const & other Coor
+ * 
+ * @return bool true if this != other
+ * @author Valeran MAYTIE
+ * @condifence 5 
+ **/
 bool Coord::operator!=(Coord const &other) const
 {
     return _x != other.getX() || _y != other.getY();
 }
 
+/** 
+ * return neigbour of Coord
+ * @param std::size_t max x in table
+ * @param std::size_t max y in table
+ * 
+ * @return std::vecotr<Coord> set of coord
+ * @author Valeran MAYTIE
+ * @condifence 5 
+ **/
 std::vector<Coord> Coord::getNeigbour(std::size_t width, std::size_t height) const
 {
     int xMin = std::max<int>(getX() - 1, 0);

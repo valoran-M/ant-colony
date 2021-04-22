@@ -1,5 +1,4 @@
 #include "models/case.hpp"
-
 #include <stdexcept>
 #include <vector>
 

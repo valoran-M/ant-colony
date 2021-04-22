@@ -5,7 +5,7 @@ void Manager::_initialize()
 {
     _getData();
     _nestGeneration();
-    _grid.intialise(_data.width, _data.height);
+    _grid.initilize(_data.width, _data.height);
 }
 
 void Manager::_getData()

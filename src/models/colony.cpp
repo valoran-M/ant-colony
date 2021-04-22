@@ -1,8 +1,9 @@
-#include <vector>
 #include "models/colony.hpp"
 #include "models/ant.hpp"
 #include "models/grid.hpp"
 #include "models/case.hpp"
+#include <vector>
+
 
 //full bug a réparer de toute Urgence
 

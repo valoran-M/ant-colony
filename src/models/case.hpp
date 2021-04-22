@@ -1,9 +1,8 @@
 #pragma once
 
+#include "models/coordinate.hpp"
 #include <vector>
 #include <array>
-
-#include "models/coordinate.hpp"
 
 class Case
 {

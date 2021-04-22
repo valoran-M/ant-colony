@@ -1,5 +1,4 @@
 #include "display.hpp"
-
 #include <SDL2/SDL.h>
 
 Display::Display()

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include "models/ant.hpp"
+#include <vector>
 
 
 struct Colony

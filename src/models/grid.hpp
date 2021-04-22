@@ -1,8 +1,8 @@
 #pragma once
 
+#include "models/case.hpp"
 #include <vector>
 
-#include "models/case.hpp"
 
 struct Grid
 {
@@ -10,7 +10,7 @@ struct Grid
     std::size_t width;
     std::vector<std::vector<Case>> grid;
     void reset();
-    bool intialise(std::size_t xMax,
+    bool initilize(std::size_t xMax,
                    std::size_t yMax);
     Grid();
 };
