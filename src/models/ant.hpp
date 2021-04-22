@@ -20,7 +20,7 @@ public:
     bool backHome() const { return not(haveSugar()); }
 //fonction qui modifie une caractéristique de la fourmie
     void takeSugar() { _sugar += 1; };
-    void dropSugar() { _sugar = 0 };
+    void dropSugar() { _sugar = 0; };
     void move(int x,int y);
 //getter
     Coord getCoord() const;
