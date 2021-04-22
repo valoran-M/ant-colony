@@ -1,9 +1,11 @@
 #include "controllers/manager.hpp"
 #include <iostream>
 
-void Manager::_inialise()
+void Manager::_initialize()
 {
     _getData();
+    _nestGeneration();
+    _grid.intialise(_data.width, _data.height);
 }
 
 void Manager::_getData()
@@ -24,5 +26,15 @@ void Manager::_getData()
 
 void Manager::_nestGeneration()
 {
-    
+    std::vector<std::array<Coord, 4>> nests;
+    for (size_t i = 0; i < _data.numberOfColony; i++)
+    {
+        std::size_t x = random_index(0, _data.width - 1);
+        std::size_t y = random_index(0, _data.height - 1);
+        nests.push_back(std::array<Coord, 4>{
+            Coord(x, y),
+            Coord(x + 1, y),
+            Coord(x, y + 1),
+            Coord(x + 1, y + 1)});
+    }
 }

@@ -4,15 +4,16 @@
 
 Display::Display()
 {
-}
-
-Display::Display(std::size_t height, std::size_t width)
-{
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
     {
         fprintf(stdout, "Faild to initialize SDL (%s)\n", SDL_GetError());
         exit(-1);
     }
+}
+
+
+void Display::newWindows(std::size_t height, std::size_t width)
+{
     _windowMenu = SDL_CreateWindow("ant simulator", SDL_WINDOWPOS_UNDEFINED,
                                    SDL_WINDOWPOS_UNDEFINED,
                                    width,
