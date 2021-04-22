@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include <vector>
-
+#include <iostream>
 #include "models/coordinate.hpp"
 
 Coord::Coord(std::size_t x, std::size_t y) : _x(x),
@@ -30,16 +30,15 @@ bool Coord::operator!=(Coord const &other) const
 
 std::vector<Coord> Coord::getNeigbour(std::size_t width, std::size_t height) const
 {
-    std::size_t xMin = std::max<std::size_t>(getX() - 1, 0);
-    std::size_t xMax = std::min<std::size_t>(getX() + 1, 0);
-    std::size_t yMin = std::max<std::size_t>(getY() - 1, 0);
-    std::size_t yMax = std::min<std::size_t>(getY() + 1, 0);
+    int xMin = std::max<int>(getX() - 1, 0);
+    int xMax = std::min<int>(getX() + 1, width - 1);
+    int yMin = std::max<int>(getY() - 1, 0);
+    int yMax = std::min<int>(getY() + 1, height - 1);
 
     std::vector<Coord> neigbours;
-
-    for (std::size_t y = yMin; y < yMax; y++)
-        for (std::size_t x = xMin - 1; x < xMax; x++)
-            if (x != getX() && y != getY())
+    for (std::size_t y = yMin; y <= yMax; y++)
+        for (std::size_t x = xMin; x <= xMax; x++)
+            if (x != getX() || y != getY())
                 neigbours.push_back(Coord(x, y));
     return neigbours;
 }

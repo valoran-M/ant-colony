@@ -1,5 +1,5 @@
 #include <doctest/doctest.h>
-
+#include <iostream>
 #include "models/coordinate.hpp"
 
 TEST_SUITE_BEGIN("");
@@ -42,6 +42,44 @@ TEST_CASE("operator bool")
         CHECK(test1 != test4);
         CHECK(test1 != test5);
     }
+}
+
+TEST_CASE("get neigbour")
+{
+    CHECK(Coord(0, 0).getNeigbour(10, 10) == std::vector<Coord>{Coord(1, 0),
+                                                                Coord(0, 1),
+                                                                Coord(1, 1)});
+    CHECK(Coord(9, 9).getNeigbour(10, 10) == std::vector<Coord>{Coord(8, 8),
+                                                                Coord(9, 8),
+                                                                Coord(8, 9)});
+    CHECK(Coord(5, 0).getNeigbour(10, 10) == std::vector<Coord>{Coord(4, 0),
+                                                                Coord(6, 0),
+                                                                Coord(4, 1),
+                                                                Coord(5, 1),
+                                                                Coord(6, 1)});
+    CHECK(Coord(0, 5).getNeigbour(10, 10) == std::vector<Coord>{Coord(0, 4),
+                                                                Coord(1, 4),
+                                                                Coord(1, 5),
+                                                                Coord(0, 6),
+                                                                Coord(1, 6)});
+    CHECK(Coord(5, 9).getNeigbour(10, 10) == std::vector<Coord>{Coord(4, 8),
+                                                                Coord(5, 8),
+                                                                Coord(6, 8),
+                                                                Coord(4, 9),
+                                                                Coord(6, 9)});
+    CHECK(Coord(9, 5).getNeigbour(10, 10) == std::vector<Coord>{Coord(8, 4),
+                                                                Coord(9, 4),
+                                                                Coord(8, 5),
+                                                                Coord(8, 6),
+                                                                Coord(9, 6)});
+    CHECK(Coord(5, 5).getNeigbour(10, 10) == std::vector<Coord>{Coord(4, 4),
+                                                                Coord(5, 4),
+                                                                Coord(6, 4),
+                                                                Coord(4, 5),
+                                                                Coord(6, 5),
+                                                                Coord(4, 6),
+                                                                Coord(5, 6),
+                                                                Coord(6, 6)});
 }
 
 TEST_SUITE_END();
