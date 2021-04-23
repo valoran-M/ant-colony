@@ -1,6 +1,7 @@
 #pragma once
 
 #include "models/ant.hpp"
+#include "models/coordinate.hpp"
 #include <vector>
 
 
@@ -17,5 +18,5 @@ struct Colony
     //fonctions internes
     Colony(char nom, Coord posi);
     void newAnt();
-    int getNbAnt() const { return return ants.size(); }
+    int getNbAnt() const { return ants.size(); }
 };
