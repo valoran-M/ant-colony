@@ -10,7 +10,7 @@ Colony::Colony(char nom,
                Coord posi) : team(nom),
                              sugar(100),
                              ants(std::vector<Ant>(1, Ant(0, pos[0]))),
-                             pos(std::vector<Coord>(1, posi))
+                             nest(std::vector<Coord>(1, posi))
 {
 }
 

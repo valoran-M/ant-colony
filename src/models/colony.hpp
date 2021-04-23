@@ -12,7 +12,7 @@ struct Colony
     char team;
     std::size_t sugar;
     std::vector<Ant> ants;
-    std::vector<Coord> pos;
+    std::vector<Coord> nest;
 
 
     //fonctions internes
