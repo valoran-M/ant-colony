@@ -1,6 +1,5 @@
 #include "models/grid.hpp"
 
-
 /**
  * Constructor for grid
  * 
@@ -24,10 +23,18 @@ Grid::Grid() : height(0),
  * @author Valeran MAYTIE
  * @confidence 2
  **/
-bool Grid::initilize(std::size_t xMax,
-                     std::size_t yMax)
+bool Grid::initilize(unsigned int xMax,
+                     unsigned int yMax,
+                     unsigned int numberOfColony)
 {
     width = xMax;
     height = yMax;
+    grid = std::vector<std::vector<Case>>(yMax);
+    for (size_t y = 0; y < yMax; y++)
+    {
+        grid[y] = std::vector<Case>(xMax);
+        for (size_t x = 0; x < xMax; x++)
+            grid[y][x] = Case(x, y, numberOfColony);
+    }
     return true;
 }

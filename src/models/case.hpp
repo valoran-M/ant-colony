@@ -43,5 +43,6 @@ public:
     void decreasesSugarPheromone(std::size_t colony, std::size_t amount);
 
     // constructor
+    Case() {}
     Case(std::size_t x, std::size_t y, std::size_t numberColony);
 };

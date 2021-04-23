@@ -3,14 +3,14 @@
 #include "models/case.hpp"
 #include <vector>
 
-
 struct Grid
 {
-    std::size_t height;
-    std::size_t width;
+    unsigned int height;
+    unsigned int width;
     std::vector<std::vector<Case>> grid;
     void reset();
-    bool initilize(std::size_t xMax,
-                   std::size_t yMax);
+    bool initilize(unsigned int xMax,
+                   unsigned int yMax,
+                   unsigned int numberOfColony);
     Grid();
 };

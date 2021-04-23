@@ -16,7 +16,8 @@ private:
                              std::size_t heiger);
     void _initialize();
     void _getData();
-    void _nestGeneration();
+    void _colonnyGeneration();
+    void _nestCreation(char colony, unsigned int coef);
 
 public:
     Manager();
