@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <vector>
+#include <random>
 
 class Coord
 {
@@ -18,4 +19,8 @@ public:
     std::vector<Coord> getNeigbour(std::size_t xMax, std::size_t yMax) const;
     Coord() {}
     Coord(std::size_t x, std::size_t y);
+    Coord(std::size_t xMin,
+          std::size_t xMax,
+          std::size_t yMin,
+          std::size_t yMax);
 };

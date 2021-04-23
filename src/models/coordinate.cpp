@@ -1,7 +1,6 @@
 #include "models/coordinate.hpp"
 #include <stdexcept>
 #include <vector>
-#include <iostream>
 
 /**
  * Constructor for Coor
@@ -14,6 +13,26 @@
 Coord::Coord(std::size_t x, std::size_t y) : _x(x),
                                              _y(y)
 {
+}
+
+/**
+ * random constructor Coord
+ * @param std::size_t xMin
+ * @param std::size_t xMax
+ * @param std::size_t yMin
+ * @param std::size_t yMax
+ * 
+ * @author Valeran MAYHTIE
+ * @confidence 2
+ **/
+Coord::Coord(std::size_t xMin,
+             std::size_t xMax,
+             std::size_t yMin,
+             std::size_t yMax)
+{
+    
+    _x = rand() % (xMax - xMin) + xMin;
+    _y = rand() % (yMax - yMin) + yMin;
 }
 
 /**

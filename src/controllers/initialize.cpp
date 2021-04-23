@@ -30,6 +30,7 @@ void Manager::_getData()
 void Manager::_colonnyGeneration()
 {
     std::cout << "nest generation : ";
+
     unsigned int coef;
     if (_data.numberOfColony * 2 < _data.width)
         coef = (_data.width - 1) / _data.numberOfColony;
@@ -45,25 +46,23 @@ void Manager::_colonnyGeneration()
 
 void Manager::_nestCreation(char colony, unsigned int coef)
 {
-    std::size_t x, y;
+    Coord base;
     if (_data.numberOfColony * 2 < _data.width)
-    {
-        x = random_index(coef * colony, coef * (colony + 1) - 1);
-        y = random_index(0, _data.height - 2);
-    }
+        base = Coord(coef * colony,
+                     coef * (colony + 1) - 1,
+                     0,
+                     _data.height - 2);
     else
-    {
-        x = random_index(0, _data.width - 2);
-        y = random_index(coef * colony, coef * (colony + 1) - 1);
-    }
-    std::cout << "(" << x << ", " << y << ") ";
-    _data.colonies[colony].nest.insert(_data.colonies[colony].nest.end(),
-                                       {Coord(x, y),
-                                        Coord(x + 1, y),
-                                        Coord(x, y + 1),
-                                        Coord(x + 1, y + 1)});
+        base = Coord(0,
+                     coef * colony,
+                     _data.width - 2,
+                     coef * (colony + 1) - 1);
 
-    for (size_t i = y; i <= y + 1; i++)
-        for (size_t j = x; j <= x + 1; j++)
+    std::cout << "(" << base[0] << ", " << base[1] << ") ";
+    _data.colonies[colony].nest.insert(_data.colonies[colony].nest.end(),
+                                       {});
+
+    for (size_t i = base[1]; i <= base[1] + 1; i++)
+        for (size_t j = base[0]; j <= base[0] + 1; j++)
             _grid.grid[i][j].putNeast(colony);
 }
