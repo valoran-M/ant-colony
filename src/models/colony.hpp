@@ -4,7 +4,6 @@
 #include "models/coordinate.hpp"
 #include <vector>
 
-
 struct Colony
 {
 
@@ -14,9 +13,11 @@ struct Colony
     std::vector<Ant> ants;
     std::vector<Coord> nest;
 
-
     //fonctions internes
-    Colony(char nom, Coord posi);
-    void newAnt();
+    Colony(char nom);
+    void antBirth(Coord coord);
+    void addAnt(Coord coord) { ants.push_back(Ant(ants.size(), coord)); }
     int getNbAnt() const { return ants.size(); }
+    void addNest(Coord coord);
+    void removeNest(Coord coord);
 };

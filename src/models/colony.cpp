@@ -4,23 +4,28 @@
 #include "models/case.hpp"
 #include <vector>
 
-
 //Constructeur
-Colony::Colony(char nom,
-               Coord posi) : team(nom),
-                             sugar(100),
-                             ants(std::vector<Ant>(1, Ant(0, pos[0]))),
-                             nest(std::vector<Coord>(1, posi))
+Colony::Colony(char nom) : team(nom)
 {
 }
 
+void Colony::addNest(Coord coord)
+{
+    nest.push_back(coord);
+}
 
-//Il y a volontairement une erreure dans la création de la fourmie en attendant une vrai struct coord
-void Colony::newAnt()
+void Colony::removeNest(Coord coord)
+{
+    for (size_t i = 0; i < nest.size(); i++)
+        if (nest[i] == coord)
+            nest.erase(nest.begin() + i);
+}
+
+void Colony::antBirth(Coord coord)
 {
     if (sugar >= 25)
     {
         sugar -= 25;
-        ants.push_back(Ant(ants.size(), Coord(0,0)));
+        addAnt(coord);
     }
 }
