@@ -5,8 +5,7 @@
 #include <vector>
 
 
-//full bug a réparer de toute Urgence
-
+//Constructeur
 Colony::Colony(char nom,
                Coord posi) : team(nom),
                              sugar(100),
@@ -15,17 +14,13 @@ Colony::Colony(char nom,
 {
 }
 
+
 //Il y a volontairement une erreure dans la création de la fourmie en attendant une vrai struct coord
 void Colony::newAnt()
 {
     if (sugar >= 25)
     {
         sugar -= 25;
-        ants.push_back(Ant(std::size(ants), pos[0]));
+        ants.push_back(Ant(ants.size(), Coord(0,0)));
     }
-}
-
-int Colony::getNbAnt() const
-{
-    return std::size(ants);
 }

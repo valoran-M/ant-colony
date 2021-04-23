@@ -37,6 +37,7 @@ set(HEADERS
 set(TESTS
     tests/tests.cpp
 
+    tests/models/ant.cpp
     tests/models/case.cpp
     tests/models/coordinate.cpp
 )

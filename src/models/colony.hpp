@@ -17,5 +17,5 @@ struct Colony
     //fonctions internes
     Colony(char nom, Coord posi);
     void newAnt();
-    int getNbAnt() const;
+    int getNbAnt() const { return return ants.size(); }
 };
