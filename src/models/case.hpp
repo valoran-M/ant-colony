@@ -8,8 +8,8 @@ class Case
 {
 private:
     Coord _coordinate;
-    std::vector<std::size_t> _nestPheromone;
-    std::vector<std::size_t> _sugarPheromone;
+    std::vector<float> _nestPheromone;
+    std::vector<float> _sugarPheromone;
     int _ant;
     int _nest;
     int _sugar;
@@ -20,8 +20,8 @@ private:
 public:
     // getter
     Coord getCoord() { return _coordinate; }
-    std::size_t getNestPhero(std::size_t colony);
-    std::size_t getSugarPhero(std::size_t colony);
+    float getNestPhero(unsigned int colony);
+    float getSugarPhero(unsigned int colony);
     int getAnt() { return _ant; }
     int getNest() { return _nest; }
     int getSugar() { return _sugar; }
@@ -37,12 +37,12 @@ public:
     void removeSugar() { _sugar = -1; }
     void putAnt(std::size_t ant);
     void putSugar(std::size_t sugar);
-    void putNeast(std::size_t neats);
-    void putNestPheromone(std::size_t colony, std::size_t intensity);
-    void putSugarPheromone(std::size_t colony, std::size_t intensity);
-    void decreasesSugarPheromone(std::size_t colony, std::size_t amount);
+    void putNeast(int colony);
+    void putNestPheromone(unsigned int colony, float intensity);
+    void putSugarPheromone(unsigned int colony, float intensity);
+    void decreasesSugarPheromone(unsigned int colony, float amount);
 
     // constructor
     Case() {}
-    Case(std::size_t x, std::size_t y, std::size_t numberColony);
+    Case(std::size_t x, std::size_t y, unsigned int numberColony);
 };

@@ -48,21 +48,23 @@ void Manager::_nestCreation(char colony, unsigned int coef)
 {
     Coord base;
     if (_data.numberOfColony * 2 < _data.width)
-        base = Coord(coef * colony,
-                     coef * (colony + 1) - 1,
-                     0,
-                     _data.height - 2);
+        base = Coord(coef * colony, coef * (colony + 1) - 1,
+                     0, _data.height - 2);
     else
-        base = Coord(0,
-                     coef * colony,
-                     _data.width - 2,
-                     coef * (colony + 1) - 1);
+        base = Coord(0, coef * colony,
+                     _data.width - 2, coef * (colony + 1) - 1);
 
     std::cout << "(" << base[0] << ", " << base[1] << ") ";
     _data.colonies[colony].nest.insert(_data.colonies[colony].nest.end(),
-                                       {});
+                                       {base,
+                                        Coord(base[0] + 1, base[1]),
+                                        Coord(base[0], base[1] + 1),
+                                        Coord(base[0] + 1, base[1] + 1)});
 
     for (size_t i = base[1]; i <= base[1] + 1; i++)
         for (size_t j = base[0]; j <= base[0] + 1; j++)
+        {
             _grid.grid[i][j].putNeast(colony);
+            _grid.grid[i][j].putNestPheromone(colony, 1);
+        }
 }

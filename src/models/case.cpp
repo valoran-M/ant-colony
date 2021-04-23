@@ -14,9 +14,9 @@
 Case::Case(
     std::size_t x,
     std::size_t y,
-    std::size_t numberColony) : _coordinate(Coord(x, y)),
-                                _nestPheromone(std::vector<std::size_t>(numberColony, 0)),
-                                _sugarPheromone(std::vector<std::size_t>(numberColony, 0)),
+    unsigned int numberColony) : _coordinate(Coord(x, y)),
+                                _nestPheromone(std::vector<float>(numberColony, 0)),
+                                _sugarPheromone(std::vector<float>(numberColony, 0)),
                                 _ant(-1),
                                 _nest(-1),
                                 _sugar(-1)
@@ -65,7 +65,7 @@ bool Case::_checkColony(std::size_t colony)
  * @author Valeran MAYTIE
  * @confidenc 5
  **/
-std::size_t Case::getNestPhero(std::size_t colony)
+float Case::getNestPhero(unsigned int colony)
 {
     if (_checkColony(colony))
         return _nestPheromone[colony];
@@ -81,7 +81,7 @@ std::size_t Case::getNestPhero(std::size_t colony)
  * @author Valeran MAYTIE
  * @confidenc 5
  **/
-std::size_t Case::getSugarPhero(std::size_t colony)
+float Case::getSugarPhero(unsigned int colony)
 {
     if (_checkColony(colony))
         return _sugarPheromone[colony];
@@ -134,10 +134,10 @@ void Case::putSugar(std::size_t sugar)
  * @author Valeran MAYTIE
  * @confidenc 5
  **/
-void Case::putNeast(std::size_t neats)
+void Case::putNeast(int colony)
 {
     if (_checkCasePut())
-        _nest = neats;
+        _nest = colony;
 }
 
 /**
@@ -148,7 +148,7 @@ void Case::putNeast(std::size_t neats)
  * @author Valeran MAYTIE
  * @confidenc 5
  **/
-void Case::putNestPheromone(std::size_t colony, std::size_t intensity)
+void Case::putNestPheromone(unsigned int colony, float intensity)
 {
     if (_checkColony(colony))
         _nestPheromone[colony] = intensity;
@@ -162,7 +162,7 @@ void Case::putNestPheromone(std::size_t colony, std::size_t intensity)
  * @author Valeran MAYTIE
  * @confidenc 5
  **/
-void Case::putSugarPheromone(std::size_t colony, std::size_t intensity)
+void Case::putSugarPheromone(unsigned int colony, float intensity)
 {
     if (_checkColony(colony))
         _sugarPheromone[colony] = intensity;
@@ -176,7 +176,7 @@ void Case::putSugarPheromone(std::size_t colony, std::size_t intensity)
  * @author Valeran MAYTIE
  * @confidenc 5
  **/
-void Case::decreasesSugarPheromone(std::size_t colony, std::size_t amount)
+void Case::decreasesSugarPheromone(unsigned int colony, float amount)
 {
     if (_checkColony(colony))
     {
