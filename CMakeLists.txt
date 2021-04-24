@@ -9,6 +9,7 @@ include(doctest)
 set(SRCS
     src/controllers/manager.cpp
     src/controllers/initialize.cpp
+    src/controllers/random.cpp
     
     src/models/ant.cpp
     src/models/case.cpp
@@ -23,6 +24,7 @@ set(SRCS
 
 set(HEADERS
     src/controllers/manager.hpp
+    src/controllers/random.hpp
 
     src/models/ant.hpp
     src/models/case.hpp

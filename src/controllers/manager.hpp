@@ -9,8 +9,6 @@ private:
     Data _data;
     Grid _grid;
     Display _display;
-    std::random_device rd;
-    std::mt19937 gen;
 
     void _initialize();
     void _getData();

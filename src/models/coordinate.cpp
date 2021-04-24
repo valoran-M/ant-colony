@@ -1,7 +1,8 @@
 #include "models/coordinate.hpp"
+#include "controllers/random.hpp"
+#include <iostream>
 #include <stdexcept>
 #include <vector>
-#include <random>
 
 /**
  * Constructor for Coor
@@ -11,8 +12,8 @@
  * @author Valeran MAYTIE
  * @condifence 5 
  **/
-Coord::Coord(std::size_t x, std::size_t y) : _x(x),
-                                             _y(y)
+Coord::Coord(unsigned int x, unsigned int y) : _x(x),
+                                               _y(y)
 {
 }
 
@@ -26,14 +27,14 @@ Coord::Coord(std::size_t x, std::size_t y) : _x(x),
  * @author Valeran MAYHTIE
  * @confidence 2
  **/
-Coord::Coord(std::size_t xMin,
-             std::size_t xMax,
-             std::size_t yMin,
-             std::size_t yMax)
+Coord::Coord(unsigned int xMin,
+             unsigned int xMax,
+             unsigned int yMin,
+             unsigned int yMax)
 {
 
-    _x = std::rand() % (xMax - xMin) + xMin;
-    _y = std::rand() % (yMax - yMin) + yMin;
+    _x = random_index(xMin, xMax);
+    _y = random_index(yMin, yMax);
 }
 
 /**
@@ -44,7 +45,7 @@ Coord::Coord(std::size_t xMin,
  * @author Valeran MAYTIE
  * @condifence 5 
  **/
-std::size_t &Coord::operator[](unsigned i)
+unsigned int &Coord::operator[](unsigned i)
 {
     if (i == 0)
         return _x;
@@ -95,7 +96,7 @@ std::ostream &operator<<(std::ostream &out, Coord const cord)
  * @author Valeran MAYTIE
  * @condifence 5 
  **/
-std::vector<Coord> Coord::getNeigbour(std::size_t width, std::size_t height) const
+std::vector<Coord> Coord::getNeigbour(unsigned int width, unsigned int height) const
 {
     int xMin = std::max<int>(getX() - 1, 0);
     int xMax = std::min<int>(getX() + 1, width - 1);
@@ -103,8 +104,8 @@ std::vector<Coord> Coord::getNeigbour(std::size_t width, std::size_t height) con
     int yMax = std::min<int>(getY() + 1, height - 1);
 
     std::vector<Coord> neigbours;
-    for (std::size_t y = yMin; y <= yMax; y++)
-        for (std::size_t x = xMin; x <= xMax; x++)
+    for (unsigned int y = yMin; y <= yMax; y++)
+        for (unsigned int x = xMin; x <= xMax; x++)
             if (x != getX() || y != getY())
                 neigbours.push_back(Coord(x, y));
     return neigbours;

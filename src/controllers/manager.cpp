@@ -3,8 +3,7 @@
 #include "models/coordinate.hpp"
 #include <iostream>
 
-Manager::Manager() : rd(),
-                     gen(rd())
+Manager::Manager()
 {
 }
 

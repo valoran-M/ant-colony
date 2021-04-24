@@ -51,14 +51,9 @@ bool Display::manageEvent()
 void Display::grid(std::size_t height, std::size_t width)
 {
     newWindows(height, width);
-    SDL_SetRenderDrawColor(_render, 255, 0, 0, 255);
-
-    // Clear the entire screen to our selected color.
+    SDL_SetRenderDrawColor(_render, 0x0F, 0x11, 0x22, 0xFF);
     SDL_RenderClear(_render);
 
-    // Up until now everything was drawn behind the scenes.
-    // This will show the new, red contents of the window.
-    SDL_RenderPresent(_render);
 
     SDL_RenderPresent(_render);
 }

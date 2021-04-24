@@ -1,29 +1,27 @@
 #pragma once
 
-#include <cstddef>
 #include <vector>
-#include <random>
-#include <iostream>
+#include <ostream>
 
 class Coord
 {
 private:
-    std::size_t _x;
-    std::size_t _y;
+    unsigned int _x;
+    unsigned int _y;
 
 public:
-    std::size_t &operator[](unsigned i);
-    std::size_t getX() const { return _x; }
-    std::size_t getY() const { return _y; }
+    unsigned int &operator[](unsigned i);
+    unsigned int getX() const { return _x; }
+    unsigned int getY() const { return _y; }
     bool operator==(Coord const &other) const;
     bool operator!=(Coord const &other) const;
-    std::vector<Coord> getNeigbour(std::size_t xMax, std::size_t yMax) const;
+    std::vector<Coord> getNeigbour(unsigned int xMax, unsigned int yMax) const;
     Coord() {}
-    Coord(std::size_t x, std::size_t y);
-    Coord(std::size_t xMin,
-          std::size_t xMax,
-          std::size_t yMin,
-          std::size_t yMax);
+    Coord(unsigned int x, unsigned int y);
+    Coord(unsigned int xMin,
+          unsigned int xMax,
+          unsigned int yMin,
+          unsigned int yMax);
 };
 
 std::ostream &operator<<(std::ostream &out, Coord const coord);
