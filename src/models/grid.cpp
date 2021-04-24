@@ -12,7 +12,7 @@ Grid::Grid() : height(0),
 {
 }
 
-Case Grid::getCase(Coord coord)
+Case& Grid::getCase(Coord coord)
 {
     return grid[coord[1]][coord[0]];
 }

@@ -8,7 +8,7 @@ struct Grid
     unsigned int height;
     unsigned int width;
     std::vector<std::vector<Case>> grid;
-    Case getCase(Coord coord);
+    Case &getCase(Coord coord);
     void reset();
     bool initilize(unsigned int xMax,
                    unsigned int yMax,

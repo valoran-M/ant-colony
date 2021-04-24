@@ -1,5 +1,6 @@
 #include "controllers/manager.hpp"
 #include "models/colony.hpp"
+#include "models/grid.hpp"
 #include <iostream>
 #include <ctime>
 
@@ -8,7 +9,7 @@ void Manager::_initialize()
     std::srand(std::time(nullptr));
     _getData();
     _grid.initilize(_data.width, _data.height, _data.numberOfColony);
-    _colonnyGeneration();/*
+    _colonnyGeneration();
     std::cout << "-------------------------------" << std::endl
               << "Nest Pheromone initialization : " << std::endl
               << "-------------------------------";
@@ -17,9 +18,8 @@ void Manager::_initialize()
         std::cout << std::endl
                   << "Colony " << colony << ": ";
         //_nestPheroInit(colony);
-    }*/
-    _display.grid(_data.width * 20, _data.height * 20);
-
+    }
+    std::cout << std::endl;
 }
 
 void Manager::_getData()
@@ -75,19 +75,12 @@ void Manager::_nestCreation(char colony, unsigned int coef)
                                         Coord(base[0], base[1] + 1),
                                         Coord(base[0] + 1, base[1] + 1)});
 
-    for (size_t i = base[1]; i <= base[1] + 1; i++)
-        for (size_t j = base[0]; j <= base[0] + 1; j++)
-        {
-            _grid.grid[i][j].putNeast(colony);
-            _grid.grid[i][j].putNestPheromone(colony, 1);
-        }
-}
-
-void Manager::_nestCase(Coord coord, unsigned int colony)
-{
-    Coord max;
-    std::vector<Coord> neig = _grid.getCase(coord).getCoord().getNeigbour(_data.width,
-                                                                          _data.height);
+    for (Coord coord : _data.colonies[colony].nest)
+    {
+        Case colonyCase = _grid.getCase(coord);
+        colonyCase.putNeast(colony);
+        colonyCase.putNestPheromone(colony, 1);
+    }
 }
 
 void Manager::_nestPheroInit(unsigned int colony)
@@ -99,7 +92,7 @@ void Manager::_nestPheroInit(unsigned int colony)
     {
         for (size_t y = 0; y < _data.width; y++)
             for (size_t x = 0; x < _data.height; x++)
-                _nestCase(Coord(x, y), colony);
+                //_nestCase(Coord(x, y), colony);
         std::cout << ".";
     }
 }

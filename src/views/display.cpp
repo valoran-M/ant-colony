@@ -1,66 +1,38 @@
-#include "display.hpp"
-#include <SDL2/SDL.h>
+#include "views/display.hpp"
+#include <SFML/Graphics.hpp>
 
 Display::Display()
 {
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
-    {
-        fprintf(stdout, "Faild to initialize SDL (%s)\n", SDL_GetError());
-        exit(-1);
-    }
 }
 
-void Display::newWindows(std::size_t height, std::size_t width)
+void Display::newWindows(unsigned int height, unsigned int width)
 {
-    _window = SDL_CreateWindow("ant simulator", SDL_WINDOWPOS_UNDEFINED,
-                               SDL_WINDOWPOS_UNDEFINED,
-                               width,
-                               height,
-                               SDL_WINDOW_SHOWN);
-    if (!_window)
-    {
-        fprintf(stderr, "Error window creation: %s\n", SDL_GetError());
-        exit(-1);
-    }
-    _render = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
+    _height = height * 20;
+    _width = width * 20;
+    _window.create(sf::VideoMode(_height, _width), "Ant");
+    _window.setFramerateLimit(4);
 }
 
 bool Display::manageEvent()
 {
-    bool close = false;
-    while (SDL_PollEvent(&event))
+    while (_window.pollEvent(_event))
     {
-        switch (event.type)
-        {
-        case SDL_QUIT:
-            close = true;
-            break;
-
-        case SDL_KEYDOWN:
-            switch (event.key.keysym.sym)
-            {
-            case SDLK_ESCAPE:
-                close = true;
-                break;
-            }
-        }
+        if (_event.type == sf::Event::Closed)
+            return true;
     }
-    return close;
+    return false;
 }
 
-void Display::grid(std::size_t height, std::size_t width)
+void Display::grid(Grid &grid, unsigned int height, unsigned int width)
 {
     newWindows(height, width);
-    SDL_SetRenderDrawColor(_render, 0x0F, 0x11, 0x22, 0xFF);
-    SDL_RenderClear(_render);
+}
 
-
-    SDL_RenderPresent(_render);
+void Display::setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b)
+{
 }
 
 void Display::close()
 {
-    SDL_DestroyWindow(_window);
-    SDL_DestroyRenderer(_render);
-    SDL_Quit();
+    _window.close();
 }

@@ -45,7 +45,9 @@ set(TESTS
 )
 
 set(LIBS
-    SDL2
+    sfml-system
+    sfml-graphics
+    sfml-window
 )
 
 add_executable(ant_sim src/main.cpp ${SRCS} ${HEADERS})

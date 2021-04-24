@@ -1,5 +1,5 @@
 with import <nixpkgs> {};
 stdenv.mkDerivation {
     name = "ant-sim-dev-environment";
-    buildInputs = [ pkgconfig cmake doctest SDL2];
+    buildInputs = [ pkg-config cmake doctest sfml ];
 }
