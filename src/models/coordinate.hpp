@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <vector>
 #include <random>
+#include <iostream>
 
 class Coord
 {
@@ -24,3 +25,5 @@ public:
           std::size_t yMin,
           std::size_t yMax);
 };
+
+std::ostream &operator<<(std::ostream &out, Coord const coord);

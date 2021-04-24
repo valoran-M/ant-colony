@@ -1,6 +1,7 @@
 #include "models/coordinate.hpp"
 #include <stdexcept>
 #include <vector>
+#include <random>
 
 /**
  * Constructor for Coor
@@ -30,9 +31,9 @@ Coord::Coord(std::size_t xMin,
              std::size_t yMin,
              std::size_t yMax)
 {
-    
-    _x = rand() % (xMax - xMin) + xMin;
-    _y = rand() % (yMax - yMin) + yMin;
+
+    _x = std::rand() % (xMax - xMin) + xMin;
+    _y = std::rand() % (yMax - yMin) + yMin;
 }
 
 /**
@@ -77,6 +78,12 @@ bool Coord::operator==(Coord const &other) const
 bool Coord::operator!=(Coord const &other) const
 {
     return _x != other.getX() || _y != other.getY();
+}
+
+std::ostream &operator<<(std::ostream &out, Coord const cord)
+{
+    out << "(" << cord.getX() << ", " << cord.getY() << ")";
+    return out;
 }
 
 /** 

@@ -1,8 +1,7 @@
 #pragma once
 
 #include "models/coordinate.hpp"
-#include <vector>
-#include <array>
+
 
 class Case
 {
@@ -15,7 +14,7 @@ private:
     int _sugar;
 
     bool _checkCasePut();
-    bool _checkColony(std::size_t colony);
+    bool _checkColony(unsigned int colony);
 
 public:
     // getter

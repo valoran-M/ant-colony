@@ -16,6 +16,8 @@ private:
     void _getData();
     void _colonnyGeneration();
     void _nestCreation(char colony, unsigned int coef);
+    void _nestPheroInit(unsigned int colony);
+    void _nestCase(Coord coord, unsigned int colony);
 
 public:
     Manager();

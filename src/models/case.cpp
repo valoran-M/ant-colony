@@ -49,7 +49,7 @@ bool Case::_checkCasePut()
  * @return bool true if it valid
  * @confidence 2 
  **/
-bool Case::_checkColony(std::size_t colony)
+bool Case::_checkColony(unsigned int colony)
 {
     if (colony > _nestPheromone.size())
         throw std::invalid_argument("colony is to big");

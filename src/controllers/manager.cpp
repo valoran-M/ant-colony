@@ -11,4 +11,10 @@ Manager::Manager() : rd(),
 void Manager::start()
 {
     _initialize();
+    bool quit = false;
+    while (!quit)
+    {
+        quit = _display.manageEvent();
+    }
+    _display.close();
 }
