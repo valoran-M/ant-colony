@@ -15,11 +15,12 @@ struct Data
     State state;
     std::vector<Colony> colonies;
 
-    std::size_t lap;
-    std::size_t speed;
-    std::size_t width;
-    std::size_t height;
-    std::size_t numberOfColony;
+    unsigned int lap;
+    unsigned int speed;
+    unsigned int width;
+    unsigned int height;
+    unsigned int numberOfColony;
+    unsigned int caseSize;
 
     void addLap() { lap++; }
     void reset();

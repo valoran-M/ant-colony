@@ -31,6 +31,13 @@ void Manager::_getData()
         std::cin >> _data.height;
     } while ((_data.width < 20 || _data.width > 1000) ||
              (_data.height < 20 || _data.height > 1000));
+    
+    do
+    {
+        std::cout << "size of case (max = 30) : ";
+        std::cin >> _data.caseSize;
+    } while (_data.caseSize >= 30);
+    
     unsigned int max = _data.width * _data.height / 100;
     do
     {

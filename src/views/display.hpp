@@ -12,9 +12,16 @@ private:
 
 public:
     Display();
-    void newWindows(unsigned int height, unsigned int width);
-    void grid(Grid &grid, unsigned int height, unsigned int width);
+    void intitWindow(unsigned int height,
+                     unsigned int width,
+                     unsigned int caseSize);
+    void grid(Grid &grid,
+              unsigned int height,
+              unsigned int width,
+              unsigned int caseSize);
     void close();
-    bool manageEvent();
+    void manageEvent();
     void setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b);
+    void setGird();
+    bool isOpen() { return _window.isOpen(); }
 };
