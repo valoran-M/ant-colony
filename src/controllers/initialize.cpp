@@ -31,13 +31,13 @@ void Manager::_getData()
         std::cin >> _data.height;
     } while ((_data.width < 20 || _data.width > 1000) ||
              (_data.height < 20 || _data.height > 1000));
-    
+
     do
     {
         std::cout << "size of case (max = 30) : ";
         std::cin >> _data.caseSize;
     } while (_data.caseSize >= 30);
-    
+
     unsigned int max = _data.width * _data.height / 100;
     do
     {
@@ -92,14 +92,4 @@ void Manager::_nestCreation(char colony, unsigned int coef)
 
 void Manager::_nestPheroInit(unsigned int colony)
 {
-    unsigned int iteration = std::max<unsigned int>(_data.width,
-                                                    _data.height);
-
-    for (size_t i = 0; i < iteration; i++)
-    {
-        for (size_t y = 0; y < _data.width; y++)
-            for (size_t x = 0; x < _data.height; x++)
-                //_nestCase(Coord(x, y), colony);
-        std::cout << ".";
-    }
 }
