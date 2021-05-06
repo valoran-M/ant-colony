@@ -7,6 +7,7 @@ class Display
 private:
     sf::RenderWindow _window;
     sf::Event _event;
+    sf::Color _backgroundColor = sf::Color(0, 22, 65);
     unsigned int _height;
     unsigned int _width;
 

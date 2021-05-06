@@ -15,10 +15,12 @@ void Display::intitWindow(unsigned int height,
                    "Ant",
                    sf::Style::Close);
     _window.setActive(false);
+    _window.setFramerateLimit(60);
 }
 
 void Display::manageEvent()
 {
+    //_window.clear(sf::Color(13, 34, 114));
     _window.pollEvent(_event);
     switch (_event.type)
     {
@@ -40,16 +42,15 @@ void Display::manageEvent()
 
 void Display::setGird(unsigned int caseSize)
 {
-    
 }
 
 void Display::drawAnt(Coord pos, unsigned int caseSize)
 {
     sf::CircleShape circle;
-    circle.setRadius(caseSize/3);
+    circle.setRadius(caseSize / 3);
     circle.setFillColor(sf::Color::Cyan);
     circle.setOutlineColor(sf::Color::White);
-    circle.setPosition(caseSize * pos[0] + caseSize/2, caseSize * pos[1] + caseSize/2);
+    circle.setPosition(caseSize * pos[0] + caseSize / 2, caseSize * pos[1] + caseSize / 2);
     _window.draw(circle);
 }
 
@@ -59,15 +60,16 @@ void Display::grid(Grid &grid,
                    unsigned int caseSize)
 {
     intitWindow(height, width, caseSize);
-    _window.clear(sf::Color::Black);
+    _window.clear(sf::Color(13, 34, 114));
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(caseSize, caseSize));
-    rectangle.setFillColor(sf::Color::Black);
-    rectangle.setOutlineColor(sf::Color::Cyan);
+    rectangle.setFillColor(_backgroundColor);
+    rectangle.setOutlineColor(sf::Color(67, 120, 222));
     rectangle.setOutlineThickness(1);
 
-    for(int i = 0; i < _width / caseSize; i++)
-        for(int j = 0; j < _height / caseSize; j++)
+
+    for (int i = 0; i < _width / caseSize; i++)
+        for (int j = 0; j < _height / caseSize; j++)
         {
             rectangle.setPosition(i * caseSize, j * caseSize);
             _window.draw(rectangle);
