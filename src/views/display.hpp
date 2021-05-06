@@ -8,6 +8,8 @@ private:
     sf::RenderWindow _window;
     sf::Event _event;
     sf::Color _backgroundColor = sf::Color(0, 22, 65);
+    sf::Color _lineColor = sf::Color(67, 120, 222);
+    unsigned int _most = 6;
     unsigned int _height;
     unsigned int _width;
 
