@@ -22,6 +22,7 @@ public:
     void close();
     void manageEvent();
     void setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b);
-    void setGird();
+    void drawAnt(Coord pos, unsigned int caseSize);
+    void setGird(unsigned int caseSize);
     bool isOpen() { return _window.isOpen(); }
 };
