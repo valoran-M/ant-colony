@@ -1,5 +1,6 @@
 #include "views/display.hpp"
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 Display::Display()
 {
@@ -11,6 +12,7 @@ void Display::intitWindow(unsigned int height,
 {
     _height = height * caseSize;
     _width = width * caseSize;
+    _caseSize = caseSize;
     _window.create(sf::VideoMode(_height + _most, _width + _most),
                    "Ant",
                    sf::Style::Close);
@@ -62,23 +64,38 @@ void Display::grid(Grid &grid,
 {
     intitWindow(height, width, caseSize);
     _window.clear(_backgroundColor);
-    sf::RectangleShape rectangle;
-    rectangle.setSize(sf::Vector2f(caseSize, caseSize));
-    rectangle.setFillColor(_backgroundColor);
-    rectangle.setOutlineColor(_lineColor);
-    rectangle.setOutlineThickness(1);
+
+    _rectangle.setSize(sf::Vector2f(caseSize, caseSize));
+    _rectangle.setOutlineColor(_lineColor);
+    _rectangle.setOutlineThickness(1);
 
     for (int i = 0; i < height; i++)
         for (int j = 0; j < width; j++)
         {
-            rectangle.setPosition(i * caseSize + _most / 2,
-                                  j * caseSize + _most / 2);
-            _window.draw(rectangle);
+            Case &my_case = grid.grid[i][j];
+            if (my_case.getNest() != -1)
+            {
+                setCell(my_case.getCoord(), 255, 0, 0);
+            }
+            else
+                setCell(my_case.getCoord(), _backgroundColor);
         }
+}
+
+void Display::setCell(Coord &coord, sf::Color color)
+{
+    _rectangle.setFillColor(_backgroundColor);
+    _rectangle.setPosition(coord[0] * _caseSize + _most / 2,
+                           coord[1] * _caseSize + _most / 2);
+    _window.draw(_rectangle);
 }
 
 void Display::setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b)
 {
+    _rectangle.setFillColor(sf::Color(r, g, b));
+    _rectangle.setPosition(coord[0] * _caseSize + _most / 2,
+                           coord[1] * _caseSize + _most / 2);
+    _window.draw(_rectangle);
 }
 
 void Display::close()

@@ -57,7 +57,7 @@ void Manager::_colonnyGeneration()
     else
         coef = (_data.height - 1) / _data.numberOfColony;
 
-    for (char colony = 0; colony < _data.numberOfColony; colony++)
+    for (char colony = 0; colony < (char)_data.numberOfColony; colony++)
     {
         _data.colonies.push_back(Colony(colony));
         _nestCreation(colony, coef);
@@ -84,7 +84,7 @@ void Manager::_nestCreation(char colony, unsigned int coef)
 
     for (Coord coord : _data.colonies[colony].nest)
     {
-        Case colonyCase = _grid.getCase(coord);
+        Case &colonyCase = _grid.getCase(coord);
         colonyCase.putNeast(colony);
         colonyCase.putNestPheromone(colony, 1);
     }

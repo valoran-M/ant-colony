@@ -18,7 +18,7 @@ private:
 
 public:
     // getter
-    Coord getCoord() { return _coordinate; }
+    Coord& getCoord() { return _coordinate; }
     float getNestPhero(unsigned int colony);
     float getSugarPhero(unsigned int colony);
     int getAnt() { return _ant; }
