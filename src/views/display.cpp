@@ -63,16 +63,15 @@ void Display::grid(Grid &grid,
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(caseSize, caseSize));
     rectangle.setFillColor(sf::Color::Black);
-    rectangle.setOutlineColor(sf::Color::White);
-    rectangle.setOutlineThickness(5);
+    rectangle.setOutlineColor(sf::Color::Cyan);
+    rectangle.setOutlineThickness(1);
+
     for(int i = 0; i < _width / caseSize; i++)
-    {
         for(int j = 0; j < _height / caseSize; j++)
         {
             rectangle.setPosition(i * caseSize, j * caseSize);
             _window.draw(rectangle);
         }
-    }
 }
 
 void Display::setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b)
