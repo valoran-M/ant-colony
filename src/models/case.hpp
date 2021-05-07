@@ -2,13 +2,13 @@
 
 #include "models/coordinate.hpp"
 
-
 class Case
 {
 private:
     Coord _coordinate;
     std::vector<float> _nestPheromone;
     std::vector<float> _sugarPheromone;
+    int _colony;
     int _ant;
     int _nest;
     int _sugar;
@@ -18,9 +18,10 @@ private:
 
 public:
     // getter
-    Coord& getCoord() { return _coordinate; }
+    Coord &getCoord() { return _coordinate; }
     float getNestPhero(unsigned int colony);
     float getSugarPhero(unsigned int colony);
+    int getColony() { return _colony; }
     int getAnt() { return _ant; }
     int getNest() { return _nest; }
     int getSugar() { return _sugar; }
@@ -32,10 +33,10 @@ public:
     bool isEmpty();
 
     // modifier
-    void removeAnt() { _ant = -1; }
+    void removeAnt() { _colony = _ant = -1; }
     void removeSugar() { _sugar = -1; }
-    void putAnt(std::size_t ant);
-    void putSugar(std::size_t sugar);
+    void putAnt(unsigned int ant, unsigned int colony);
+    void putSugar(unsigned int sugar);
     void putNeast(int colony);
     void putNestPheromone(unsigned int colony, float intensity);
     void putSugarPheromone(unsigned int colony, float intensity);

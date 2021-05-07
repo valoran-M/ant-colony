@@ -10,7 +10,11 @@ Manager::Manager()
 void Manager::start()
 {
     _initialize();
-    _display.grid(_grid, _data.width, _data.height, _data.caseSize);
+    _display.display_init(&_grid,
+                          _data.numberOfColony,
+                          _data.width,
+                          _data.height,
+                          _data.caseSize);
     while (_display.isOpen())
     {
         _display.manageEvent();

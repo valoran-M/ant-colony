@@ -12,12 +12,13 @@ struct Colony
     std::size_t sugar;
     std::vector<Ant> ants;
     std::vector<Coord> nest;
+    std::vector<Coord> spawnableCase;
 
     //fonctions internes
     Colony(char nom);
-    void antBirth(Coord coord);
-    void addAnt(Coord coord) { ants.push_back(Ant(ants.size(), coord)); }
+    void antBirth(Coord &coord);
+    void addAnt(Coord &coord) { ants.push_back(Ant(ants.size(), coord)); }
     int getNbAnt() const { return ants.size(); }
-    void addNest(Coord coord);
-    void removeNest(Coord coord);
+    void addNest(Coord &coord);
+    void removeNest(Coord &coord);
 };

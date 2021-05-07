@@ -20,6 +20,7 @@ set(SRCS
 
 
     src/views/display.cpp
+    src/views/init.cpp
 )
 
 set(HEADERS

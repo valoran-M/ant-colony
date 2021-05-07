@@ -15,11 +15,12 @@ Case::Case(
     std::size_t x,
     std::size_t y,
     unsigned int numberColony) : _coordinate(Coord(x, y)),
-                                _nestPheromone(std::vector<float>(numberColony, 0)),
-                                _sugarPheromone(std::vector<float>(numberColony, 0)),
-                                _ant(-1),
-                                _nest(-1),
-                                _sugar(-1)
+                                 _nestPheromone(std::vector<float>(numberColony, 0)),
+                                 _sugarPheromone(std::vector<float>(numberColony, 0)),
+                                 _colony(-1),
+                                 _ant(-1),
+                                 _nest(-1),
+                                 _sugar(-1)
 {
 }
 
@@ -108,10 +109,13 @@ bool Case::isEmpty()
  * @author Valeran MAYTIE
  * @confidenc 5
  **/
-void Case::putAnt(std::size_t ant)
+void Case::putAnt(unsigned int ant, unsigned int colony)
 {
     if (_checkCasePut())
+    {
         _ant = ant;
+        _colony = colony;
+    }
 }
 
 /**
@@ -121,7 +125,7 @@ void Case::putAnt(std::size_t ant)
  * @author Valeran MAYTIE
  * @confidenc 5
  **/
-void Case::putSugar(std::size_t sugar)
+void Case::putSugar(unsigned int sugar)
 {
     if (_checkCasePut())
         _sugar = sugar;

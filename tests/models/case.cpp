@@ -33,9 +33,9 @@ TEST_CASE("modifier")
     SUBCASE("Ant")
     {
         CHECK(caseForTest.getAnt() == -1);
-        caseForTest.putAnt(1);
+        caseForTest.putAnt(1, 1);
         CHECK(caseForTest.getAnt() == 1);
-        CHECK_THROWS_AS(caseForTest.putAnt(5),
+        CHECK_THROWS_AS(caseForTest.putAnt(5, 1),
                         std::invalid_argument);
         caseForTest.removeAnt();
         CHECK(caseForTest.getAnt() == -1);
@@ -93,7 +93,7 @@ TEST_CASE("Predicate")
     SUBCASE("ant")
     {
         CHECK_FALSE(caseForTest.containsAnt());
-        caseForTest.putAnt(4);
+        caseForTest.putAnt(4, 1);
         CHECK(caseForTest.containsAnt());
         caseForTest.removeAnt();
         CHECK_FALSE(caseForTest.containsAnt());
@@ -117,7 +117,7 @@ TEST_CASE("Predicate")
     {
         Case caseForEmptyTest = Case(0, 0, 3);
         CHECK(caseForEmptyTest.isEmpty());
-        caseForEmptyTest.putAnt(1);
+        caseForEmptyTest.putAnt(1, 1);
         CHECK_FALSE(caseForEmptyTest.isEmpty());
         caseForEmptyTest.removeAnt();
         caseForEmptyTest.putSugar(1);

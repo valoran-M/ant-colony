@@ -9,19 +9,19 @@ Colony::Colony(char nom) : team(nom)
 {
 }
 
-void Colony::addNest(Coord coord)
+void Colony::addNest(Coord &coord)
 {
     nest.push_back(coord);
 }
 
-void Colony::removeNest(Coord coord)
+void Colony::removeNest(Coord &coord)
 {
     for (size_t i = 0; i < nest.size(); i++)
         if (nest[i] == coord)
             nest.erase(nest.begin() + i);
 }
 
-void Colony::antBirth(Coord coord)
+void Colony::antBirth(Coord &coord)
 {
     if (sugar >= 25)
     {

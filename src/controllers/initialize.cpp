@@ -38,7 +38,7 @@ void Manager::_getData()
         std::cin >> _data.caseSize;
     } while (_data.caseSize > 30);
 
-    unsigned int max = _data.width * _data.height / 100;
+    unsigned int max = std::max((_data.width - 1) / 4, (_data.height - 1) / 4);
     do
     {
         std::cout << "Number of colony max(" << max << "): ";
@@ -52,7 +52,7 @@ void Manager::_colonnyGeneration()
     std::cout << "nest generation : ";
 
     unsigned int coef;
-    if (_data.numberOfColony * 2 < _data.width)
+    if (_data.numberOfColony * 4 <= _data.width)
         coef = (_data.width - 1) / _data.numberOfColony;
     else
         coef = (_data.height - 1) / _data.numberOfColony;
@@ -68,7 +68,7 @@ void Manager::_colonnyGeneration()
 void Manager::_nestCreation(char colony, unsigned int coef)
 {
     Coord base;
-    if (_data.numberOfColony * 2 < _data.width)
+    if (_data.numberOfColony * 4 <= _data.width)
         base = Coord(coef * colony, coef * (colony + 1) - 1,
                      0, _data.height - 2);
     else
@@ -81,13 +81,18 @@ void Manager::_nestCreation(char colony, unsigned int coef)
                                         Coord(base[0] + 1, base[1]),
                                         Coord(base[0], base[1] + 1),
                                         Coord(base[0] + 1, base[1] + 1)});
-
+    _spawnableCase(colony);
     for (Coord coord : _data.colonies[colony].nest)
     {
         Case &colonyCase = _grid.getCase(coord);
         colonyCase.putNeast(colony);
         colonyCase.putNestPheromone(colony, 1);
     }
+}
+
+void Manager::_spawnableCase(char colony)
+{
+
 }
 
 void Manager::_nestPheroInit(unsigned int colony)
