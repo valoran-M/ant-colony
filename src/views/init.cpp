@@ -1,33 +1,32 @@
 #include "views/display.hpp"
 #include <SFML/Graphics.hpp>
+#include <stdlib.h>
 
 Display::Display()
 {
 }
 
-void Display::display_init(Grid *grid,
-                           unsigned int numberColoy,
-                           unsigned int height,
-                           unsigned int width,
+void Display::display_init(Data *data,
+                           Grid *grid,
                            unsigned int caseSize)
 {
     _grid = grid;
-    intitWindow(height, width, caseSize);
-    _window.clear(_backgroundColor);
+    _data = data;
+    _height = _data->height;
+    _width = _data->width;
+    _caseSize = caseSize;
+    _rectangle.setOutlineThickness(1);
 
-    setGird();
+    _intitWindow();
+    _colorNeast(_data->numberOfColony);
+    _setGird();
 }
 
-void Display::intitWindow(unsigned int height,
-                          unsigned int width,
-                          unsigned int caseSize)
+void Display::_intitWindow()
 {
-    _height = height;
-    _width = width;
-    _caseSize = caseSize;
-    if (caseSize > 0)
-        _window.create(sf::VideoMode(_height * caseSize + _most,
-                                     _width * caseSize + _most),
+    if (_caseSize > 0)
+        _window.create(sf::VideoMode(_height * _caseSize + _most,
+                                     _width * _caseSize + _most),
                        "Ant",
                        sf::Style::Close);
     else
@@ -37,20 +36,32 @@ void Display::intitWindow(unsigned int height,
     _window.setFramerateLimit(60);
 }
 
-void Display::setGird()
+void Display::_colorNeast(unsigned int numberColoy)
 {
+    for (char colony = 0; colony < numberColoy; colony++)
+    {
+        srand(colony * 200);
+        _colonyColor.push_back(sf::Color(rand() % 255,
+                                         rand() % 255,
+                                         rand() % 255));
+    }
+}
+
+void Display::_setGird()
+{
+    _window.clear(_backgroundColor);
+
     _rectangle.setSize(sf::Vector2f(_caseSize, _caseSize));
     _rectangle.setOutlineColor(_lineColor);
-    _rectangle.setOutlineThickness(1);
     for (int i = 0; i < _height; i++)
         for (int j = 0; j < _width; j++)
         {
             Case &my_case = _grid->grid[i][j];
             if (my_case.getNest() != -1)
-            {
-                setCell(my_case.getCoord(), 255, 0, 0);
-            }
+                setCell(my_case.getCoord(),
+                        _colonyColor[my_case.getNest()]);
             else
                 setCell(my_case.getCoord(), _backgroundColor);
         }
+    drawAnt(Coord(0, 0), _colonyColor[2]);
 }
