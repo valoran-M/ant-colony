@@ -38,7 +38,7 @@ void Display::_intitWindow()
 
 void Display::_colorNeast(unsigned int numberColoy)
 {
-    for (char colony = 0; colony < numberColoy; colony++)
+    for (unsigned int colony = 0; colony < numberColoy; colony++)
     {
         srand(colony * 200);
         _colonyColor.push_back(sf::Color(rand() % 255,

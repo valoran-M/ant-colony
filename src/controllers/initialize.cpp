@@ -58,7 +58,7 @@ void Manager::_colonnyGeneration()
               << "Nest Pheromone initialization :" << std::endl
               << "-------------------------------" << std::endl;
 
-    for (char colony = 0; colony < _data.numberOfColony; colony++)
+    for (unsigned int colony = 0; colony < _data.numberOfColony; colony++)
     {
         std::cout << "Colony " << colony << ": ";
         _nestPheroInit(colony);
