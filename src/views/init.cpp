@@ -30,7 +30,7 @@ void Display::_intitWindow()
                        "Ant",
                        sf::Style::Close);
     else
-        _window.create(sf::VideoMode(),
+        _window.create(sf::VideoMode(1920, 1080),
                        "ant", sf::Style::Fullscreen);
     _window.setActive(true);
     _window.setFramerateLimit(60);

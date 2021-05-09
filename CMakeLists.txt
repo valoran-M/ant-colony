@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 3.0)
 
 project(ant-colony VERSION 0.0.1)
 
-# Prepare doctest for other targets to use
-find_package(doctest REQUIRED)
-include(doctest)
-
 set(SRCS
     src/controllers/manager.cpp
     src/controllers/initialize.cpp
@@ -59,7 +55,7 @@ target_link_libraries(ant_sim ${LIBS})
 # Make test executable
 
 # tests
-add_executable(run_tests ${TESTS} ${SRCS} ${HEADERS})
+add_executable(run_tests ${TESTS} ${SRCS} ${HEADERS} tests/doctest.h)
 target_compile_features(run_tests PRIVATE cxx_std_17)
-target_include_directories(run_tests PUBLIC src/)
-target_link_libraries(run_tests PRIVATE doctest::doctest ${LIBS})
+target_include_directories(run_tests PUBLIC src/ tests/)
+target_link_libraries(run_tests ${LIBS})

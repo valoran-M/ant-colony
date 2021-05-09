@@ -1,8 +1,8 @@
 #include "models/case.hpp"
 #include "models/coordinate.hpp"
+#include "doctest.h"
 
 #include <array>
-#include <doctest/doctest.h>
 #include <stdexcept>
 #include <iostream>
 

@@ -2,7 +2,7 @@
 
 int main(int argc, char const *argv[])
 {
-    Manager simulation = Manager();
+    Manager simulation(1e9);
     simulation.start();
     return 0;
 }

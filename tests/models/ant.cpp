@@ -1,7 +1,7 @@
 #include "models/ant.hpp"
 #include "models/coordinate.hpp"
 
-#include <doctest/doctest.h>
+#include "doctest.h"
 #include <stdexcept>
 #include <iostream>
 

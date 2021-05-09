@@ -1,5 +1,5 @@
-#include <doctest/doctest.h>
 #include <iostream>
+#include "doctest.h"
 #include "models/coordinate.hpp"
 
 TEST_SUITE_BEGIN("");

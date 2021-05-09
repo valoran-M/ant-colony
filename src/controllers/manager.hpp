@@ -9,6 +9,7 @@ private:
     Data _data;
     Grid _grid;
     Display _display;
+    unsigned long _delay;
 
     void _initialize();
     void _getData();
@@ -18,7 +19,7 @@ private:
     void _spawnableCase(Coord const &coord, char colony);
 
 public:
-    Manager();
+    Manager(unsigned long _delay);
     void start();
     void loop(long delay);
 };
