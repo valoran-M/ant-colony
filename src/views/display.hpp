@@ -35,7 +35,7 @@ public:
     void manageEvent();
     void setCell(Coord &coord, sf::Color &color);
     void setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b);
-    void drawAnt(Coord pos, sf::Color &color);
+    void drawAnt(Coord &pos, sf::Color &color);
     bool isOpen() { return _window.isOpen(); }
     void close();
 };

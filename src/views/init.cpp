@@ -59,9 +59,14 @@ void Display::_setGird()
             Case &my_case = _grid->grid[i][j];
             if (my_case.getNest() != -1)
                 setCell(my_case.getCoord(),
-                        _colonyColor[my_case.getNest()]);
+                        _colonyColor[my_case.getColony()]);
+            else if (my_case.getAnt() != -1)
+            {
+                setCell(my_case.getCoord(), _backgroundColor);
+                drawAnt(my_case.getCoord(),
+                        _colonyColor[my_case.getColony()]);
+            }
             else
                 setCell(my_case.getCoord(), _backgroundColor);
         }
-    drawAnt(Coord(0, 0), _colonyColor[2]);
 }

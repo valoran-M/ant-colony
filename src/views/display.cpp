@@ -37,7 +37,7 @@ void Display::manageEvent()
     _window.display();
 }
 
-void Display::drawAnt(Coord pos, sf::Color &color)
+void Display::drawAnt(Coord &pos, sf::Color &color)
 {
     _circle.setRadius(_caseSize / 3);
     _circle.setFillColor(color);

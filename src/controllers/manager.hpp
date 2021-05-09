@@ -14,9 +14,8 @@ private:
     void _getData();
     void _colonnyGeneration();
     void _nestCreation(char colony, unsigned int coef);
-    void _nestPheroInit(unsigned int colony);
-    void _nestCase(Coord coord, unsigned int colony);
-    void _spawnableCase(char colony);
+    void _nestPheroInit(char colony);
+    void _spawnableCase(Coord const &coord, char colony);
 
 public:
     Manager();

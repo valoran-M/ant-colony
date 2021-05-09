@@ -82,4 +82,26 @@ TEST_CASE("get neigbour")
                                                                 Coord(6, 6)});
 }
 
+TEST_CASE("is in")
+{
+    Coord const test1 = Coord(0, 0);
+    Coord const test2 = Coord(1, 1);
+    Coord const test3 = Coord(1, 3);
+
+    Coord const test4 = Coord(3, 3);
+    Coord const test5 = Coord(1, 0);
+    Coord const test6 = Coord(6, 4);
+
+    std::vector<Coord> tab = {Coord(0, 0),
+                               Coord(1, 1),
+                               Coord(1, 3)};
+    CHECK(test1.isIn(tab));
+    CHECK(test2.isIn(tab));
+    CHECK(test3.isIn(tab));
+
+    CHECK_FALSE(test4.isIn(tab));
+    CHECK_FALSE(test5.isIn(tab));
+    CHECK_FALSE(test6.isIn(tab));
+}
+
 TEST_SUITE_END();

@@ -141,7 +141,10 @@ void Case::putSugar(unsigned int sugar)
 void Case::putNeast(int colony)
 {
     if (_checkCasePut())
+    {
+        _colony = colony;
         _nest = colony;
+    }
 }
 
 /**

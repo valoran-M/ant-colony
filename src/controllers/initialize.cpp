@@ -10,16 +10,6 @@ void Manager::_initialize()
     _getData();
     _grid.initilize(_data.width, _data.height, _data.numberOfColony);
     _colonnyGeneration();
-    std::cout << "-------------------------------" << std::endl
-              << "Nest Pheromone initialization : " << std::endl
-              << "-------------------------------";
-    for (unsigned int colony = 0; colony < _data.numberOfColony; colony++)
-    {
-        std::cout << std::endl
-                  << "Colony " << colony << ": ";
-        //_nestPheroInit(colony);
-    }
-    std::cout << std::endl;
 }
 
 void Manager::_getData()
@@ -62,7 +52,18 @@ void Manager::_colonnyGeneration()
         _data.colonies.push_back(Colony(colony));
         _nestCreation(colony, coef);
     }
-    std::cout << std::endl;
+
+    std::cout << std::endl
+              << "-------------------------------" << std::endl
+              << "Nest Pheromone initialization :" << std::endl
+              << "-------------------------------" << std::endl;
+
+    for (char colony = 0; colony < _data.numberOfColony; colony++)
+    {
+        std::cout << "Colony " << colony << ": ";
+        _nestPheroInit(colony);
+        std::cout << std::endl;
+    }
 }
 
 void Manager::_nestCreation(char colony, unsigned int coef)
@@ -81,20 +82,33 @@ void Manager::_nestCreation(char colony, unsigned int coef)
                                         Coord(base[0] + 1, base[1]),
                                         Coord(base[0], base[1] + 1),
                                         Coord(base[0] + 1, base[1] + 1)});
-    _spawnableCase(colony);
     for (Coord coord : _data.colonies[colony].nest)
     {
         Case &colonyCase = _grid.getCase(coord);
         colonyCase.putNeast(colony);
         colonyCase.putNestPheromone(colony, 1);
+        _spawnableCase(coord, colony);
     }
 }
 
-void Manager::_spawnableCase(char colony)
+void Manager::_spawnableCase(Coord const &coord, char colony)
 {
-
+    std::vector<Coord> neigbours = coord.getNeigbour(_data.height,
+                                                     _data.width);
+    for (Coord const &neigbour : neigbours)
+    {
+        if (!(neigbour.isIn(_data.colonies[colony].nest) ||
+              neigbour.isIn(_data.colonies[colony].spawnableCase)))
+        {
+            _data.colonies[colony].spawnableCase.push_back(neigbour);
+            _data.colonies[colony].addAnt(neigbour);
+            _grid.getCase(neigbour).putAnt(
+                _data.colonies[colony].ants.size() - 1,
+                colony);
+        }
+    }
 }
 
-void Manager::_nestPheroInit(unsigned int colony)
+void Manager::_nestPheroInit(char colony)
 {
 }

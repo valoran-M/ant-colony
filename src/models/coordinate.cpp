@@ -110,3 +110,11 @@ std::vector<Coord> Coord::getNeigbour(unsigned int width, unsigned int height) c
                 neigbours.push_back(Coord(x, y));
     return neigbours;
 }
+
+bool Coord::isIn(std::vector<Coord> &tab) const
+{
+    for (Coord &coord : tab)
+        if (coord == *this)
+            return true;
+    return false;
+}

@@ -22,6 +22,7 @@ public:
           unsigned int xMax,
           unsigned int yMin,
           unsigned int yMax);
+    bool isIn(std::vector<Coord> &tab) const;
 };
 
 std::ostream &operator<<(std::ostream &out, Coord const coord);
