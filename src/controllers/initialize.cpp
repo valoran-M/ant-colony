@@ -6,8 +6,6 @@
 
 void Manager::_initialize()
 {
-    std::srand(std::time(nullptr));
-    _getData();
     _grid.initilize(_data.width, _data.height, _data.numberOfColony);
     _colonnyGeneration();
 }

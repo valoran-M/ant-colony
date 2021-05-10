@@ -2,39 +2,43 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-void Display::manageEvent()
+Display::events Display::manageEvent()
 {
-    _window.pollEvent(_event);
-    switch (_event.type)
-    {
-    case sf::Event::Closed:
-        _window.close();
-        break;
-
-    case sf::Event::KeyPressed:
-        switch (_event.key.code)
+    while (_window.pollEvent(_event))
+        switch (_event.type)
         {
-        case sf::Keyboard::Escape:
+        case sf::Event::Closed:
             _window.close();
             break;
-        case sf::Keyboard::Q:
-            _window.close();
-            break;
-        case sf::Keyboard::G:
-            if (_rectangle.getOutlineThickness() == 1)
-                _rectangle.setOutlineThickness(0);
-            else
-                _rectangle.setOutlineThickness(1);
-            _setGird();
-            break;
-        case sf::Keyboard::H:
-            sf::Thread help(&_help);
-            help.launch();
+
+        case sf::Event::KeyPressed:
+            switch (_event.key.code)
+            {
+            case sf::Keyboard::Escape:
+                _window.close();
+                break;
+            case sf::Keyboard::Q:
+                _window.close();
+                break;
+            case sf::Keyboard::G:
+                if (_rectangle.getOutlineThickness() == 1)
+                    _rectangle.setOutlineThickness(0);
+                else
+                    _rectangle.setOutlineThickness(1);
+                setGird();
+                break;
+            case sf::Keyboard::R:
+                return reset;
+            case sf::Keyboard::H:
+                sf::Thread help(&_help);
+                help.launch();
+                break;
+            }
             break;
         }
-        break;
-    }
     _window.display();
+    sf::sleep(sf::seconds(1.f / 60.f));
+    return nothing;
 }
 
 void Display::drawAnt(Coord &pos, sf::Color &color)

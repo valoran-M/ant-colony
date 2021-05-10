@@ -22,22 +22,28 @@ private:
     unsigned int _width;
 
     void _intitWindow();
-    void _setGird();
     void _colorNeast(unsigned int numberColoy);
 
 public:
+    enum events
+    {
+        pause,
+        reset,
+        nothing
+    };
     Display();
 
     void display_init(Data *data,
                       Grid *grid,
                       unsigned int caseSize);
 
-    void manageEvent();
+    Display::events manageEvent();
     void setCell(Coord &coord, sf::Color &color);
     void setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b);
     void drawAnt(Coord &pos, sf::Color &color);
     bool isOpen() { return _window.isOpen(); }
     void close();
+    void setGird();
 };
 
 static void _help();

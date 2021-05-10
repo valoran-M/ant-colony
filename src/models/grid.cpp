@@ -1,4 +1,5 @@
 #include "models/grid.hpp"
+#include <iostream>
 
 /**
  * Constructor for grid
@@ -42,4 +43,11 @@ bool Grid::initilize(unsigned int xMax,
             grid[y][x] = Case(x, y, numberOfColony);
     }
     return true;
+}
+
+void Grid::reset()
+{
+    for (int x = 0; x < height; x++)
+        for(int y = 0; y < width; y++)
+            grid[y][x].reset();
 }

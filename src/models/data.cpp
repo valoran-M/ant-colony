@@ -6,3 +6,8 @@ Data::Data() : state(menu),
                speed(1)
 {
 }
+
+void Data::reset()
+{
+    colonies.clear();
+}

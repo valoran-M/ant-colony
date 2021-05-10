@@ -45,4 +45,6 @@ public:
     // constructor
     Case() {}
     Case(std::size_t x, std::size_t y, unsigned int numberColony);
+
+    void reset();
 };

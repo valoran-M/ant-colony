@@ -19,7 +19,7 @@ void Display::display_init(Data *data,
 
     _intitWindow();
     _colorNeast(_data->numberOfColony);
-    _setGird();
+    setGird();
 }
 
 void Display::_intitWindow()
@@ -47,7 +47,7 @@ void Display::_colorNeast(unsigned int numberColoy)
     }
 }
 
-void Display::_setGird()
+void Display::setGird()
 {
     _window.clear(_backgroundColor);
 

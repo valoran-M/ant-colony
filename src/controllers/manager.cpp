@@ -10,6 +10,7 @@ Manager::Manager(unsigned long delay) : _delay(delay)
 
 void Manager::start()
 {
+    _getData();
     _initialize();
     _display.display_init(&_data,
                           &_grid,
@@ -18,8 +19,11 @@ void Manager::start()
     std::chrono::high_resolution_clock::time_point previousTime = std::chrono::high_resolution_clock::now();
     while (_display.isOpen())
     {
-        _display.manageEvent();
-        
+        event = _display.manageEvent();
+
+        if (event == Display::events::reset)
+            _reset();
+
         long delay = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - previousTime).count();
         if (delay < _delay)
             continue;
@@ -29,4 +33,13 @@ void Manager::start()
         _display.setCell(test, (uint8_t)255, (uint8_t)255, (uint8_t)255);
     }
     _display.close();
+}
+
+void Manager::_reset()
+{
+    _data.reset();
+    _grid.reset();
+
+    _initialize();
+    _display.setGird();
 }

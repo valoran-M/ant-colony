@@ -9,9 +9,12 @@ private:
     Data _data;
     Grid _grid;
     Display _display;
+    Display::events event;
     unsigned long _delay;
 
     void _initialize();
+    void _reset();
+
     void _getData();
     void _colonnyGeneration();
     void _nestCreation(char colony, unsigned int coef);
@@ -21,5 +24,4 @@ private:
 public:
     Manager(unsigned long _delay);
     void start();
-    void loop(long delay);
 };

@@ -193,3 +193,16 @@ void Case::decreasesSugarPheromone(unsigned int colony, float amount)
             _sugarPheromone[colony] -= amount;
     }
 }
+
+void Case::reset()
+{
+    _colony = -1;
+    _ant = -1;
+    _nest = -1;
+    _sugar = -1;
+    for (int x = 0; x < _nestPheromone.size(); x++)
+        _nestPheromone[x] = 0;
+
+    for (int x = 0; x < _sugarPheromone.size(); x++)
+        _sugarPheromone[x] = 0;
+}
