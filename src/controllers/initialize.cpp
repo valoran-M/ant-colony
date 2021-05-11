@@ -109,4 +109,35 @@ void Manager::_spawnableCase(Coord const &coord, char colony)
 
 void Manager::_nestPheroInit(char colony)
 {
+    std::vector<Coord> neig;
+    int x, y, neigI, size;
+    float max, maxPheroCase, casePhero;
+    bool stable = false;
+    size = std::min(_data.height, _data.width);
+    while (!stable)
+    {
+        std::cout << "*";
+        stable = true;
+        for (y = 0; y < _data.height; y++)
+            for (x = 0; x < _data.width; x++)
+            {
+                Case &p = _grid.getCase(y, x); 
+                if ((casePhero = p.getNestPhero(colony)) < 1)
+                {
+                    neig = p.getCoord().getNeigbour(_data.width,
+                                                    _data.height);
+                    max = _grid.getCase(neig[0]).getNestPhero(colony);
+                    for (neigI = 1; neigI < neig.size(); neigI++)
+                        max = std::max(max,
+                                       _grid.getCase(neig[neigI]).getNestPhero(colony));
+
+                    maxPheroCase = max - 1. / size;
+                    if (maxPheroCase > casePhero)
+                    {
+                        p.putNestPheromone(colony, maxPheroCase);
+                        stable = false;
+                    }
+                }
+            }
+    }
 }

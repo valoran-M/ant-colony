@@ -15,8 +15,11 @@ Display::events Display::manageEvent()
             switch (_event.key.code)
             {
             case sf::Keyboard::Escape:
-                _window.close();
-                break;
+                return pause;
+            case sf::Keyboard::Up:
+                return speedUp;
+            case sf::Keyboard::Down:
+                return speedDown;
             case sf::Keyboard::Q:
                 _window.close();
                 break;
@@ -29,6 +32,8 @@ Display::events Display::manageEvent()
                 break;
             case sf::Keyboard::R:
                 return reset;
+            case sf::Keyboard::P:
+                return pause;
             case sf::Keyboard::H:
                 sf::Thread help(&_help);
                 help.launch();
@@ -48,6 +53,22 @@ void Display::drawAnt(Coord &pos, sf::Color &color)
     _circle.setPosition(_caseSize * pos[0] + _caseSize / 3,
                         _caseSize * pos[1] + _caseSize / 3);
     _window.draw(_circle);
+}
+
+void Display::setCell(Coord &coord)
+{
+    Case &cell = _grid->getCase(coord);
+    if (cell.getAnt() != -1)
+    {
+        setCell(cell.getCoord(), _backgroundColor);
+        drawAnt(cell.getCoord(), _colonyColor[cell.getColony()]);
+    }
+    else if (cell.getColony() != -1)
+        setCell(cell.getCoord(), _colonyColor[cell.getColony()]);
+    else if (cell.getSugar() != -1)
+        setCell(cell.getCoord(), 255, 255, 255);
+    else
+        setCell(cell.getCoord(), _backgroundColor);
 }
 
 void Display::setCell(Coord &coord, sf::Color &color)
@@ -80,12 +101,16 @@ static void _help()
               << std::endl
               << "g     :   display or delete borders"
               << std::endl
+              << "r     :   reset"
+              << std::endl
+              << "p     :   pause"
+              << std::endl
               << "q     :   quit"
               << std::endl
               << "UP    :   speed up"
               << std::endl
               << "DOWN  :   speed down"
               << std::endl
-              << "ECHAP :   quit"
+              << "ECHAP :   pause"
               << std::endl;
 }

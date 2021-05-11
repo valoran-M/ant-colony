@@ -36,11 +36,11 @@ bool Grid::initilize(unsigned int xMax,
     width = xMax;
     height = yMax;
     grid = std::vector<std::vector<Case>>(yMax);
-    for (size_t y = 0; y < yMax; y++)
+    for (size_t x = 0; x < xMax; x++)
     {
-        grid[y] = std::vector<Case>(xMax);
-        for (size_t x = 0; x < xMax; x++)
-            grid[y][x] = Case(x, y, numberOfColony);
+        grid[x] = std::vector<Case>(yMax);
+        for (size_t y = 0; y < yMax; y++)
+            grid[x][y] = Case(x, y, numberOfColony);
     }
     return true;
 }

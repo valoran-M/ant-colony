@@ -53,20 +53,8 @@ void Display::setGird()
 
     _rectangle.setSize(sf::Vector2f(_caseSize, _caseSize));
     _rectangle.setOutlineColor(_lineColor);
-    for (int i = 0; i < _height; i++)
-        for (int j = 0; j < _width; j++)
-        {
-            Case &my_case = _grid->grid[i][j];
-            if (my_case.getNest() != -1)
-                setCell(my_case.getCoord(),
-                        _colonyColor[my_case.getColony()]);
-            else if (my_case.getAnt() != -1)
-            {
-                setCell(my_case.getCoord(), _backgroundColor);
-                drawAnt(my_case.getCoord(),
-                        _colonyColor[my_case.getColony()]);
-            }
-            else
-                setCell(my_case.getCoord(), _backgroundColor);
-        }
+    Coord coord(0, 0);
+    for (coord[1] = 0; coord[1] < _height; coord[1]++)
+        for (coord[0] = 0; coord[0] < _width; coord[0]++)
+            setCell(coord);
 }

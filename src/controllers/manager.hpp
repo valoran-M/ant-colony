@@ -9,7 +9,6 @@ private:
     Data _data;
     Grid _grid;
     Display _display;
-    Display::events event;
     unsigned long _delay;
 
     void _initialize();
@@ -20,6 +19,7 @@ private:
     void _nestCreation(char colony, unsigned int coef);
     void _nestPheroInit(char colony);
     void _spawnableCase(Coord const &coord, char colony);
+    void _eventTraitment(Display::events event);
 
 public:
     Manager(unsigned long _delay);

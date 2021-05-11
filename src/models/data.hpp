@@ -16,11 +16,11 @@ struct Data
     std::vector<Colony> colonies;
 
     unsigned int lap;
-    unsigned int speed;
     unsigned int width;
     unsigned int height;
     unsigned int numberOfColony;
     unsigned int caseSize;
+    float speed;
 
     void addLap() { lap++; }
     void reset();
