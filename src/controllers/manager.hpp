@@ -18,6 +18,7 @@ private:
     void _colonnyGeneration();
     void _nestCreation(char colony, unsigned int coef);
     void _nestPheroInit(char colony);
+    void _sugarCreation();
     void _spawnableCase(Coord const &coord, char colony);
     void _eventTraitment(Display::events event);
 

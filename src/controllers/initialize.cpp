@@ -1,3 +1,4 @@
+#include "controllers/random.hpp"
 #include "controllers/manager.hpp"
 #include "models/colony.hpp"
 #include "models/grid.hpp"
@@ -8,10 +9,12 @@ void Manager::_initialize()
 {
     _grid.initilize(_data.width, _data.height, _data.numberOfColony);
     _colonnyGeneration();
+    _sugarCreation();
 }
 
 void Manager::_getData()
 {
+    unsigned int max;
     do
     {
         std::cout << "Shape of grid (x, y) : ";
@@ -26,13 +29,22 @@ void Manager::_getData()
         std::cin >> _data.caseSize;
     } while (_data.caseSize > 30);
 
-    unsigned int max = std::max((_data.width - 1) / 4, (_data.height - 1) / 4);
+    max = std::max((_data.width - 1) / 4, (_data.height - 1) / 4);
     do
     {
         std::cout << "Number of colony max(" << max << "): ";
         std::cin >> _data.numberOfColony;
     } while (_data.numberOfColony > max &&
              _data.numberOfColony > 0);
+    max = ((_data.height * _data.width) -
+           (_data.numberOfColony * 16)) /
+          30;
+    do
+    {
+        std::cout << "Number of sugar max(" << max << "): ";
+        std::cin >> _data.sugar;
+    } while (_data.sugar > max &&
+             _data.sugar > 0);
 }
 
 void Manager::_colonnyGeneration()
@@ -121,7 +133,7 @@ void Manager::_nestPheroInit(char colony)
         for (y = 0; y < _data.height; y++)
             for (x = 0; x < _data.width; x++)
             {
-                Case &p = _grid.getCase(y, x); 
+                Case &p = _grid.getCase(y, x);
                 if ((casePhero = p.getNestPhero(colony)) < 1)
                 {
                     neig = p.getCoord().getNeigbour(_data.width,
@@ -139,5 +151,20 @@ void Manager::_nestPheroInit(char colony)
                     }
                 }
             }
+    }
+}
+
+void Manager::_sugarCreation()
+{
+    unsigned int sugar = 0;
+    Coord sugarCoord;
+    while (sugar < _data.sugar)
+    {
+        while (!_grid.getCase(sugarCoord = Coord(random_index(0, _data.width - 1),
+                                                 random_index(0, _data.width - 1)))
+                    .isEmpty())
+            ;
+        _grid.getCase(sugarCoord).putSugar(100);
+        sugar++;
     }
 }

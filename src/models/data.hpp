@@ -20,6 +20,7 @@ struct Data
     unsigned int height;
     unsigned int numberOfColony;
     unsigned int caseSize;
+    unsigned int sugar;
     float speed;
 
     void addLap() { lap++; }
