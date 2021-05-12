@@ -27,11 +27,14 @@ void Manager::start()
         if (delay < _delay * _data.speed || _data.state == Data::paused)
             continue;
         previousTime = std::chrono::high_resolution_clock::now();
+        /*
         _display.setCell(test);
         test[0]++;
         _display.setCell(test, (uint8_t)255, (uint8_t)255, (uint8_t)255);
         if (test[0] > _data.width - 2)
-            test[0] = 0;
+            test[0] = 0;*/
+        _dead(0, 0);
+        _lapUpdate();
     }
     _display.close();
 }
@@ -57,4 +60,18 @@ void Manager::_reset()
 
     _initialize();
     _display.setGird();
+}
+
+void Manager::_lapUpdate()
+{
+    for (unsigned int colony;
+         colony < _data.numberOfColony;
+         colony++)
+    {
+        for (unsigned int ant;
+             ant < _data.colonies[colony].getNbAnt();
+             ant++)
+            _antManger(colony, ant);
+    }
+    _data.addLap();
 }

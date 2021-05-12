@@ -11,6 +11,7 @@ private:
     Display _display;
     unsigned long _delay;
 
+    // init
     void _initialize();
     void _reset();
 
@@ -22,7 +23,16 @@ private:
     void _nestPheroInit(char colony);
     void _sugarCreation();
     void _spawnableCase(Coord const &coord, char colony);
+
+    // event
     void _eventTraitment(Display::events event);
+
+    void _lapUpdate();
+
+    // ant manager
+    void _antManger(unsigned int colony, unsigned int ant);
+    void _dead(unsigned int colonyDead, unsigned int antDead);
+    void _getSugar(unsigned int colony, unsigned int ant);
 
 public:
     Manager(unsigned long _delay);
