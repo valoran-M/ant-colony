@@ -61,7 +61,7 @@ void Manager::_colonnyGeneration()
     for (int y = 0; y < _data.height / 4; y++)
         y_grid.push_back(y);
 
-    for (char colony = 0; colony < (char)_data.numberOfColony; colony++)
+    for (unsigned int colony = 0; colony < _data.numberOfColony; colony++)
     {
         _data.colonies.push_back(Colony(colony));
         _data.sugarPhero.push_back(std::vector<Coord>(0));
