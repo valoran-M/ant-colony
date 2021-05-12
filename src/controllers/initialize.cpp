@@ -4,6 +4,7 @@
 #include "models/grid.hpp"
 #include <iostream>
 #include <ctime>
+#include <vector>
 
 void Manager::_initialize()
 {
@@ -29,7 +30,7 @@ void Manager::_getData()
         std::cin >> _data.caseSize;
     } while (_data.caseSize > 30);
 
-    max = std::max((_data.width - 1) / 4, (_data.height - 1) / 4);
+    max = std::min(_data.width, _data.height) / 4;
     do
     {
         std::cout << "Number of colony max(" << max << "): ";
@@ -51,16 +52,16 @@ void Manager::_colonnyGeneration()
 {
     std::cout << "nest generation : ";
 
-    unsigned int coef;
-    if (_data.numberOfColony * 4 <= _data.width)
-        coef = (_data.width - 1) / _data.numberOfColony;
-    else
-        coef = (_data.height - 1) / _data.numberOfColony;
+    std::vector<int> x_grid, y_grid;
+    for (int x = 0; x < _data.width / 4; x++)
+        x_grid.push_back(x);
+    for (int y = 0; y < _data.height / 4; y++)
+        y_grid.push_back(y);
 
     for (char colony = 0; colony < (char)_data.numberOfColony; colony++)
     {
         _data.colonies.push_back(Colony(colony));
-        _nestCreation(colony, coef);
+        _nestCreation(_data.colonies[colony], x_grid, y_grid);
     }
 
     std::cout << std::endl
@@ -76,28 +77,30 @@ void Manager::_colonnyGeneration()
     }
 }
 
-void Manager::_nestCreation(char colony, unsigned int coef)
+void Manager::_nestCreation(Colony &colony,
+                            std::vector<int> &x_grid,
+                            std::vector<int> &y_grid)
 {
-    Coord base;
-    if (_data.numberOfColony * 4 <= _data.width)
-        base = Coord(coef * colony, coef * (colony + 1) - 1,
-                     0, _data.height - 2);
-    else
-        base = Coord(0, coef * colony,
-                     _data.width - 2, coef * (colony + 1) - 1);
+    int random_x, random_y;
+    random_x = random_index(0, x_grid.size() - 1);
+    random_y = random_index(0, y_grid.size() - 1);
+    Coord base(x_grid[random_x] * 4 + 1, y_grid[random_y] * 4 + 1);
+    x_grid.erase(x_grid.begin() + random_x);
+    y_grid.erase(y_grid.begin() + random_y);
 
-    std::cout << base << " ";
-    _data.colonies[colony].nest.insert(_data.colonies[colony].nest.end(),
-                                       {base,
-                                        Coord(base[0] + 1, base[1]),
-                                        Coord(base[0], base[1] + 1),
-                                        Coord(base[0] + 1, base[1] + 1)});
-    for (Coord coord : _data.colonies[colony].nest)
+    std::cout
+        << base << " ";
+    colony.nest.insert(colony.nest.end(),
+                       {base,
+                        Coord(base[0] + 1, base[1]),
+                        Coord(base[0], base[1] + 1),
+                        Coord(base[0] + 1, base[1] + 1)});
+    for (Coord coord : colony.nest)
     {
         Case &colonyCase = _grid.getCase(coord);
-        colonyCase.putNeast(colony);
-        colonyCase.putNestPheromone(colony, 1);
-        _spawnableCase(coord, colony);
+        colonyCase.putNeast(colony.team);
+        colonyCase.putNestPheromone(colony.team, 1);
+        _spawnableCase(coord, colony.team);
     }
 }
 

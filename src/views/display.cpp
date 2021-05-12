@@ -50,8 +50,8 @@ void Display::drawAnt(Coord &pos, sf::Color &color)
 {
     _circle.setRadius(_caseSize / 3);
     _circle.setFillColor(color);
-    _circle.setPosition(_caseSize * pos[0] + _caseSize / 3,
-                        _caseSize * pos[1] + _caseSize / 3);
+    _circle.setPosition(sf::Vector2f(_caseSize * pos[0] + _caseSize / 3,
+                                     _caseSize * pos[1] + _caseSize / 3));
     _window.draw(_circle);
 }
 

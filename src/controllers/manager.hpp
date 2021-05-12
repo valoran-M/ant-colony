@@ -16,7 +16,9 @@ private:
 
     void _getData();
     void _colonnyGeneration();
-    void _nestCreation(char colony, unsigned int coef);
+    void _nestCreation(Colony &colony,
+                       std::vector<int> &x_grid,
+                       std::vector<int> &y_grid);
     void _nestPheroInit(char colony);
     void _sugarCreation();
     void _spawnableCase(Coord const &coord, char colony);
