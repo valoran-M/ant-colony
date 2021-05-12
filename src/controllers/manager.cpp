@@ -27,13 +27,9 @@ void Manager::start()
         if (delay < _delay * _data.speed || _data.state == Data::paused)
             continue;
         previousTime = std::chrono::high_resolution_clock::now();
-        /*
-        _display.setCell(test);
-        test[0]++;
-        _display.setCell(test, (uint8_t)255, (uint8_t)255, (uint8_t)255);
-        if (test[0] > _data.width - 2)
-            test[0] = 0;*/
-        _dead(0, 0);
+
+        if (_data.colonies[0].getNbAnt() > 0)
+            _dead(0, 0);
         _lapUpdate();
     }
     _display.close();
@@ -73,5 +69,16 @@ void Manager::_lapUpdate()
              ant++)
             _antManger(colony, ant);
     }
+    _decreaseSugarPhero();
     _data.addLap();
+}
+
+void Manager::_decreaseSugarPhero()
+{
+    for (std::size_t colony = 0; colony < _data.numberOfColony; colony++)
+        for (std::size_t phero = 0;
+             phero > _data.sugarPhero[colony].size();
+             phero++)
+            _grid.getCase(_data.sugarPhero[colony][phero])
+                .decreasesSugarPheromone(colony, _data.decrease);
 }

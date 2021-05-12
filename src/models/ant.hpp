@@ -22,6 +22,7 @@ public:
     void takeSugar();
     int dropSugar();
     void move(int x, int y);
+    void go_to(Coord &coord) { _pos = coord; }
     void fight(Ant other);
 
     //getter

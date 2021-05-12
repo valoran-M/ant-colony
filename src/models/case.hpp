@@ -40,6 +40,7 @@ public:
     void putNeast(int colony);
     void putNestPheromone(unsigned int colony, float intensity);
     void putSugarPheromone(unsigned int colony, float intensity);
+    void decreasesSugar() { _sugar = -1; }
     void decreasesSugarPheromone(unsigned int colony, float amount);
 
     // constructor

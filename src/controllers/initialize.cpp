@@ -5,9 +5,12 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
+#include <math.h>
 
 void Manager::_initialize()
 {
+    _data.decrease = std::sqrt(
+        float(_data.width * _data.width + _data.height * _data.height));
     _grid.initilize(_data.width, _data.height, _data.numberOfColony);
     _colonnyGeneration();
     _sugarCreation();
@@ -61,6 +64,7 @@ void Manager::_colonnyGeneration()
     for (char colony = 0; colony < (char)_data.numberOfColony; colony++)
     {
         _data.colonies.push_back(Colony(colony));
+        _data.sugarPhero.push_back(std::vector<Coord>(0));
         _nestCreation(_data.colonies[colony], x_grid, y_grid);
     }
 
@@ -109,7 +113,6 @@ void Manager::_spawnableCase(Coord const &coord, char colony)
     std::vector<Coord> neigbours = coord.getNeigbour(_data.height,
                                                      _data.width);
     for (Coord const &neigbour : neigbours)
-    {
         if (!(neigbour.isIn(_data.colonies[colony].nest) ||
               neigbour.isIn(_data.colonies[colony].spawnableCase)))
         {
@@ -118,8 +121,8 @@ void Manager::_spawnableCase(Coord const &coord, char colony)
             _grid.getCase(neigbour).putAnt(
                 _data.colonies[colony].ants.size() - 1,
                 colony);
+            std::cout << _data.colonies[colony].ants[_data.colonies[colony].ants.size() - 1].getCoord() << std::endl;
         }
-    }
 }
 
 void Manager::_nestPheroInit(char colony)

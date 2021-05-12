@@ -14,6 +14,7 @@ struct Data
 
     State state;
     std::vector<Colony> colonies;
+    std::vector<std::vector<Coord>> sugarPhero;
 
     unsigned int lap;
     unsigned int width;
@@ -22,6 +23,7 @@ struct Data
     unsigned int caseSize;
     unsigned int sugar;
     float speed;
+    float decrease;
 
     void addLap() { lap++; }
     void reset();

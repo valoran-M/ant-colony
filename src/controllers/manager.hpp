@@ -32,7 +32,12 @@ private:
     // ant manager
     void _antManger(unsigned int colony, unsigned int ant);
     void _dead(unsigned int colonyDead, unsigned int antDead);
-    void _getSugar(unsigned int colony, unsigned int ant);
+    void _getSugar(unsigned int colony, unsigned int ant, Coord &sugar);
+    void _putSugar(unsigned int colony, unsigned int ant);
+    void _backNeast(unsigned int colony, unsigned int ant);
+
+    // other manager
+    void _decreaseSugarPhero();
 
 public:
     Manager(unsigned long _delay);
