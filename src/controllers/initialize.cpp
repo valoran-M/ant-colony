@@ -121,7 +121,6 @@ void Manager::_spawnableCase(Coord const &coord, char colony)
             _grid.getCase(neigbour).putAnt(
                 _data.colonies[colony].ants.size() - 1,
                 colony);
-            std::cout << _data.colonies[colony].ants[_data.colonies[colony].ants.size() - 1].getCoord() << std::endl;
         }
 }
 

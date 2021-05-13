@@ -99,7 +99,7 @@ float Case::getSugarPhero(unsigned int colony)
  **/
 bool Case::isEmpty()
 {
-    return !(containsAnt() || containsNest() || containsSugar());
+    return !containsAnt() && !containsNest() && !containsSugar();
 }
 
 /**
