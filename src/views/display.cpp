@@ -57,6 +57,7 @@ void Display::drawAnt(Coord &pos, sf::Color &color)
 
 void Display::setCell(Coord &coord)
 {
+    int sugarPhero = 0;
     Case &cell = _grid->getCase(coord);
     if (cell.getAnt() != -1)
     {
@@ -69,6 +70,11 @@ void Display::setCell(Coord &coord)
         setCell(cell.getCoord(), 255, 255, 255);
     else
         setCell(cell.getCoord(), _backgroundColor);
+    if ((sugarPhero = cell.containsSugarPhero()) != -1)
+    {
+        sf::Color color(255, 255, 255, 100 * cell.getSugarPhero(sugarPhero));
+        setCell(cell.getCoord(), color);
+    }
 }
 
 void Display::setCell(Coord &coord, sf::Color &color)

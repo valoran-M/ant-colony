@@ -89,6 +89,14 @@ float Case::getSugarPhero(unsigned int colony)
     return 0;
 }
 
+int Case::containsSugarPhero()
+{
+    for (int i = 0; i < _sugarPheromone.size(); i++)
+        if (_sugarPheromone[i] > 0)
+            return i;
+    return -1;
+}
+
 /**
  * prdicat if case is empty
  * 

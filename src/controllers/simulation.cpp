@@ -1,5 +1,6 @@
 #include "controllers/manager.hpp"
 #include <chrono>
+#include <iostream>
 
 void Manager::start()
 {
@@ -48,7 +49,9 @@ void Manager::_lapUpdate()
         for (unsigned int ant = 0;
              ant < _data.colonies[colony].getNbAnt();
              ant++)
+        {
             _antManger(colony, ant);
+        }
     _decreaseSugarPhero();
     _data.addLap();
 }

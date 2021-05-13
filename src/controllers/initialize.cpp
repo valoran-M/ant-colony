@@ -169,7 +169,7 @@ void Manager::_sugarCreation()
                                                  random_index(0, _data.width - 1)))
                     .isEmpty())
             ;
-        _grid.getCase(sugarCoord).putSugar(100);
+        _grid.getCase(sugarCoord).putSugar(10);
         sugar++;
     }
 }

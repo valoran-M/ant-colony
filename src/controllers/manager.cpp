@@ -28,6 +28,7 @@ void Manager::_decreaseSugarPhero()
                     .getSugarPhero(colony) == 0)
                 _data.sugarPhero[colony].erase(
                     _data.sugarPhero[colony].begin() + phero);
+            _display.setCell(_data.sugarPhero[colony][phero]);
         }
 }
 
@@ -70,4 +71,20 @@ bool Manager::_nestNeigbour(Ant &ant)
             _grid.getCase(coord).getColony() == ant.getColony())
             return true;
     return false;
+}
+
+bool Manager::_sugarPheroNeigbour(Ant &ant, Coord &niegbour)
+{
+    std::vector<Coord> neigbours =
+        ant.getCoord().getNeigbour(
+            _data.width, _data.width);
+    float min = 2;
+    for (Coord coord : neigbours)
+        if (_grid.getCase(coord).getSugarPhero(ant.getColony()) > min &&
+            _grid.getCase(coord).isEmpty())
+        {
+            min = _grid.getCase(coord).getSugarPhero(ant.getColony());
+            niegbour = coord;
+        }
+    return min < 2;
 }

@@ -30,6 +30,7 @@ public:
     bool containsAnt() { return _ant != -1; }
     bool containsNest() { return _nest != -1; }
     bool containsSugar() { return _sugar != -1; }
+    int containsSugarPhero();
     bool isEmpty();
 
     // modifier
