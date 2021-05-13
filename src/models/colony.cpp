@@ -21,6 +21,11 @@ void Colony::removeNest(Coord &coord)
             nest.erase(nest.begin() + i);
 }
 
+void Colony::addAnt(Coord coord)
+{
+    ants.push_back(Ant(ants.size(), coord, team));
+}
+
 void Colony::antBirth(Coord coord)
 {
     if (sugar >= 25)

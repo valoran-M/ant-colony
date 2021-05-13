@@ -30,3 +30,44 @@ void Manager::_decreaseSugarPhero()
                     _data.sugarPhero[colony].begin() + phero);
         }
 }
+
+bool Manager::_antNeigbour(Ant &ant, Coord &neigbour)
+{
+    std::vector<Coord> neigbours =
+        ant.getCoord().getNeigbour(
+            _data.width, _data.width);
+    for (Coord coord : neigbours)
+        if (_grid.getCase(coord).containsAnt() &&
+            _grid.getCase(coord).getColony() != ant.getColony())
+        {
+            neigbour = coord;
+            return true;
+        }
+    return false;
+}
+
+bool Manager::_sugarNeigbour(Ant &ant, Coord &neigbour)
+{
+    std::vector<Coord> neigbours =
+        ant.getCoord().getNeigbour(
+            _data.width, _data.width);
+    for (Coord coord : neigbours)
+        if (_grid.getCase(coord).containsSugar())
+        {
+            neigbour = coord;
+            return true;
+        }
+    return false;
+}
+
+bool Manager::_nestNeigbour(Ant &ant)
+{
+    std::vector<Coord> neigbours =
+        ant.getCoord().getNeigbour(
+            _data.width, _data.width);
+    for (Coord coord : neigbours)
+        if (_grid.getCase(coord).containsNest() &&
+            _grid.getCase(coord).getColony() == ant.getColony())
+            return true;
+    return false;
+}

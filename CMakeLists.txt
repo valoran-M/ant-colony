@@ -4,9 +4,10 @@ project(ant-colony VERSION 0.0.1)
 
 set(SRCS
     src/controllers/ant.cpp
-    src/controllers/manager.cpp
     src/controllers/initialize.cpp
+    src/controllers/manager.cpp
     src/controllers/random.cpp
+    src/controllers/simulation.cpp
     
     src/models/ant.cpp
     src/models/case.cpp

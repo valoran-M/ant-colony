@@ -6,7 +6,18 @@
 void Manager::_antManger(unsigned int colony, unsigned int ant)
 {
     Ant &antEntity = _data.colonies[colony].ants[ant];
-    if (antEntity.haveSugar())
+    Coord neigbourEntity;
+    if (_antNeigbour(antEntity, neigbourEntity))
+        _kill(antEntity,
+              _grid.getCase(neigbourEntity).getColony(),
+              _grid.getCase(neigbourEntity).getAnt());
+    else if (_sugarNeigbour(antEntity, neigbourEntity) &&
+             antEntity.getSugar() == 0)
+        _getSugar(colony, ant, neigbourEntity);
+    else if (_nestNeigbour(antEntity) &&
+             antEntity.getSugar() != 0)
+        _putSugar(colony, ant);
+    else if (antEntity.haveSugar())
         _backNeast(colony, ant);
     else
         _randomMove(colony, ant);
@@ -24,7 +35,14 @@ void Manager::_moveAnt(unsigned int colony,
     antEntity.go_to(newCase);
 }
 
-void Manager::_dead(unsigned int colonyDead, unsigned int antDead)
+void Manager::_kill(Ant &antKiller,
+                    unsigned int colonyDead,
+                    unsigned int antDead)
+{
+    antKiller.takeSugar(_dead(colonyDead, antDead));
+}
+
+int Manager::_dead(unsigned int colonyDead, unsigned int antDead)
 {
     Coord &deadAntCoord = _data.colonies[colonyDead].ants[antDead].getCoord();
 
@@ -33,7 +51,9 @@ void Manager::_dead(unsigned int colonyDead, unsigned int antDead)
     _display.setCell(deadAntCoord);
 
     std::vector<Ant> &ants = _data.colonies[colonyDead].ants;
-    ants.erase(ants.begin());
+    int sugar = ants[antDead].getSugar();
+    ants.erase(ants.begin() + antDead);
+    return sugar;
 }
 
 void Manager::_getSugar(unsigned int colony, unsigned int ant, Coord &sugar)
@@ -95,7 +115,7 @@ void Manager::_randomMove(unsigned int colony, unsigned int ant)
     for (unsigned int i = 0; i < neigbours.size(); i++)
         if (_grid.getCase(neigbours[i]).isEmpty())
             good.push_back(neigbours[i]);
-    if (neigbours.size() > 0)
+    if (good.size() > 0)
     {
         unsigned int rand = random_index(0, good.size() - 1);
         _moveAnt(colony, ant, good[rand]);

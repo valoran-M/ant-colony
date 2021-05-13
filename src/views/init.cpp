@@ -15,7 +15,7 @@ void Display::display_init(Data *data,
     _height = _data->height;
     _width = _data->width;
     _caseSize = caseSize;
-    _rectangle.setOutlineThickness(1);
+    _rectangle.setOutlineThickness(0);
 
     _intitWindow();
     _colorNeast(_data->numberOfColony);

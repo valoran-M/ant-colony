@@ -5,6 +5,7 @@
 class Ant
 {
 private:
+    unsigned int _colony;
     int _number;
     int _sugar;
     int _lifePoint;
@@ -24,8 +25,10 @@ public:
     void move(int x, int y);
     void go_to(Coord &coord) { _pos = coord; }
     void fight(Ant other);
+    void takeSugar(int sugar) { _sugar += sugar; }
 
     //getter
+    unsigned int getColony() { return _colony; }
     Coord &getCoord() { return _pos; }
     int getNumber() const { return _number; }
     int getLifePoint() const { return _lifePoint; }
@@ -33,5 +36,5 @@ public:
     int getEnergy() const { return _energy; }
 
     //constructeur
-    Ant(int number, Coord pos);
+    Ant(int number, Coord pos, unsigned int colony);
 };

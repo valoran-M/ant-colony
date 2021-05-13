@@ -2,31 +2,32 @@
 #include "models/coordinate.hpp"
 #include <stdexcept>
 
-
 //constructeur
 Ant::Ant(
     int number,
-    Coord pos) : _number(number),
-                 _lifePoint(10),
-                 _energy(5),
-                 _sugar(0),
-                 _pos(pos)
+    Coord pos,
+    unsigned int colony) : _colony(colony),
+                           _number(number),
+                           _lifePoint(10),
+                           _energy(5),
+                           _sugar(0),
+                           _pos(pos)
 {
 }
-
 
 //permet a la fourmie de prendre un sucre en contre parti elle perd un point d'energy
 void Ant::takeSugar()
 {
-    if(_sugar < 3)
+    if (_sugar < 3)
     {
         _sugar += 1;
         _energy -= 1;
-    } else {
+    }
+    else
+    {
         throw std::invalid_argument("Can't hold more sugar");
     }
 }
-
 
 //renvoie le nombre de sucre dont se débarasse la fourmie et enlève tous les sucres de la fourmie
 int Ant::dropSugar()
@@ -45,13 +46,11 @@ void Ant::move(int x, int y)
     _pos[1] += y;
 }
 
-
-
 //premisse des combats de fourmis
 //Non testé pour le moment
 void Ant::fight(Ant other)
 {
-    while(inLife() or other.inLife())
+    while (inLife() or other.inLife())
     {
         other._lifePoint -= _energy;
         _lifePoint -= other._energy;

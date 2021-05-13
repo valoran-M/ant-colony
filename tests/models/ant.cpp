@@ -9,7 +9,7 @@ DOCTEST_TEST_SUITE_BEGIN("ant test");
 
 TEST_CASE("constructor")
 {
-    Ant testFourmis = Ant(0, Coord(0,0));
+    Ant testFourmis = Ant(0, Coord(0,0), 1);
     CHECK(testFourmis.getCoord() == Coord(0,0));
     CHECK(testFourmis.getLifePoint() == 10);
     CHECK(testFourmis.getNumber() == 0);
@@ -19,7 +19,7 @@ TEST_CASE("constructor")
 
 TEST_CASE("modifier")
 {
-    Ant testFourmis = Ant(0, Coord(0,0));
+    Ant testFourmis = Ant(0, Coord(0,0), 1);
     SUBCASE("takeSugar")
     {
         testFourmis.takeSugar();
@@ -61,7 +61,7 @@ TEST_CASE("modifier")
 
 TEST_CASE("Predicat")
 {
-    Ant testFourmis = Ant(0, Coord(0,0));
+    Ant testFourmis = Ant(0, Coord(0,0), 1);
     SUBCASE("inLife")
     {
         CHECK(testFourmis.inLife() == true);

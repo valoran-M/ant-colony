@@ -24,7 +24,6 @@ private:
     void _sugarCreation();
     void _spawnableCase(Coord const &coord, char colony);
 
-    // event
     void _eventTraitment(Display::events event);
 
     void _lapUpdate();
@@ -34,7 +33,10 @@ private:
     void _moveAnt(unsigned int colonyDead,
                   unsigned int antDead,
                   Coord &newCase);
-    void _dead(unsigned int colonyDead, unsigned int antDead);
+    void _kill(Ant &antKiller,
+               unsigned int colonyDead,
+               unsigned int antDead);
+    int _dead(unsigned int colonyDead, unsigned int antDead);
     void _getSugar(unsigned int colony, unsigned int ant, Coord &sugar);
     void _putSugar(unsigned int colony, unsigned int ant);
     void _backNeast(unsigned int colony, unsigned int ant);
@@ -43,6 +45,9 @@ private:
 
     // other manager
     void _decreaseSugarPhero();
+    bool _antNeigbour(Ant &ant, Coord &neigbour);
+    bool _sugarNeigbour(Ant &ant, Coord &neigbour);
+    bool _nestNeigbour(Ant &ant);
 
 public:
     Manager(unsigned long _delay);
