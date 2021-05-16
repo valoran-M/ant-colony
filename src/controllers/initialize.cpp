@@ -37,8 +37,8 @@ void Manager::_getData()
     };
 
     max = std::min(_data.width, _data.height) / 4;
-    while (_data.numberOfColony > max &&
-           _data.numberOfColony > 0)
+    while (_data.numberOfColony > max ||
+           _data.numberOfColony <= 0)
     {
         std::cout << "Number of colony max(" << max << "): ";
         std::cin >> _data.numberOfColony;
@@ -46,8 +46,7 @@ void Manager::_getData()
     max = ((_data.height * _data.width) -
            (_data.numberOfColony * 16)) /
           30;
-    while (_data.sugar > max &&
-           _data.sugar > 0)
+    while (_data.sugar > max)
     {
         std::cout << "Number of sugar max(" << max << "): ";
         std::cin >> _data.sugar;
