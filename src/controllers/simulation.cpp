@@ -4,7 +4,7 @@
 void Manager::start()
 {
     _initialize();
-    
+
     int i = 0;
     std::chrono::high_resolution_clock::time_point previousTime = std::chrono::high_resolution_clock::now();
     Coord test(0, 0);
@@ -36,6 +36,9 @@ void Manager::_eventTraitment(Display::events event)
         _data.speed -= (_data.speed > 0) ? 0.1 : 0;
     else if (event == Display::events::speedDown)
         _data.speed += 0.1;
+    else if (event == Display::events::pheroUpdate)
+        for (int colony; colony < _data.numberOfColony; colony++)
+            _nestPheroInit(colony);
 }
 
 void Manager::_lapUpdate()

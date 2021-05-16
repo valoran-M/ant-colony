@@ -16,7 +16,7 @@ set(SRCS
     src/models/data.cpp
     src/models/grid.cpp
 
-
+    src/views/barrier.cpp
     src/views/display.cpp
     src/views/init.cpp
     src/views/event.cpp

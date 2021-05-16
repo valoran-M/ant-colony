@@ -15,13 +15,18 @@ Case::Case(
     std::size_t x,
     std::size_t y,
     unsigned int numberColony) : _coordinate(Coord(x, y)),
-                                 _nestPheromone(std::vector<float>(numberColony, 0)),
-                                 _sugarPheromone(std::vector<float>(numberColony, 0)),
                                  _colony(-1),
                                  _ant(-1),
                                  _nest(-1),
-                                 _sugar(-1)
+                                 _sugar(-1),
+                                 _barrier(false)
 {
+    for (int i = 0; i < numberColony; i++)
+    {
+        _nestPheromone.push_back(0.);
+        _sugarPheromone.push_back(0.);
+    }
+    _nestPheromone[0] = 0;
 }
 
 /**
@@ -107,7 +112,10 @@ int Case::containsSugarPhero()
  **/
 bool Case::isEmpty()
 {
-    return !containsAnt() && !containsNest() && !containsSugar();
+    return !containsAnt() &&
+           !containsNest() &&
+           !containsSugar() &&
+           !getBarrier();
 }
 
 /**
@@ -202,12 +210,26 @@ void Case::decreasesSugarPheromone(unsigned int colony, float amount)
     }
 }
 
+void Case::removeNestPhero()
+{
+    if (!containsNest())
+        for (int x = 0; x < _nestPheromone.size(); x++)
+            _nestPheromone[x] = 0;
+}
+
+void Case::removeNestPhero(int colony)
+{
+    if (!containsNest())
+        _nestPheromone[colony] = 0;
+}
+
 void Case::reset()
 {
     _colony = -1;
     _ant = -1;
     _nest = -1;
     _sugar = -1;
+    _barrier = false;
     for (int x = 0; x < _nestPheromone.size(); x++)
         _nestPheromone[x] = 0;
 

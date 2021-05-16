@@ -12,6 +12,7 @@ private:
     int _ant;
     int _nest;
     int _sugar;
+    bool _barrier;
 
     bool _checkCasePut();
     bool _checkColony(unsigned int colony);
@@ -25,6 +26,7 @@ public:
     int getAnt() { return _ant; }
     int getNest() { return _nest; }
     int getSugar() { return _sugar; }
+    bool getBarrier() { return _barrier; }
 
     // predicate
     bool containsAnt() { return _ant != -1; }
@@ -36,6 +38,8 @@ public:
     // modifier
     void removeAnt() { _colony = _ant = -1; }
     void removeSugar() { _sugar = -1; }
+    void putBarrier() { _barrier = true; }
+    void removeBarrier() { _barrier = false; }
     void putAnt(unsigned int ant, unsigned int colony);
     void putSugar(unsigned int sugar);
     void putNeast(int colony);
@@ -43,6 +47,8 @@ public:
     void putSugarPheromone(unsigned int colony, float intensity);
     void decreasesSugar() { _sugar = -1; }
     void decreasesSugarPheromone(unsigned int colony, float amount);
+    void removeNestPhero();
+    void removeNestPhero(int colony);
 
     // constructor
     Case() {}

@@ -1,7 +1,6 @@
 #include "views/display.hpp"
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
-#include <iostream>
 
 Display::Display() : _antDataCoef(NULL),
                      _colontyDataCoef(NULL),

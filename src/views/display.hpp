@@ -13,6 +13,7 @@ private:
     sf::Event _event;
     sf::Color _backgroundColor = sf::Color(0, 22, 65);
     sf::Color _lineColor = sf::Color(0, 55, 162);
+    sf::Color _barrierColor = sf::Color(86, 86, 86);
     std::vector<sf::Color> _colonyColor;
 
     sf::RectangleShape _rectangle;
@@ -42,6 +43,8 @@ private:
     void _antDataDisplay();
     void _colonyDataDisplay();
 
+    void _addbarrier();
+
 public:
     enum events
     {
@@ -49,7 +52,8 @@ public:
         reset,
         speedUp,
         speedDown,
-        nothing
+        nothing,
+        pheroUpdate
     };
     Display();
 

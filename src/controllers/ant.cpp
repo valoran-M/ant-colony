@@ -75,16 +75,21 @@ void Manager::_backHome(Ant &antEntity)
     std::vector<Coord> neigbours =
         antEntity.getCoord().getNeigbour(_data.width, _data.height);
     Case closer;
-    float nestPheroMax = 0;
+    float nestPheroMax = _grid.getCase(antEntity.getCoord()).getNestPhero(antEntity.getColony());
+    bool find = false;
     for (Coord &neigbour : neigbours)
     {
         if (_grid.getCase(neigbour).isEmpty() && _grid.getCase(neigbour).getNestPhero(antEntity.getColony()) > nestPheroMax)
         {
+            find = true;
             closer = _grid.getCase(neigbour);
             nestPheroMax = _grid.getCase(neigbour).getNestPhero(antEntity.getColony());
         }
     }
-    _moveAnt(antEntity, closer.getCoord());
+    if (find)
+        _moveAnt(antEntity, closer.getCoord());
+    else
+        _randomMove(antEntity);
 }
 
 void Manager::_randomMove(Ant &antEntity)

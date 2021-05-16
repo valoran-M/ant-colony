@@ -4,7 +4,6 @@
 
 #include <array>
 #include <stdexcept>
-#include <iostream>
 
 DOCTEST_TEST_SUITE_BEGIN("case test");
 

@@ -29,7 +29,8 @@ void Display::updataCell(Coord &coord)
 
     else if (cell.getSugar() != -1)
         _setCell(cell.getCoord(), 255, 255, 255);
-
+    else if (cell.getBarrier())
+        _setCell(cell.getCoord(), _barrierColor);
     else if (_colontyDataCoef != NULL)
         _setCell(cell.getCoord(),
                  _colonyColor[_colontyDataCoef->team].r,

@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
 
         if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0)
             help();
-        else if (strcmp(argv[i], "--m") == 0 || strcmp(argv[i], "--man") == 0)
+        else if (strcmp(argv[i], "-m") == 0 || strcmp(argv[i], "--man") == 0)
             man = true;
         else if (strcmp(argv[i], "-c") == 0 || strcmp(argv[i], "--colony") == 0)
         {
@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
         else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "--dimension") == 0)
             gridDim[0] = atoi(argv[++i]), gridDim[1] = atoi(argv[++i]);
     }
-
+    std::cout << man;
     Manager simulation(1e9, man, colony, sugar, cellDim, gridDim);
     simulation.start();
     return 0;

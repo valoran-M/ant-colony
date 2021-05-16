@@ -8,6 +8,7 @@ Manager::Manager(unsigned long delay,
                  unsigned int sugar,
                  int cellDim,
                  Coord gridDim) : _delay(delay),
+                                  _manual(manual),
                                   _data(colony, sugar, cellDim, gridDim)
 {
     _getData();

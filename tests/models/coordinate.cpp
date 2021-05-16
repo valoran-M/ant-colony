@@ -1,4 +1,3 @@
-#include <iostream>
 #include "doctest.h"
 #include "models/coordinate.hpp"
 

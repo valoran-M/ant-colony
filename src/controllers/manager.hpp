@@ -50,13 +50,14 @@ private:
     bool _sugarNeigbour(Ant &ant, Coord &neigbour);
     bool _nestNeigbour(Ant &ant);
     bool _sugarPheroNeigbour(Ant &ant, Coord &niegbour);
+    void _resetNestPhero();
 
 public:
     Manager(unsigned long delay,
-            bool manual = false,
-            unsigned int colony = 0,
-            unsigned int sugar = 0,
-            int cellDim = -1,
-            Coord gridDim = Coord(0, 0));
+            bool manual,
+            unsigned int colony,
+            unsigned int sugar,
+            int cellDim,
+            Coord gridDim);
     void start();
 };

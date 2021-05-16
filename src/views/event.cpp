@@ -22,6 +22,9 @@ Display::events Display::manageEvent()
             case sf::Keyboard::Q:
                 _window.close();
                 break;
+            case sf::Keyboard::B:
+                _addbarrier();
+                return pheroUpdate;
             case sf::Keyboard::G:
                 if (_rectangle.getOutlineThickness() == 1)
                     _rectangle.setOutlineThickness(0);

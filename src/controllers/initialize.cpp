@@ -17,6 +17,7 @@ void Manager::_initialize()
                           _data.caseSize);
     _colonnyGeneration();
     _sugarCreation();
+    _display.setGird();
 }
 
 void Manager::_getData()
@@ -63,7 +64,7 @@ void Manager::_colonnyGeneration()
 
     for (unsigned int colony = 0; colony < _data.numberOfColony; colony++)
     {
-        _data.colonies.push_back(Colony(colony));
+        _data.colonies.push_back(Colony(Coord(0, 0), colony));
         _data.sugarPhero.push_back(std::vector<Coord>(0));
         if (!_manual)
         {
@@ -89,11 +90,7 @@ void Manager::_colonnyGeneration()
               << "-------------------------------" << std::endl;
 
     for (unsigned int colony = 0; colony < _data.numberOfColony; colony++)
-    {
-        std::cout << "Colony " << colony << ": ";
         _nestPheroInit(colony);
-        std::cout << std::endl;
-    }
 }
 
 void Manager::_randomNestCreation(Colony &colony,
@@ -124,6 +121,7 @@ bool Manager::_baseTest(Coord &base)
 
 void Manager::_nestCreation(Colony &colony, Coord base)
 {
+    colony.base = base;
     colony.nest.insert(colony.nest.end(),
                        {base,
                         Coord(base[0] + 1, base[1]),
@@ -161,6 +159,10 @@ void Manager::_nestPheroInit(char colony)
     float max, maxPheroCase, casePhero;
     bool stable = false;
     size = std::min(_data.height, _data.width);
+    for (y = 0; y < _data.height; y++)
+        for (x = 0; x < _data.width; x++)
+            _grid.getCase(y, x).removeNestPhero(colony);
+    std::cout << "Colone " << colony << ":";
     while (!stable)
     {
         std::cout << "*";
@@ -179,7 +181,9 @@ void Manager::_nestPheroInit(char colony)
                                        _grid.getCase(neig[neigI]).getNestPhero(colony));
 
                     maxPheroCase = max - 1. / size;
-                    if (maxPheroCase > casePhero)
+                    if (maxPheroCase > casePhero &&
+                        p.getNest() == -1 &&
+                        !p.getBarrier())
                     {
                         p.putNestPheromone(colony, maxPheroCase);
                         stable = false;
@@ -187,6 +191,7 @@ void Manager::_nestPheroInit(char colony)
                 }
             }
     }
+    std::cout << std::endl;
 }
 
 void Manager::_sugarCreation()

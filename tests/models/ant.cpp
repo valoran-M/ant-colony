@@ -3,7 +3,6 @@
 
 #include "doctest.h"
 #include <stdexcept>
-#include <iostream>
 
 DOCTEST_TEST_SUITE_BEGIN("ant test");
 

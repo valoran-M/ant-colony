@@ -9,8 +9,9 @@ struct Grid
     unsigned int width;
     std::vector<std::vector<Case>> grid;
     Case &getCase(Coord const &coord);
-    Case &getCase(int y, int x) { return grid[y][x]; }
+    Case &getCase(int x, int y) { return grid[x][y]; }
     void reset();
+    void removeNestPhero();
     bool initilize(unsigned int xMax,
                    unsigned int yMax,
                    unsigned int numberOfColony);
