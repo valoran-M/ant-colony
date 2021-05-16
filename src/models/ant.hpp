@@ -11,6 +11,7 @@ private:
     int _lifePoint;
     int _energy;
     Coord _pos;
+    Coord _direction;
 
 public:
     //predicat

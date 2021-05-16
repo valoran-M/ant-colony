@@ -63,6 +63,8 @@ public:
     void close();
     void setGird();
     void setData();
+
+    Coord getNestCreation();
 };
 
 static void _help();

@@ -10,16 +10,19 @@ private:
     Grid _grid;
     Display _display;
     unsigned long _delay;
+    bool _manual;
 
     // init
     void _initialize();
     void _reset();
 
     void _getData();
+    bool _baseTest(Coord &base);
     void _colonnyGeneration();
-    void _nestCreation(Colony &colony,
-                       std::vector<int> &x_grid,
-                       std::vector<int> &y_grid);
+    void _randomNestCreation(Colony &colony,
+                             std::vector<int> &x_grid,
+                             std::vector<int> &y_grid);
+    void _nestCreation(Colony &colony, Coord base);
     void _nestPheroInit(char colony);
     void _sugarCreation();
     void _spawnableCase(Coord const &coord, char colony);
@@ -36,8 +39,8 @@ private:
                unsigned int antDead);
     int _dead(unsigned int colonyDead, unsigned int antDead);
     void _getSugar(Ant &antEntity, Coord &sugar);
-    void _putSugar(Ant &antEntity);
-    void _backNeast(Ant &antEntity);
+    bool _putSugar(Ant &antEntity);
+    void _backHome(Ant &antEntity);
     void _backSugar(Ant &antEntity);
     void _randomMove(Ant &antEntity);
 
@@ -49,6 +52,11 @@ private:
     bool _sugarPheroNeigbour(Ant &ant, Coord &niegbour);
 
 public:
-    Manager(unsigned long _delay);
+    Manager(unsigned long delay,
+            bool manual = false,
+            unsigned int colony = 0,
+            unsigned int sugar = 0,
+            int cellDim = -1,
+            Coord gridDim = Coord(0, 0));
     void start();
 };

@@ -1,6 +1,7 @@
 #include "views/display.hpp"
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
+#include <iostream>
 
 Display::Display() : _antDataCoef(NULL),
                      _colontyDataCoef(NULL),
@@ -70,4 +71,45 @@ void Display::setGird()
         for (coord[0] = 0; coord[0] < _width; coord[0]++)
             updataCell(coord);
     setData();
+}
+
+Coord Display::getNestCreation()
+{
+    int xGrid = -1, yGrid = -1;
+    while (xGrid == -1 && yGrid == -1)
+    {
+        while (_window.pollEvent(_event))
+            switch (_event.type)
+            {
+            case sf::Event::Closed:
+                _window.close();
+                exit(EXIT_SUCCESS);
+
+            case sf::Event::KeyPressed:
+                switch (_event.key.code)
+                {
+                case sf::Keyboard::Q:
+                    _window.close();
+                    exit(EXIT_SUCCESS);
+                case sf::Keyboard::G:
+                    if (_rectangle.getOutlineThickness() == 1)
+                        _rectangle.setOutlineThickness(0);
+                    else
+                        _rectangle.setOutlineThickness(1);
+                    setGird();
+                    break;
+                }
+            case sf::Event::MouseButtonPressed:
+                unsigned int xGrid = (_event.mouseButton.x - _most) / _caseSize;
+                unsigned int yGrid = (_event.mouseButton.y - _most) / _caseSize;
+                if (xGrid > _data->width || yGrid > _data->height)
+                    yGrid = xGrid = -1;
+                else
+                    return Coord(xGrid, yGrid);
+                break;
+            }
+        setGird();
+        _window.display();
+    }
+    return Coord(0, 0);
 }

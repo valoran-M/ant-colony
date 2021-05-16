@@ -5,7 +5,8 @@
 #include <vector>
 
 //Constructeur
-Colony::Colony(char nom) : team(nom)
+Colony::Colony(char nom) : team(nom),
+                           sugar(0)
 {
 }
 

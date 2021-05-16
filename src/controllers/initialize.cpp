@@ -12,6 +12,9 @@ void Manager::_initialize()
     _data.decrease = std::sqrt(
         float(_data.width * _data.width + _data.height * _data.height));
     _grid.initilize(_data.width, _data.height, _data.numberOfColony);
+    _display.display_init(&_data,
+                          &_grid,
+                          _data.caseSize);
     _colonnyGeneration();
     _sugarCreation();
 }
@@ -19,42 +22,40 @@ void Manager::_initialize()
 void Manager::_getData()
 {
     unsigned int max;
-    do
+    while ((_data.width < 20 || _data.width > 1000) ||
+           (_data.height < 20 || _data.height > 1000))
     {
         std::cout << "Shape of grid (x, y) : ";
         std::cin >> _data.width;
         std::cin >> _data.height;
-    } while ((_data.width < 20 || _data.width > 1000) ||
-             (_data.height < 20 || _data.height > 1000));
+    };
 
-    do
+    while (_data.caseSize > 30)
     {
         std::cout << "size of case (max = 30) : ";
         std::cin >> _data.caseSize;
-    } while (_data.caseSize > 30);
+    };
 
     max = std::min(_data.width, _data.height) / 4;
-    do
+    while (_data.numberOfColony > max &&
+           _data.numberOfColony > 0)
     {
         std::cout << "Number of colony max(" << max << "): ";
         std::cin >> _data.numberOfColony;
-    } while (_data.numberOfColony > max &&
-             _data.numberOfColony > 0);
+    };
     max = ((_data.height * _data.width) -
            (_data.numberOfColony * 16)) /
           30;
-    do
+    while (_data.sugar > max &&
+           _data.sugar > 0)
     {
         std::cout << "Number of sugar max(" << max << "): ";
         std::cin >> _data.sugar;
-    } while (_data.sugar > max &&
-             _data.sugar > 0);
+    };
 }
 
 void Manager::_colonnyGeneration()
 {
-    std::cout << "nest generation : ";
-
     std::vector<int> x_grid, y_grid;
     for (int x = 0; x < _data.width / 4; x++)
         x_grid.push_back(x);
@@ -65,7 +66,22 @@ void Manager::_colonnyGeneration()
     {
         _data.colonies.push_back(Colony(colony));
         _data.sugarPhero.push_back(std::vector<Coord>(0));
-        _nestCreation(_data.colonies[colony], x_grid, y_grid);
+        if (!_manual)
+        {
+            std::cout << "nest generation : ";
+            _randomNestCreation(_data.colonies[colony], x_grid, y_grid);
+        }
+        else
+        {
+            Coord base;
+            do
+            {
+                base = _display.getNestCreation();
+            } while (!_baseTest(base));
+
+            _nestCreation(_data.colonies[colony], base);
+            _display.setGird();
+        }
     }
 
     std::cout << std::endl
@@ -81,9 +97,9 @@ void Manager::_colonnyGeneration()
     }
 }
 
-void Manager::_nestCreation(Colony &colony,
-                            std::vector<int> &x_grid,
-                            std::vector<int> &y_grid)
+void Manager::_randomNestCreation(Colony &colony,
+                                  std::vector<int> &x_grid,
+                                  std::vector<int> &y_grid)
 {
     int random_x, random_y;
     random_x = random_index(0, x_grid.size() - 1);
@@ -91,9 +107,24 @@ void Manager::_nestCreation(Colony &colony,
     Coord base(x_grid[random_x] * 4 + 1, y_grid[random_y] * 4 + 1);
     x_grid.erase(x_grid.begin() + random_x);
     y_grid.erase(y_grid.begin() + random_y);
+    std::cout << base << " ";
+    _nestCreation(colony, base);
+}
 
-    std::cout
-        << base << " ";
+bool Manager::_baseTest(Coord &base)
+{
+    if ((base[0] < 1 || base[0] > _data.width - 2) &&
+        (base[1] < 1 || base[1] > _data.height - 2))
+        return false;
+    for (int y = base[1] - 1; y < base[1] + 3; y++)
+        for (int x = base[0] - 1; x < base[0] + 3; x++)
+            if (!_grid.getCase(Coord(x, y)).isEmpty())
+                return false;
+    return true;
+}
+
+void Manager::_nestCreation(Colony &colony, Coord base)
+{
     colony.nest.insert(colony.nest.end(),
                        {base,
                         Coord(base[0] + 1, base[1]),

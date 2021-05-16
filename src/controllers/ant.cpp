@@ -8,7 +8,10 @@ void Manager::_antManger(unsigned int colony, unsigned int ant)
     if (!antEntity.inLife())
         return;
     else if (antEntity.getSugar() != 0)
-        _backNeast(antEntity);
+    {
+        if (!_putSugar(antEntity))
+            _backHome(antEntity);
+    }
     else
         _randomMove(antEntity);
 }
@@ -52,14 +55,22 @@ void Manager::_getSugar(Ant &antEntity, Coord &sugar)
     _data.sugarPhero[antEntity.getColony()].push_back(caseAnt);
 }
 
-void Manager::_putSugar(Ant &antEntity)
+bool Manager::_putSugar(Ant &antEntity)
 {
-    _data.colonies[antEntity.getColony()].sugar +=
-        antEntity.getSugar();
-    antEntity.dropSugar();
+    std::vector<Coord> neigbours =
+        antEntity.getCoord().getNeigbour(_data.width, _data.height);
+    for (Coord &neigbour : neigbours)
+        if (_grid.getCase(neigbour).getNest() == antEntity.getColony())
+        {
+            _data.colonies[antEntity.getColony()].sugar +=
+                antEntity.getSugar();
+            antEntity.dropSugar();
+            return true;
+        }
+    return false;
 }
 
-void Manager::_backNeast(Ant &antEntity)
+void Manager::_backHome(Ant &antEntity)
 {
     std::vector<Coord> neigbours =
         antEntity.getCoord().getNeigbour(_data.width, _data.height);

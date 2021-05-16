@@ -3,11 +3,8 @@
 
 void Manager::start()
 {
-    _getData();
     _initialize();
-    _display.display_init(&_data,
-                          &_grid,
-                          _data.caseSize);
+    
     int i = 0;
     std::chrono::high_resolution_clock::time_point previousTime = std::chrono::high_resolution_clock::now();
     Coord test(0, 0);

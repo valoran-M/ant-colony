@@ -16,6 +16,7 @@ struct Data
     std::vector<Colony> colonies;
     std::vector<std::vector<Coord>> sugarPhero;
 
+    Coord gridDim;
     unsigned int lap;
     unsigned int width;
     unsigned int height;
@@ -29,4 +30,8 @@ struct Data
     void reset();
 
     Data();
+    Data(unsigned int colony,
+         unsigned int sugar,
+         int cellDim,
+         Coord gridDim);
 };

@@ -2,8 +2,15 @@
 #include "models/grid.hpp"
 #include "models/coordinate.hpp"
 
-Manager::Manager(unsigned long delay) : _delay(delay)
+Manager::Manager(unsigned long delay,
+                 bool manual,
+                 unsigned int colony,
+                 unsigned int sugar,
+                 int cellDim,
+                 Coord gridDim) : _delay(delay),
+                                  _data(colony, sugar, cellDim, gridDim)
 {
+    _getData();
 }
 
 void Manager::_reset()
