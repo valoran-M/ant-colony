@@ -2,7 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
 
-Display::Display()
+Display::Display() : _antDataCoef(-1),
+                     _colontyDataCoef(-1),
+                     _sugarDataCase(NULL)
 {
 }
 
@@ -18,6 +20,12 @@ void Display::display_init(Data *data,
     _rectangle.setOutlineThickness(0);
 
     _intitWindow();
+    _rectangleData.setSize(sf::Vector2f(_dataX, _window.getSize().y));
+    _rectangleData.setOutlineThickness(1);
+    _rectangleData.setOutlineColor(_lineColor);
+    _rectangleData.setFillColor(_backgroundColor);
+    _rectangleData.setPosition(_window.getSize().x - _dataX,
+                               _most / 2);
     _colorNeast(_data->numberOfColony);
     setGird();
 }
@@ -25,7 +33,7 @@ void Display::display_init(Data *data,
 void Display::_intitWindow()
 {
     if (_caseSize > 0)
-        _window.create(sf::VideoMode(_height * _caseSize + _most + 300,
+        _window.create(sf::VideoMode(_height * _caseSize + _most + _dataX,
                                      _width * _caseSize + _most),
                        "Ant",
                        sf::Style::Close);
@@ -34,13 +42,6 @@ void Display::_intitWindow()
                        "ant", sf::Style::Fullscreen);
     _window.setActive(true);
     _window.setFramerateLimit(60);
-
-    _rectangleData.setSize(sf::Vector2f(300, _window.getSize().y));
-    _rectangleData.setOutlineThickness(1);
-    _rectangleData.setOutlineColor(_lineColor);
-    _rectangleData.setFillColor(_backgroundColor);
-    _rectangleData.setPosition(_window.getSize().x - 300,
-                               _most / 2);
 }
 
 void Display::_colorNeast(unsigned int numberColoy)

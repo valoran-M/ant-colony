@@ -40,6 +40,39 @@ Display::events Display::manageEvent()
                 help.launch();
                 break;
             }
+        case sf::Event::MouseButtonPressed:
+            unsigned int xGrid = (_event.mouseButton.x - _most) / _caseSize;
+            unsigned int yGrid = (_event.mouseButton.y - _most) / _caseSize;
+            if (xGrid > _data->width || yGrid > _data->height)
+                break;
+
+            switch (_event.mouseButton.button)
+            {
+            case sf::Mouse::Right:
+                _antDataCoef = -1;
+                _colontyDataCoef = -1;
+                _sugarDataCase = NULL;
+                if (_grid->getCase(xGrid, yGrid).isEmpty())
+                    ;
+                else if (_grid->getCase(xGrid, yGrid).containsAnt())
+                {
+                    _antDataCoef = _grid->getCase(xGrid, yGrid).getAnt();
+                    _colontyDataCoef = _grid->getCase(xGrid, yGrid).getColony();
+                }
+                else if (_grid->getCase(xGrid, yGrid).containsNest())
+                    _colontyDataCoef = _grid->getCase(xGrid, yGrid).getColony();
+                else if (_grid->getCase(xGrid, yGrid).getSugar() != 0)
+                    _sugarDataCase = &_grid->getCase(xGrid, yGrid);
+                setGird();
+                break;
+
+            case sf::Mouse::Left:
+                if (!_grid->getCase(xGrid, yGrid).isEmpty())
+                    break;
+                _grid->getCase(xGrid, yGrid).putSugar(20);
+                setCell(_grid->getCase(xGrid, yGrid).getCoord());
+                break;
+            }
             break;
         }
     _window.display();
@@ -62,13 +95,29 @@ void Display::setCell(Coord &coord)
     Case &cell = _grid->getCase(coord);
     if (cell.getAnt() != -1)
     {
-        setCell(cell.getCoord(), _backgroundColor);
+        if (_colontyDataCoef == -1)
+            setCell(cell.getCoord(), _backgroundColor);
+        else
+            setCell(cell.getCoord(),
+                    _colonyColor[_colontyDataCoef].r,
+                    _colonyColor[_colontyDataCoef].g,
+                    _colonyColor[_colontyDataCoef].b,
+                    _grid->getCase(cell.getCoord()).getNestPhero(_colontyDataCoef) * 100);
         drawAnt(cell.getCoord(), _colonyColor[cell.getColony()]);
     }
+
     else if (cell.getColony() != -1)
         setCell(cell.getCoord(), _colonyColor[cell.getColony()]);
+
     else if (cell.getSugar() != -1)
         setCell(cell.getCoord(), 255, 255, 255);
+
+    else if (_colontyDataCoef != -1)
+        setCell(cell.getCoord(),
+                _colonyColor[_colontyDataCoef].r,
+                _colonyColor[_colontyDataCoef].g,
+                _colonyColor[_colontyDataCoef].b,
+                _grid->getCase(cell.getCoord()).getNestPhero(_colontyDataCoef) * 100);
     else
         setCell(cell.getCoord(), _backgroundColor);
     if ((sugarPhero = cell.containsSugarPhero()) != -1)
@@ -94,6 +143,14 @@ void Display::setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b)
     _window.draw(_rectangle);
 }
 
+void Display::setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b, uint8_t a)
+{
+    _rectangle.setFillColor(sf::Color(r, g, b, a));
+    _rectangle.setPosition(coord[0] * _caseSize + _most / 2,
+                           coord[1] * _caseSize + _most / 2);
+    _window.draw(_rectangle);
+}
+
 void Display::close()
 {
     _window.close();
@@ -101,15 +158,18 @@ void Display::close()
 
 void Display::setData()
 {
-    _window.draw(_rectangleData);
     std::string lap = "lap : " + std::to_string(_data->lap);
     sf::Font font;
-    if(!font.loadFromFile("./font/arial.ttf"))
+
+    if (!font.loadFromFile("./font/arial.ttf"))
         exit(EXIT_FAILURE);
+
     sf::Text lap_sf(lap, font);
-    lap_sf.setPosition(_window.getSize().x - 290,
-                      15);
+    lap_sf.setPosition(_window.getSize().x - _dataX + 10,
+                       15);
     lap_sf.setFillColor(sf::Color::White);
+
+    _window.draw(_rectangleData);
     _window.draw(lap_sf);
 }
 
