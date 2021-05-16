@@ -26,6 +26,7 @@ public:
     void go_to(Coord &coord) { _pos = coord; }
     void fight(Ant other);
     void takeSugar(int sugar) { _sugar += sugar; }
+    void kill() { _lifePoint = 0; }
 
     //getter
     unsigned int getColony() { return _colony; }

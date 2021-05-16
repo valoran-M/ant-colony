@@ -50,8 +50,9 @@ void Manager::_lapUpdate()
              ant < _data.colonies[colony].getNbAnt();
              ant++)
         {
-            _antManger(colony, ant);
+            //_antManger(colony, ant);
         }
     _decreaseSugarPhero();
+    _display.setData();
     _data.addLap();
 }

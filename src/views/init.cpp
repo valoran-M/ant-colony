@@ -25,7 +25,7 @@ void Display::display_init(Data *data,
 void Display::_intitWindow()
 {
     if (_caseSize > 0)
-        _window.create(sf::VideoMode(_height * _caseSize + _most,
+        _window.create(sf::VideoMode(_height * _caseSize + _most + 300,
                                      _width * _caseSize + _most),
                        "Ant",
                        sf::Style::Close);
@@ -34,6 +34,13 @@ void Display::_intitWindow()
                        "ant", sf::Style::Fullscreen);
     _window.setActive(true);
     _window.setFramerateLimit(60);
+
+    _rectangleData.setSize(sf::Vector2f(300, _window.getSize().y));
+    _rectangleData.setOutlineThickness(1);
+    _rectangleData.setOutlineColor(_lineColor);
+    _rectangleData.setFillColor(_backgroundColor);
+    _rectangleData.setPosition(_window.getSize().x - 300,
+                               _most / 2);
 }
 
 void Display::_colorNeast(unsigned int numberColoy)
@@ -57,4 +64,5 @@ void Display::setGird()
     for (coord[1] = 0; coord[1] < _height; coord[1]++)
         for (coord[0] = 0; coord[0] < _width; coord[0]++)
             setCell(coord);
+    setData();
 }

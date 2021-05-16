@@ -14,6 +14,7 @@ private:
     std::vector<sf::Color> _colonyColor;
 
     sf::RectangleShape _rectangle;
+    sf::RectangleShape _rectangleData;
     sf::CircleShape _circle;
 
     unsigned int _caseSize;
@@ -47,6 +48,7 @@ public:
     bool isOpen() { return _window.isOpen(); }
     void close();
     void setGird();
+    void setData();
 };
 
 static void _help();

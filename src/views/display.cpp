@@ -1,5 +1,6 @@
 #include "views/display.hpp"
 #include <SFML/Graphics.hpp>
+#include <string>
 #include <iostream>
 
 Display::events Display::manageEvent()
@@ -96,6 +97,20 @@ void Display::setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b)
 void Display::close()
 {
     _window.close();
+}
+
+void Display::setData()
+{
+    _window.draw(_rectangleData);
+    std::string lap = "lap : " + std::to_string(_data->lap);
+    sf::Font font;
+    if(!font.loadFromFile("./font/arial.ttf"))
+        exit(EXIT_FAILURE);
+    sf::Text lap_sf(lap, font);
+    lap_sf.setPosition(_window.getSize().x - 290,
+                      15);
+    lap_sf.setFillColor(sf::Color::White);
+    _window.draw(lap_sf);
 }
 
 static void _help()

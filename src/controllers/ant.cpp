@@ -6,6 +6,8 @@
 void Manager::_antManger(unsigned int colony, unsigned int ant)
 {
     Ant &antEntity = _data.colonies[colony].ants[ant];
+    if (!antEntity.inLife())
+        return;
     Coord neigbourEntity;
     if (_antNeigbour(antEntity, neigbourEntity))
         _kill(antEntity,
@@ -53,7 +55,7 @@ int Manager::_dead(unsigned int colonyDead, unsigned int antDead)
 
     std::vector<Ant> &ants = _data.colonies[colonyDead].ants;
     int sugar = ants[antDead].getSugar();
-    ants.erase(ants.begin() + antDead);
+    ants[antDead].kill();
     return sugar;
 }
 
@@ -84,7 +86,7 @@ void Manager::_backNeast(Ant &antEntity)
         if (test.getNestPhero(antEntity.getColony()) >= closer.getNestPhero(antEntity.getColony()) && test.isEmpty())
             closer = test;
     }
-    if(!closer.isEmpty())
+    if (!closer.isEmpty())
         return;
     _grid.getCase(antEntity.getCoord()).putSugarPheromone(antEntity.getColony(), 1.);
     _data.sugarPhero[antEntity.getColony()].push_back(closer.getCoord());
