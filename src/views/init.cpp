@@ -27,6 +27,10 @@ void Display::display_init(Data *data,
     _rectangleData.setPosition(_window.getSize().x - _dataX,
                                _most / 2);
     _colorNeast(_data->numberOfColony);
+
+    if (!_font.loadFromFile("./font/Monospace.ttf"))
+        exit(EXIT_FAILURE);
+
     setGird();
 }
 

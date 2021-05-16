@@ -7,6 +7,7 @@ class Display
 private:
     Grid *_grid;
     Data *_data;
+    sf::Font _font;
     sf::RenderWindow _window;
     sf::Event _event;
     sf::Color _backgroundColor = sf::Color(0, 22, 65);
@@ -32,8 +33,11 @@ private:
 
     void _setCell(Coord &coord, sf::Color &color);
     void _setCell(Coord &coord,
-                 uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
+                  uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
     void _drawAnt(Coord &pos, sf::Color &color);
+
+    void _entityData();
+    void _sugarDataDisplay();
 
 public:
     enum events
