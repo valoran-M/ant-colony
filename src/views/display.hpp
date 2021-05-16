@@ -1,5 +1,6 @@
 #include "models/coordinate.hpp"
 #include "models/data.hpp"
+#include "models/colony.hpp"
 #include <SFML/Graphics.hpp>
 
 class Display
@@ -24,8 +25,8 @@ private:
     unsigned int _width;
     unsigned int _dataX = 300;
 
-    int _antDataCoef;
-    int _colontyDataCoef;
+    Ant *_antDataCoef;
+    Colony *_colontyDataCoef;
     Case *_sugarDataCase;
 
     void _intitWindow();
@@ -38,6 +39,8 @@ private:
 
     void _entityData();
     void _sugarDataDisplay();
+    void _antDataDisplay();
+    void _colonyDataDisplay();
 
 public:
     enum events

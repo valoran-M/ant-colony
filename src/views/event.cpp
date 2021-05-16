@@ -1,7 +1,6 @@
 #include "views/display.hpp"
 #include <iostream>
 
-
 Display::events Display::manageEvent()
 {
     while (_window.pollEvent(_event))
@@ -48,18 +47,18 @@ Display::events Display::manageEvent()
             switch (_event.mouseButton.button)
             {
             case sf::Mouse::Right:
-                _antDataCoef = -1;
-                _colontyDataCoef = -1;
+                _antDataCoef = NULL;
+                _colontyDataCoef = NULL;
                 _sugarDataCase = NULL;
                 if (_grid->getCase(xGrid, yGrid).isEmpty())
                     ;
                 else if (_grid->getCase(xGrid, yGrid).containsAnt())
                 {
-                    _antDataCoef = _grid->getCase(xGrid, yGrid).getAnt();
-                    _colontyDataCoef = _grid->getCase(xGrid, yGrid).getColony();
+                    _antDataCoef = &_data->colonies[_grid->getCase(xGrid, yGrid).getColony()]
+                                        .ants[_grid->getCase(xGrid, yGrid).getAnt()];
                 }
                 else if (_grid->getCase(xGrid, yGrid).containsNest())
-                    _colontyDataCoef = _grid->getCase(xGrid, yGrid).getColony();
+                    _colontyDataCoef = &_data->colonies[_grid->getCase(xGrid, yGrid).getColony()];
                 else if (_grid->getCase(xGrid, yGrid).getSugar() != 0)
                     _sugarDataCase = &_grid->getCase(xGrid, yGrid);
                 setGird();

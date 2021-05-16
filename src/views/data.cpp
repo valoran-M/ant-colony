@@ -19,12 +19,15 @@ void Display::_entityData()
 {
     if (_sugarDataCase != NULL)
         _sugarDataDisplay();
-    else if (_antDataCoef != -1)
+    else if (_antDataCoef != NULL)
     {
+        if (!_antDataCoef->inLife())
+            _antDataCoef = NULL;
+        else
+            _antDataDisplay();
     }
-    else if (_colontyDataCoef != -1)
-    {
-    }
+    else if (_colontyDataCoef != NULL)
+        _colonyDataDisplay();
 }
 
 void Display::_sugarDataDisplay()
@@ -57,5 +60,66 @@ void Display::_sugarDataDisplay()
     text.setPosition(_window.getSize().x - _dataX + 10,
                      15 + 160);
 
+    _window.draw(text);
+}
+
+void Display::_antDataDisplay()
+{
+    sf::Text text;
+    std::string str_data;
+
+    text.setFont(_font);
+    text.setFillColor(sf::Color::White);
+    text.setString("Ant :");
+    text.setPosition(_window.getSize().x - _dataX + 10,
+                     15 + 40);
+    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    _window.draw(text);
+
+    str_data = "  coord x: " +
+               std::to_string(_antDataCoef->getCoord().getX()) +
+               "\n        y: " +
+               std::to_string(_antDataCoef->getCoord().getY());
+
+    text.setStyle(sf::Text::Regular);
+    text.setString(str_data);
+    text.setPosition(_window.getSize().x - _dataX + 10,
+                     15 + 80);
+    _window.draw(text);
+
+    str_data = "  sugar: " + std::to_string(_antDataCoef->getSugar());
+    text.setStyle(sf::Text::Regular);
+    text.setString(str_data);
+    text.setPosition(_window.getSize().x - _dataX + 10,
+                     15 + 160);
+
+    _window.draw(text);
+}
+
+void Display::_colonyDataDisplay()
+{
+    sf::Text text;
+    std::string str_data;
+
+    text.setFont(_font);
+    text.setFillColor(sf::Color::White);
+    text.setString("Colony :");
+    text.setPosition(_window.getSize().x - _dataX + 10,
+                     15 + 40);
+    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    _window.draw(text);
+
+    str_data = "  sugar: " + std::to_string(_colontyDataCoef->sugar);
+    text.setStyle(sf::Text::Regular);
+    text.setString(str_data);
+    text.setPosition(_window.getSize().x - _dataX + 10,
+                     15 + 80);
+    _window.draw(text);
+
+    str_data = "  ant:   " + std::to_string(_colontyDataCoef->getNbAnt());
+    text.setStyle(sf::Text::Regular);
+    text.setString(str_data);
+    text.setPosition(_window.getSize().x - _dataX + 10,
+                     15 + 120);
     _window.draw(text);
 }

@@ -2,8 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
 
-Display::Display() : _antDataCoef(-1),
-                     _colontyDataCoef(-1),
+Display::Display() : _antDataCoef(NULL),
+                     _colontyDataCoef(NULL),
                      _sugarDataCase(NULL)
 {
 }
