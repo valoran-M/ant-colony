@@ -1,28 +1,14 @@
 #include "controllers/manager.hpp"
 #include "controllers/random.hpp"
 #include "models/ant.hpp"
-#include <iostream>
 
 void Manager::_antManger(unsigned int colony, unsigned int ant)
 {
     Ant &antEntity = _data.colonies[colony].ants[ant];
     if (!antEntity.inLife())
         return;
-    Coord neigbourEntity;
-    if (_antNeigbour(antEntity, neigbourEntity))
-        _kill(antEntity,
-              _grid.getCase(neigbourEntity).getColony(),
-              _grid.getCase(neigbourEntity).getAnt());
-    else if (antEntity.haveSugar())
+    else if (antEntity.getSugar() != 0)
         _backNeast(antEntity);
-    else if (_sugarNeigbour(antEntity, neigbourEntity) &&
-             antEntity.getSugar() == 0)
-        _getSugar(antEntity, neigbourEntity);
-    else if (_nestNeigbour(antEntity) &&
-             antEntity.getSugar() != 0)
-        _putSugar(antEntity);
-    else if (_sugarPheroNeigbour(antEntity, neigbourEntity) && _grid.getCase(neigbourEntity).isEmpty())
-        _moveAnt(antEntity, neigbourEntity);
     else
         _randomMove(antEntity);
 }
@@ -33,8 +19,6 @@ void Manager::_moveAnt(Ant &antEntity,
     _grid.getCase(antEntity.getCoord()).removeAnt();
     _grid.getCase(newCase).putAnt(antEntity.getNumber(),
                                   antEntity.getColony());
-    _display.updataCell(antEntity.getCoord());
-    _display.updataCell(newCase);
     antEntity.go_to(newCase);
 }
 
@@ -79,18 +63,16 @@ void Manager::_backNeast(Ant &antEntity)
 {
     std::vector<Coord> neigbours =
         antEntity.getCoord().getNeigbour(_data.width, _data.height);
-    Case &closer = _grid.getCase(neigbours[0]);
-    for (std::size_t i = 1; i < neigbours.size(); i++)
+    Case closer;
+    float nestPheroMax = 0;
+    for (Coord &neigbour : neigbours)
     {
-        Case &test = _grid.getCase(neigbours[i]);
-        if (test.getNestPhero(antEntity.getColony()) >= closer.getNestPhero(antEntity.getColony()) && test.isEmpty())
-            closer = test;
+        if (_grid.getCase(neigbour).isEmpty() && _grid.getCase(neigbour).getNestPhero(antEntity.getColony()) > nestPheroMax)
+        {
+            closer = _grid.getCase(neigbour);
+            nestPheroMax = _grid.getCase(neigbour).getNestPhero(antEntity.getColony());
+        }
     }
-    if (!closer.isEmpty())
-        return;
-    _grid.getCase(antEntity.getCoord()).putSugarPheromone(antEntity.getColony(), 1.);
-    _data.sugarPhero[antEntity.getColony()].push_back(closer.getCoord());
-
     _moveAnt(antEntity, closer.getCoord());
 }
 

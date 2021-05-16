@@ -1,11 +1,8 @@
 #include "controllers/manager.hpp"
 #include <chrono>
-#include <iostream>
 
 void Manager::start()
 {
-    Coord test = Coord(0, 0);
-
     _getData();
     _initialize();
     _display.display_init(&_data,
@@ -13,6 +10,9 @@ void Manager::start()
                           _data.caseSize);
     int i = 0;
     std::chrono::high_resolution_clock::time_point previousTime = std::chrono::high_resolution_clock::now();
+    Coord test(0, 0);
+    _moveAnt(_data.colonies[0].ants[1], test);
+    _data.colonies[0].ants[1].takeSugar(10);
     while (_display.isOpen())
     {
         _eventTraitment(_display.manageEvent());
