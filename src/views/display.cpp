@@ -15,7 +15,13 @@ void Display::updataCell(Coord &coord)
                      _colonyColor[_colontyDataCoef->team].g,
                      _colonyColor[_colontyDataCoef->team].b,
                      _grid->getCase(cell.getCoord()).getNestPhero(_colontyDataCoef->team) * 100);
-        _drawAnt(cell.getCoord(), _colonyColor[cell.getColony()]);
+        if (&_data->colonies[cell.getColony()].ants[cell.getAnt()] == _antDataCoef)
+        {
+            sf::Color red(255, 0, 0);
+            _drawAnt(cell.getCoord(), red);
+        }
+        else
+            _drawAnt(cell.getCoord(), _colonyColor[cell.getColony()]);
     }
 
     else if (cell.getColony() != -1)
