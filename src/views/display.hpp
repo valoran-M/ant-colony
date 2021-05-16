@@ -48,9 +48,8 @@ public:
     Display::events manageEvent();
     void setCell(Coord &cord);
     void setCell(Coord &coord, sf::Color &color);
-    void setCell(Coord &coord, uint8_t r, uint8_t g, uint8_t b);
     void setCell(Coord &coord,
-                 uint8_t r, uint8_t g, uint8_t b, uint8_t a);
+                 uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
     void drawAnt(Coord &pos, sf::Color &color);
     bool isOpen() { return _window.isOpen(); }
     void close();

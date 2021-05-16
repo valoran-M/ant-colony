@@ -19,6 +19,8 @@ set(SRCS
 
     src/views/display.cpp
     src/views/init.cpp
+    src/views/event.cpp
+    src/views/data.cpp
 )
 
 set(HEADERS
