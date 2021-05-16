@@ -1,7 +1,6 @@
 #include "views/display.hpp"
 #include <string>
 
-
 void Display::setData()
 {
     std::string lap = "lap : " + std::to_string(_data->lap);
@@ -12,7 +11,7 @@ void Display::setData()
 
     sf::Text text(lap, font);
     text.setPosition(_window.getSize().x - _dataX + 10,
-                       15);
+                     15);
     text.setFillColor(sf::Color::White);
 
     _window.draw(_rectangleData);

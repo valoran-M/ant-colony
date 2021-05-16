@@ -30,6 +30,11 @@ private:
     void _intitWindow();
     void _colorNeast(unsigned int numberColoy);
 
+    void _setCell(Coord &coord, sf::Color &color);
+    void _setCell(Coord &coord,
+                 uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
+    void _drawAnt(Coord &pos, sf::Color &color);
+
 public:
     enum events
     {
@@ -46,11 +51,7 @@ public:
                       unsigned int caseSize);
 
     Display::events manageEvent();
-    void setCell(Coord &cord);
-    void setCell(Coord &coord, sf::Color &color);
-    void setCell(Coord &coord,
-                 uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
-    void drawAnt(Coord &pos, sf::Color &color);
+    void updataCell(Coord &cord);
     bool isOpen() { return _window.isOpen(); }
     void close();
     void setGird();

@@ -64,6 +64,6 @@ void Display::setGird()
     Coord coord(0, 0);
     for (coord[1] = 0; coord[1] < _height; coord[1]++)
         for (coord[0] = 0; coord[0] < _width; coord[0]++)
-            setCell(coord);
+            updataCell(coord);
     setData();
 }

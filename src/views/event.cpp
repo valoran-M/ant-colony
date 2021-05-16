@@ -69,7 +69,7 @@ Display::events Display::manageEvent()
                 if (!_grid->getCase(xGrid, yGrid).isEmpty())
                     break;
                 _grid->getCase(xGrid, yGrid).putSugar(20);
-                setCell(_grid->getCase(xGrid, yGrid).getCoord());
+                updataCell(_grid->getCase(xGrid, yGrid).getCoord());
                 break;
             }
             break;

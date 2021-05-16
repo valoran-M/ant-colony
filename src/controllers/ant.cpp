@@ -33,8 +33,8 @@ void Manager::_moveAnt(Ant &antEntity,
     _grid.getCase(antEntity.getCoord()).removeAnt();
     _grid.getCase(newCase).putAnt(antEntity.getNumber(),
                                   antEntity.getColony());
-    _display.setCell(antEntity.getCoord());
-    _display.setCell(newCase);
+    _display.updataCell(antEntity.getCoord());
+    _display.updataCell(newCase);
     antEntity.go_to(newCase);
 }
 
@@ -51,7 +51,7 @@ int Manager::_dead(unsigned int colonyDead, unsigned int antDead)
 
     _grid.getCase(deadAntCoord)
         .removeAnt();
-    _display.setCell(deadAntCoord);
+    _display.updataCell(deadAntCoord);
 
     std::vector<Ant> &ants = _data.colonies[colonyDead].ants;
     int sugar = ants[antDead].getSugar();

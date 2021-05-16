@@ -28,7 +28,7 @@ void Manager::_decreaseSugarPhero()
                     .getSugarPhero(colony) == 0)
                 _data.sugarPhero[colony].erase(
                     _data.sugarPhero[colony].begin() + phero);
-            _display.setCell(_data.sugarPhero[colony][phero]);
+            _display.updataCell(_data.sugarPhero[colony][phero]);
         }
 }
 
