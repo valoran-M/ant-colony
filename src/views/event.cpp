@@ -3,6 +3,7 @@
 
 Display::events Display::manageEvent()
 {
+    unsigned int xGrid, yGrid;
     while (_window.pollEvent(_event))
         switch (_event.type)
         {
@@ -25,6 +26,8 @@ Display::events Display::manageEvent()
             case sf::Keyboard::B:
                 _addbarrier();
                 return pheroUpdate;
+            case sf::Keyboard::N:
+                return pheroUpdate;
             case sf::Keyboard::G:
                 if (_rectangle.getOutlineThickness() == 1)
                     _rectangle.setOutlineThickness(0);
@@ -42,8 +45,8 @@ Display::events Display::manageEvent()
                 break;
             }
         case sf::Event::MouseButtonPressed:
-            unsigned int xGrid = (_event.mouseButton.x - _most) / _caseSize;
-            unsigned int yGrid = (_event.mouseButton.y - _most) / _caseSize;
+            xGrid = (_event.mouseButton.x - _most) / _caseSize;
+            yGrid = (_event.mouseButton.y - _most) / _caseSize;
             if (xGrid > _data->width || yGrid > _data->height)
                 break;
 
@@ -70,11 +73,28 @@ Display::events Display::manageEvent()
             case sf::Mouse::Left:
                 if (!_grid->getCase(xGrid, yGrid).isEmpty())
                     break;
+                pressL = true;
                 _grid->getCase(xGrid, yGrid).putSugar(20);
                 updataCell(_grid->getCase(xGrid, yGrid).getCoord());
                 break;
             }
             break;
+        case sf::Event::MouseButtonReleased:
+            pressL = false;
+            break;
+        case sf::Event::MouseMoved:
+            if (pressL)
+            {
+                xGrid = (_event.mouseMove.x - _most) / _caseSize;
+                yGrid = (_event.mouseMove.y - _most) / _caseSize;
+                if (xGrid > _data->width || yGrid > _data->height)
+                    break;
+                if (!_grid->getCase(xGrid, yGrid).isEmpty())
+                    break;
+                _grid->getCase(xGrid, yGrid).putSugar(20);
+                updataCell(_grid->getCase(xGrid, yGrid).getCoord());
+                break;
+            }
         }
     _window.display();
     sf::sleep(sf::seconds(1.f / 60.f));
@@ -95,6 +115,10 @@ static void _help()
               << "p     :   pause"
               << std::endl
               << "q     :   quit"
+              << std::endl
+              << "b     :   barrier"
+              << std::endl
+              << "n     :   reste nest phero"
               << std::endl
               << "UP    :   speed up"
               << std::endl

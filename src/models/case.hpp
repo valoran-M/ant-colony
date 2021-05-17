@@ -31,13 +31,13 @@ public:
     // predicate
     bool containsAnt() { return _ant != -1; }
     bool containsNest() { return _nest != -1; }
-    bool containsSugar() { return _sugar != -1; }
+    bool containsSugar() { return _sugar != 0; }
     int containsSugarPhero();
     bool isEmpty();
 
     // modifier
     void removeAnt() { _colony = _ant = -1; }
-    void removeSugar() { _sugar = -1; }
+    void removeSugar() { _sugar = 0; }
     void putBarrier() { _barrier = true; }
     void removeBarrier() { _barrier = false; }
     void putAnt(unsigned int ant, unsigned int colony);
@@ -45,7 +45,7 @@ public:
     void putNeast(int colony);
     void putNestPheromone(unsigned int colony, float intensity);
     void putSugarPheromone(unsigned int colony, float intensity);
-    void decreasesSugar() { _sugar = -1; }
+    void decreasesSugar() { _sugar -= 1; }
     void decreasesSugarPheromone(unsigned int colony, float amount);
     void removeNestPhero();
     void removeNestPhero(int colony);

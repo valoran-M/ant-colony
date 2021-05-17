@@ -9,8 +9,8 @@
 
 void Manager::_initialize()
 {
-    _data.decrease = std::sqrt(
-        float(_data.width * _data.width + _data.height * _data.height));
+    _data.decrease = 1 / std::sqrt(
+                             float(_data.width * _data.width + _data.height * _data.height));
     _grid.initilize(_data.width, _data.height, _data.numberOfColony);
     _display.display_init(&_data,
                           &_grid,
@@ -24,7 +24,8 @@ void Manager::_getData()
 {
     unsigned int max;
     while ((_data.width < 20 || _data.width > 1000) ||
-           (_data.height < 20 || _data.height > 1000))
+           (_data.height < 20 || _data.height > 1000) ||
+           _data.height != _data.width)
     {
         std::cout << "Shape of grid (x, y) : ";
         std::cin >> _data.width;
@@ -162,7 +163,8 @@ void Manager::_nestPheroInit(char colony)
     for (y = 0; y < _data.height; y++)
         for (x = 0; x < _data.width; x++)
             _grid.getCase(y, x).removeNestPhero(colony);
-    std::cout << "Colone " << colony << ":";
+    std::cout << "Colony " << int(colony) << " "
+              << ":";
     while (!stable)
     {
         std::cout << "*";
@@ -183,7 +185,8 @@ void Manager::_nestPheroInit(char colony)
                     maxPheroCase = max - 1. / size;
                     if (maxPheroCase > casePhero &&
                         p.getNest() == -1 &&
-                        !p.getBarrier())
+                        !p.getBarrier() &&
+                        p.getSugar() == 0)
                     {
                         p.putNestPheromone(colony, maxPheroCase);
                         stable = false;

@@ -5,32 +5,18 @@ void Display::updataCell(Coord &coord)
 {
     int sugarPhero = 0;
     Case &cell = _grid->getCase(coord);
-    if (cell.getAnt() != -1)
-    {
-        if (_colontyDataCoef == NULL)
-            _setCell(cell.getCoord(), _backgroundColor);
-        else
-            _setCell(cell.getCoord(),
-                     _colonyColor[_colontyDataCoef->team].r,
-                     _colonyColor[_colontyDataCoef->team].g,
-                     _colonyColor[_colontyDataCoef->team].b,
-                     _grid->getCase(cell.getCoord()).getNestPhero(_colontyDataCoef->team) * 100);
-        if (&_data->colonies[cell.getColony()].ants[cell.getAnt()] == _antDataCoef)
-        {
-            sf::Color red(255, 0, 0);
-            _drawAnt(cell.getCoord(), red);
-        }
-        else
-            _drawAnt(cell.getCoord(), _colonyColor[cell.getColony()]);
-    }
 
-    else if (cell.getColony() != -1)
+    if (cell.getColony() != -1 && cell.getAnt() == -1)
         _setCell(cell.getCoord(), _colonyColor[cell.getColony()]);
-
-    else if (cell.getSugar() != -1)
+    else if (cell.getSugar() > 0)
         _setCell(cell.getCoord(), 255, 255, 255);
     else if (cell.getBarrier())
         _setCell(cell.getCoord(), _barrierColor);
+    else if ((sugarPhero = cell.containsSugarPhero()) != -1)
+    {
+        sf::Color color(255, 255, 255, 100 * cell.getSugarPhero(sugarPhero));
+        _setCell(cell.getCoord(), color);
+    }
     else if (_colontyDataCoef != NULL)
         _setCell(cell.getCoord(),
                  _colonyColor[_colontyDataCoef->team].r,
@@ -40,10 +26,15 @@ void Display::updataCell(Coord &coord)
     else
         _setCell(cell.getCoord(), _backgroundColor);
 
-    if ((sugarPhero = cell.containsSugarPhero()) != -1)
+    if (cell.getAnt() != -1)
     {
-        sf::Color color(255, 255, 255, 100 * cell.getSugarPhero(sugarPhero));
-        _setCell(cell.getCoord(), color);
+        if (&_data->colonies[cell.getColony()].ants[cell.getAnt()] == _antDataCoef)
+        {
+            sf::Color red(255, 0, 0);
+            _drawAnt(cell.getCoord(), red);
+        }
+        else
+            _drawAnt(cell.getCoord(), _colonyColor[cell.getColony()]);
     }
 }
 

@@ -18,7 +18,7 @@ Case::Case(
                                  _colony(-1),
                                  _ant(-1),
                                  _nest(-1),
-                                 _sugar(-1),
+                                 _sugar(0),
                                  _barrier(false)
 {
     for (int i = 0; i < numberColony; i++)
@@ -41,7 +41,7 @@ bool Case::_checkCasePut()
 {
     if (_ant != -1)
         throw std::invalid_argument("already a ant");
-    if (_sugar != -1)
+    if (_sugar != 0)
         throw std::invalid_argument("already a sugar");
     if (_nest != -1)
         throw std::invalid_argument("already a nest");

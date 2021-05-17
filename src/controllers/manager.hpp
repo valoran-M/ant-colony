@@ -42,15 +42,14 @@ private:
     bool _putSugar(Ant &antEntity);
     void _backHome(Ant &antEntity);
     void _backSugar(Ant &antEntity);
+    bool _getSugar(Ant &antEntity);
     void _randomMove(Ant &antEntity);
 
     // other manager
+    void _putSugarPhero(Ant &antEntity);
     void _decreaseSugarPhero();
-    bool _antNeigbour(Ant &ant, Coord &neigbour);
-    bool _sugarNeigbour(Ant &ant, Coord &neigbour);
-    bool _nestNeigbour(Ant &ant);
-    bool _sugarPheroNeigbour(Ant &ant, Coord &niegbour);
     void _resetNestPhero();
+    void _cleanAnt();
 
 public:
     Manager(unsigned long delay,

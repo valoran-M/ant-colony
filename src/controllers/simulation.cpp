@@ -53,6 +53,7 @@ void Manager::_lapUpdate()
             _antManger(colony, ant);
         }
     _decreaseSugarPhero();
+    _cleanAnt();
     _display.setData();
     _display.setGird();
     _data.addLap();

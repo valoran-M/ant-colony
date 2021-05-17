@@ -25,6 +25,7 @@ private:
     unsigned int _height;
     unsigned int _width;
     unsigned int _dataX = 300;
+    bool pressL = false;
 
     Ant *_antDataCoef;
     Colony *_colontyDataCoef;

@@ -1,6 +1,7 @@
 #include "controllers/manager.hpp"
 #include "models/grid.hpp"
 #include "models/coordinate.hpp"
+#include <iostream>
 
 Manager::Manager(unsigned long delay,
                  bool manual,
@@ -23,76 +24,43 @@ void Manager::_reset()
     _display.setGird();
 }
 
+void Manager::_putSugarPhero(Ant &antEntity)
+{
+    _data.sugarPhero[antEntity.getColony()]
+        .push_back(antEntity.getCoord());
+    _grid.getCase(antEntity.getCoord())
+        .putSugarPheromone(antEntity.getColony(), 1.);
+}
+
 void Manager::_decreaseSugarPhero()
 {
     for (std::size_t colony = 0; colony < _data.numberOfColony; colony++)
         for (std::size_t phero = 0;
-             phero > _data.sugarPhero[colony].size();
+             phero < _data.sugarPhero[colony].size();
              phero++)
         {
             _grid.getCase(_data.sugarPhero[colony][phero])
                 .decreasesSugarPheromone(colony, _data.decrease);
+            _display.updataCell(_data.sugarPhero[colony][phero]);
             if (_grid.getCase(_data.sugarPhero[colony][phero])
-                    .getSugarPhero(colony) == 0)
+                    .getSugarPhero(colony) <= 0)
+            {
                 _data.sugarPhero[colony].erase(
                     _data.sugarPhero[colony].begin() + phero);
-            _display.updataCell(_data.sugarPhero[colony][phero]);
+                phero--;
+            }
         }
 }
 
-bool Manager::_antNeigbour(Ant &ant, Coord &neigbour)
+void Manager::_cleanAnt()
 {
-    std::vector<Coord> neigbours =
-        ant.getCoord().getNeigbour(
-            _data.width, _data.width);
-    for (Coord coord : neigbours)
-        if (_grid.getCase(coord).containsAnt() &&
-            _grid.getCase(coord).getColony() != ant.getColony())
+    for (std::size_t colony = 0; colony < _data.numberOfColony; colony++)
+        for (std::size_t ant = 0;
+             ant < _data.colonies[colony].ants.size();
+             ant++)
         {
-            neigbour = coord;
-            return true;
+            if (!_data.colonies[colony].ants[ant].inLife())
+                _data.colonies[colony].ants.erase(
+                    _data.colonies[colony].ants.begin() + ant);
         }
-    return false;
-}
-
-bool Manager::_sugarNeigbour(Ant &ant, Coord &neigbour)
-{
-    std::vector<Coord> neigbours =
-        ant.getCoord().getNeigbour(
-            _data.width, _data.width);
-    for (Coord coord : neigbours)
-        if (_grid.getCase(coord).containsSugar())
-        {
-            neigbour = coord;
-            return true;
-        }
-    return false;
-}
-
-bool Manager::_nestNeigbour(Ant &ant)
-{
-    std::vector<Coord> neigbours =
-        ant.getCoord().getNeigbour(
-            _data.width, _data.width);
-    for (Coord coord : neigbours)
-        if (_grid.getCase(coord).containsNest() &&
-            _grid.getCase(coord).getColony() == ant.getColony())
-            return true;
-    return false;
-}
-
-bool Manager::_sugarPheroNeigbour(Ant &ant, Coord &niegbour)
-{
-    std::vector<Coord> neigbours =
-        ant.getCoord().getNeigbour(
-            _data.width, _data.width);
-    float min = 2;
-    for (Coord coord : neigbours)
-        if (_grid.getCase(coord).getSugarPhero(ant.getColony()) > min &&
-            _grid.getCase(coord).isEmpty())
-        {
-            min = _grid.getCase(coord).getSugarPhero(ant.getColony());
-            niegbour = coord;
-        }
-    return min < 2;
 }

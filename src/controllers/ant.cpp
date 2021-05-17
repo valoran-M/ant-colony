@@ -1,6 +1,7 @@
 #include "controllers/manager.hpp"
 #include "controllers/random.hpp"
 #include "models/ant.hpp"
+#include <iostream>
 
 void Manager::_antManger(unsigned int colony, unsigned int ant)
 {
@@ -13,7 +14,10 @@ void Manager::_antManger(unsigned int colony, unsigned int ant)
             _backHome(antEntity);
     }
     else
-        _randomMove(antEntity);
+    {
+        if (!_getSugar(antEntity))
+            _randomMove(antEntity);
+    }
 }
 
 void Manager::_moveAnt(Ant &antEntity,
@@ -23,36 +27,6 @@ void Manager::_moveAnt(Ant &antEntity,
     _grid.getCase(newCase).putAnt(antEntity.getNumber(),
                                   antEntity.getColony());
     antEntity.go_to(newCase);
-}
-
-void Manager::_kill(Ant &antKiller,
-                    unsigned int colonyDead,
-                    unsigned int antDead)
-{
-    antKiller.takeSugar(_dead(colonyDead, antDead));
-}
-
-int Manager::_dead(unsigned int colonyDead, unsigned int antDead)
-{
-    Coord &deadAntCoord = _data.colonies[colonyDead].ants[antDead].getCoord();
-
-    _grid.getCase(deadAntCoord)
-        .removeAnt();
-    _display.updataCell(deadAntCoord);
-
-    std::vector<Ant> &ants = _data.colonies[colonyDead].ants;
-    int sugar = ants[antDead].getSugar();
-    ants[antDead].kill();
-    return sugar;
-}
-
-void Manager::_getSugar(Ant &antEntity, Coord &sugar)
-{
-    antEntity.takeSugar();
-    _grid.getCase(sugar).decreasesSugar();
-    Coord &caseAnt = antEntity.getCoord();
-    _grid.getCase(caseAnt).putSugarPheromone(antEntity.getColony(), 1);
-    _data.sugarPhero[antEntity.getColony()].push_back(caseAnt);
 }
 
 bool Manager::_putSugar(Ant &antEntity)
@@ -65,6 +39,7 @@ bool Manager::_putSugar(Ant &antEntity)
             _data.colonies[antEntity.getColony()].sugar +=
                 antEntity.getSugar();
             antEntity.dropSugar();
+            _putSugarPhero(antEntity);
             return true;
         }
     return false;
@@ -86,10 +61,25 @@ void Manager::_backHome(Ant &antEntity)
             nestPheroMax = _grid.getCase(neigbour).getNestPhero(antEntity.getColony());
         }
     }
+    _putSugarPhero(antEntity);
     if (find)
         _moveAnt(antEntity, closer.getCoord());
     else
         _randomMove(antEntity);
+}
+
+bool Manager::_getSugar(Ant &antEntity)
+{
+    std::vector<Coord> neigbours =
+        antEntity.getCoord().getNeigbour(_data.width, _data.height);
+    for (Coord &neigbour : neigbours)
+        if (_grid.getCase(neigbour).getSugar() > 0)
+        {
+            _grid.getCase(neigbour).decreasesSugar();
+            antEntity.takeSugar(1);
+            return true;
+        }
+    return false;
 }
 
 void Manager::_randomMove(Ant &antEntity)

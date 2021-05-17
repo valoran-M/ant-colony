@@ -33,7 +33,6 @@ int main(int argc, char const *argv[])
         else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "--dimension") == 0)
             gridDim[0] = atoi(argv[++i]), gridDim[1] = atoi(argv[++i]);
     }
-    std::cout << man;
     Manager simulation(1e9, man, colony, sugar, cellDim, gridDim);
     simulation.start();
     return 0;
