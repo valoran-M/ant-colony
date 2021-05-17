@@ -247,6 +247,18 @@ private:
     void _cleanAnt();
 
 public:
+    /**
+     * constructor of manager
+     * 
+     * @param unsigned long delay
+     * @param bool if colony spwan is manual
+     * @param unsigned long number of colony
+     * @param unsigned long number of sugar
+     * @param int cell dimention
+     * @param Coord grid dimention
+     *  
+     * @confidence 2
+     **/
     Manager(unsigned long delay,
             bool manual,
             unsigned int colony,
@@ -259,7 +271,7 @@ public:
      * 
      * @return void
      * 
-     * @confidence 3
+     * @confidence 2
      **/
     void start();
 };
