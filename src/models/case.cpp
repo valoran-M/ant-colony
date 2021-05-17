@@ -29,14 +29,6 @@ Case::Case(
     _nestPheromone[0] = 0;
 }
 
-/**
- * check case for put an entity
- *
- * @return bool true if is possible to put an entity
- * 
- * @author Valeran MAYTIE
- * @confidence 2
- **/
 bool Case::_checkCasePut()
 {
     if (_ant != -1)

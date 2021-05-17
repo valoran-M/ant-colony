@@ -29,6 +29,20 @@ void Manager::_moveAnt(Ant &antEntity,
     antEntity.go_to(newCase);
 }
 
+bool Manager::_getSugar(Ant &antEntity)
+{
+    std::vector<Coord> neigbours =
+        antEntity.getCoord().getNeigbour(_data.width, _data.height);
+    for (Coord &neigbour : neigbours)
+        if (_grid.getCase(neigbour).getSugar() > 0)
+        {
+            _grid.getCase(neigbour).decreasesSugar();
+            antEntity.takeSugar(1);
+            return true;
+        }
+    return false;
+}
+
 bool Manager::_putSugar(Ant &antEntity)
 {
     std::vector<Coord> neigbours =
@@ -66,20 +80,6 @@ void Manager::_backHome(Ant &antEntity)
         _moveAnt(antEntity, closer.getCoord());
     else
         _randomMove(antEntity);
-}
-
-bool Manager::_getSugar(Ant &antEntity)
-{
-    std::vector<Coord> neigbours =
-        antEntity.getCoord().getNeigbour(_data.width, _data.height);
-    for (Coord &neigbour : neigbours)
-        if (_grid.getCase(neigbour).getSugar() > 0)
-        {
-            _grid.getCase(neigbour).decreasesSugar();
-            antEntity.takeSugar(1);
-            return true;
-        }
-    return false;
 }
 
 void Manager::_randomMove(Ant &antEntity)

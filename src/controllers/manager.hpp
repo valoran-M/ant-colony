@@ -13,42 +13,237 @@ private:
     bool _manual;
 
     // init
+    /**
+     * initialize simulation
+     *
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _initialize();
+
+    /**
+     * reset simulation
+     *
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _reset();
 
+    /**
+     * get data for the simulation
+     *
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _getData();
+
+    /**
+     * teste if base is valid
+     * 
+     * @param Coord& base of nest
+     * 
+     * @return bool true if is valid
+     * 
+     * @confidence 2
+     **/
     bool _baseTest(Coord &base);
+
+    /**
+     * generates colony
+     *
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _colonnyGeneration();
+
+    /**
+     * generates random nest
+     *
+     * @param Colony& colony reference
+     * @param std::vector<int>& vector refence
+     * @param std::vector<int>& vector refence
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _randomNestCreation(Colony &colony,
                              std::vector<int> &x_grid,
                              std::vector<int> &y_grid);
+
+    /**
+     * generates random nest
+     *
+     * @param Colony& colony reference
+     * @param Coord base of nest
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _nestCreation(Colony &colony, Coord base);
+
+    /**
+     * initailiser nest Pheromone
+     *
+     * @param char colony marker
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _nestPheroInit(char colony);
+
+    /**
+     * create sugar
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _sugarCreation();
+
+    /**
+     * initialize spanable case of coord in colony
+     * 
+     * @param Coord const& coord
+     * @param char colony
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _spawnableCase(Coord const &coord, char colony);
 
+    /**
+     * processes events
+     * 
+     * @param Display::events
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _eventTraitment(Display::events event);
 
+    /**
+     * update lap
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _lapUpdate();
 
-    // ant manager
+    /**
+     * manage ant
+     * 
+     * @param unsinged int colony
+     * @param unsigned int ant
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _antManger(unsigned int colony, unsigned int ant);
+
+    /**
+     * move ant
+     * 
+     * @param Ant& antEntity
+     * @param Coord& newCase
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _moveAnt(Ant &antEntity, Coord &newCase);
-    void _kill(Ant &antKiller,
-               unsigned int colonyDead,
-               unsigned int antDead);
-    int _dead(unsigned int colonyDead, unsigned int antDead);
-    void _getSugar(Ant &antEntity, Coord &sugar);
-    bool _putSugar(Ant &antEntity);
-    void _backHome(Ant &antEntity);
-    void _backSugar(Ant &antEntity);
+
+    /**
+     * move ant
+     * 
+     * @param Ant& antEntity
+     * @param Coord& newCase
+     * 
+     * @return bool true if ant find sugar
+     * 
+     * @confidence 2
+     **/
     bool _getSugar(Ant &antEntity);
+
+    /**
+     * ant put sugar in nest
+     * 
+     * @param Ant& antEntity
+     * 
+     * @return bool true if ant put sugar in nest
+     * 
+     * @confidence 2
+     **/
+    bool _putSugar(Ant &antEntity);
+
+    /**
+     * ant back to its nest
+     * 
+     * @param Ant& antEntity
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
+    void _backHome(Ant &antEntity);
+
+    /**
+     * making a random movement to the antEntity
+     * 
+     * @param Ant& antEntity
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _randomMove(Ant &antEntity);
 
-    // other manager
+    /**
+     * put sugar phermone in case where the ant is
+     * 
+     * @param Ant& antEntity
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
     void _putSugarPhero(Ant &antEntity);
+
+    /**
+     * Decrese sugar pheromone in grid
+     * 
+     * @return void
+     * 
+     * @confidence 2 
+     **/
     void _decreaseSugarPhero();
+
+    /**
+     * reset nest pheromone
+     * 
+     * @return void
+     * 
+     * @confidence 2 
+     **/
     void _resetNestPhero();
+
+    /**
+     * remove dead ant in colony
+     * 
+     * @return void
+     * 
+     * @confidence 2 
+     **/
     void _cleanAnt();
 
 public:
@@ -58,5 +253,13 @@ public:
             unsigned int sugar,
             int cellDim,
             Coord gridDim);
+
+    /**
+     * start simulation
+     * 
+     * @return void
+     * 
+     * @confidence 3
+     **/
     void start();
 };
