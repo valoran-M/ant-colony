@@ -97,3 +97,20 @@ void Manager::_randomMove(Ant &antEntity)
         _moveAnt(antEntity, good[rand]);
     }
 }
+
+void Manager::_antBirth(char colony)
+{
+    if(_data.colonies[colony].sugar > 15)
+    {
+        for(Coord &spawn: _data.colonies[colony].spawnableCase)
+        {
+            if(_grid.getCase(spawn).isEmpty())
+            {
+                _data.colonies[colony].sugar -= 10;
+                _data.colonies[colony].ants.push_back(Ant(_data.colonies[colony].ants.size(), spawn, colony));
+                _grid.getCase(spawn).putAnt(_data.colonies[colony].ants.size() - 1, colony);
+                return;
+            }
+        }
+    }
+}

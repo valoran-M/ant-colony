@@ -46,14 +46,16 @@ void Manager::_lapUpdate()
     for (unsigned int colony = 0;
          colony < _data.numberOfColony;
          colony++)
+    {
         for (unsigned int ant = 0;
              ant < _data.colonies[colony].getNbAnt();
              ant++)
         {
             _antManger(colony, ant);
         }
+        _antBirth(colony);
+    }
     _decreaseSugarPhero();
-    _cleanAnt();
     _display.setData();
     _display.setGird();
     _data.addLap();

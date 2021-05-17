@@ -17,15 +17,14 @@ void Display::updataCell(Coord &coord)
         sf::Color color(255, 255, 255, 100 * cell.getSugarPhero(sugarPhero));
         _setCell(cell.getCoord(), color);
     }
-    else if (_colontyDataCoef != NULL)
+    else
+        _setCell(cell.getCoord(), _backgroundColor);
+    if (_colontyDataCoef != NULL)
         _setCell(cell.getCoord(),
                  _colonyColor[_colontyDataCoef->team].r,
                  _colonyColor[_colontyDataCoef->team].g,
                  _colonyColor[_colontyDataCoef->team].b,
                  _grid->getCase(cell.getCoord()).getNestPhero(_colontyDataCoef->team) * 100);
-    else
-        _setCell(cell.getCoord(), _backgroundColor);
-
     if (cell.getAnt() != -1)
     {
         if (&_data->colonies[cell.getColony()].ants[cell.getAnt()] == _antDataCoef)

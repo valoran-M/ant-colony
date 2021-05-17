@@ -51,16 +51,3 @@ void Manager::_decreaseSugarPhero()
             }
         }
 }
-
-void Manager::_cleanAnt()
-{
-    for (std::size_t colony = 0; colony < _data.numberOfColony; colony++)
-        for (std::size_t ant = 0;
-             ant < _data.colonies[colony].ants.size();
-             ant++)
-        {
-            if (!_data.colonies[colony].ants[ant].inLife())
-                _data.colonies[colony].ants.erase(
-                    _data.colonies[colony].ants.begin() + ant);
-        }
-}

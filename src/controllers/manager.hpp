@@ -238,13 +238,13 @@ private:
     void _resetNestPhero();
 
     /**
-     * remove dead ant in colony
+     * birth of ant
      * 
      * @return void
      * 
-     * @confidence 2 
+     * @confidence 2
      **/
-    void _cleanAnt();
+    void _antBirth(char colony);
 
 public:
     /**

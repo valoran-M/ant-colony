@@ -14,7 +14,7 @@ TEST_CASE("constructor")
     CHECK(caseForTest.getCoord() == Coord(0, 0));
     CHECK(caseForTest.getNest() == -1);
     CHECK(caseForTest.getAnt() == -1);
-    CHECK(caseForTest.getSugar() == -1);
+    CHECK(caseForTest.getSugar() == 0);
     for (size_t i = 0; i < 3; i++)
     {
         CHECK(caseForTest.getNestPhero(i) == 0);
@@ -42,13 +42,13 @@ TEST_CASE("modifier")
     caseForTest = Case(0, 0, 3);
     SUBCASE("Sugar")
     {
-        CHECK(caseForTest.getSugar() == -1);
+        CHECK(caseForTest.getSugar() == 0);
         caseForTest.putSugar(4);
         CHECK(caseForTest.getSugar() == 4);
         CHECK_THROWS_AS(caseForTest.putSugar(5),
                         std::invalid_argument);
         caseForTest.removeSugar();
-        CHECK(caseForTest.getSugar() == -1);
+        CHECK(caseForTest.getSugar() == 0);
     }
     caseForTest = Case(0, 0, 3);
     SUBCASE("Neats")
