@@ -40,11 +40,17 @@ int main(int argc, char const *argv[])
 
 void help()
 {
-    std::cout << "\thelp :\n"
-              << "-m / --man                        : place colony manualy\n"
-              << "-c / --colony number              : number of colony\n"
-              << "-s / --sugar number               : number of sugar\n"
-              << "-l / --largeness number           : cell dimension\n"
-              << "-d / --dimension number number    : grid dimension\n";
+    std::cout << "ANT-COLONY\t\t\tUSER COMMANDE\n\n"
+              << "NAME\n"
+              << "\tAnt simulation\n\n"
+              << "SYNOPSIS\n"
+              << "\tant-colony [OPTION] ...\n\n"
+              << "OPTIONS \n"
+              << "\t-h / --help\n\t\tshow command\n"
+              << "\t-m / --man\n\t\tplace colony manualy\n"
+              << "\t-c / --colony number\n\t\tnumber of colony\n"
+              << "\t-s / --sugar number\n\t\tnumber of sugar\n"
+              << "\t-l / --largeness number\n\t\tcell dimension\n"
+              << "\t-d / --dimension number number\n\t\tgrid dimension\n";
     exit(EXIT_SUCCESS);
 }
