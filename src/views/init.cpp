@@ -21,7 +21,7 @@ void Display::display_init(Data *data,
     _rectangle.setOutlineThickness(0);
 
     _texture.create(_caseSize, _caseSize);
-    _texture.loadFromFile("./ant.png");
+    _texture.loadFromFile("./utility/ant.png");
     _texture.setSmooth(true);
     _sprite.setTexture(_texture);
 
@@ -37,7 +37,7 @@ void Display::display_init(Data *data,
                                _mostL / 2);
     _colorNeast(_data->numberOfColony);
 
-    if (!_font.loadFromFile("./font/Monospace.ttf"))
+    if (!_font.loadFromFile("./utility/Monospace.ttf"))
         exit(EXIT_FAILURE);
 
     setGird();
