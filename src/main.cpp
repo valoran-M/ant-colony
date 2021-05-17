@@ -44,7 +44,7 @@ void help()
               << "-m / --man                        : place colony manualy\n"
               << "-c / --colony number              : number of colony\n"
               << "-s / --sugar number               : number of sugar\n"
-              << "-l / --largeness number               : cell dimension\n"
+              << "-l / --largeness number           : cell dimension\n"
               << "-d / --dimension number number    : grid dimension\n";
     exit(EXIT_SUCCESS);
 }
