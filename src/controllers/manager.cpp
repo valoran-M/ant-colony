@@ -8,9 +8,11 @@ Manager::Manager(unsigned long delay,
                  unsigned int colony,
                  unsigned int sugar,
                  int cellDim,
-                 Coord gridDim) : _delay(delay),
-                                  _manual(manual),
-                                  _data(colony, sugar, cellDim, gridDim)
+                 Coord gridDim,
+                 bool texture) : _delay(delay),
+                                 _manual(manual),
+                                 _data(colony, sugar, cellDim, gridDim),
+                                 _display(texture)
 {
     _getData();
 }

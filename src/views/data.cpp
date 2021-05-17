@@ -74,6 +74,10 @@ void Display::_antDataDisplay()
                std::to_string(_antDataCoef->getCoord().getX()) +
                "\n        y: " +
                std::to_string(_antDataCoef->getCoord().getY()) +
+               "\n  rot   x: " +
+               std::to_string(_antDataCoef->getRotation().getX()) +
+               "\n        y: " +
+               std::to_string(_antDataCoef->getRotation().getY()) +
                "\n  sugar: " + std::to_string(_antDataCoef->getSugar());
 
     text.setStyle(sf::Text::Regular);

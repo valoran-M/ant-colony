@@ -8,12 +8,15 @@ class Display
 private:
     Grid *_grid;
     Data *_data;
+    sf::Texture _texture;
+    sf::Sprite _sprite;
     sf::Font _font;
     sf::RenderWindow _window;
     sf::Event _event;
     sf::Color _backgroundColor = sf::Color(0, 22, 65);
     sf::Color _lineColor = sf::Color(0, 55, 162);
     sf::Color _barrierColor = sf::Color(86, 86, 86);
+    sf::Color _red = sf::Color(255, 0, 0);
     std::vector<sf::Color> _colonyColor;
 
     sf::RectangleShape _rectangle;
@@ -21,11 +24,13 @@ private:
     sf::CircleShape _circle;
 
     unsigned int _caseSize;
-    unsigned int _most = 6;
+    unsigned int _mostR = 6;
+    unsigned int _mostL = 6;
     unsigned int _height;
     unsigned int _width;
     unsigned int _dataX = 300;
     bool pressL = false;
+    bool _textures;
 
     Ant *_antDataCoef;
     Colony *_colontyDataCoef;
@@ -78,6 +83,14 @@ private:
      **/
     void _setCell(Coord &coord,
                   uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255);
+
+    /**
+     * 
+     * 
+     * 
+     * 
+     **/
+    float _vectToRot(Coord &rotation);
 
     /**
      * draw ant
@@ -150,9 +163,11 @@ public:
     /**
      * constructor of Display
      * 
+     * @param bool true if textures was activated
+     * 
      * @confidence 2
      **/
-    Display();
+    Display(bool texture);
 
     /**
      * initialize display

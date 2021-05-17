@@ -36,6 +36,7 @@ make
 |commande|dedescriptions|
 |:-:|:-:|
 | -h / --help | show command |
+| -t / --textures | active textures |
 | -m / --man | place colony manualy |
 | -c / --colony *number* | number of colony |
 | -s / --sugar *number* | number of sugar |

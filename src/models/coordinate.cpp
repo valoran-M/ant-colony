@@ -12,8 +12,8 @@
  * @author Valeran MAYTIE
  * @condifence 5 
  **/
-Coord::Coord(unsigned int x, unsigned int y) : _x(x),
-                                               _y(y)
+Coord::Coord(int x, int y) : _x(x),
+                             _y(y)
 {
 }
 
@@ -27,10 +27,10 @@ Coord::Coord(unsigned int x, unsigned int y) : _x(x),
  * @author Valeran MAYHTIE
  * @confidence 2
  **/
-Coord::Coord(unsigned int xMin,
-             unsigned int xMax,
-             unsigned int yMin,
-             unsigned int yMax)
+Coord::Coord(int xMin,
+             int xMax,
+             int yMin,
+             int yMax)
 {
 
     _x = random_index(xMin, xMax);
@@ -45,7 +45,7 @@ Coord::Coord(unsigned int xMin,
  * @author Valeran MAYTIE
  * @condifence 5 
  **/
-unsigned int &Coord::operator[](unsigned i)
+int &Coord::operator[](unsigned i)
 {
     if (i == 0)
         return _x;
@@ -96,7 +96,7 @@ std::ostream &operator<<(std::ostream &out, Coord const cord)
  * @author Valeran MAYTIE
  * @condifence 5 
  **/
-std::vector<Coord> Coord::getNeigbour(unsigned int width, unsigned int height) const
+std::vector<Coord> Coord::getNeigbour(int width, int height) const
 {
     int xMin = std::max<int>(getX() - 1, 0);
     int xMax = std::min<int>(getX() + 1, width - 1);
@@ -104,8 +104,8 @@ std::vector<Coord> Coord::getNeigbour(unsigned int width, unsigned int height) c
     int yMax = std::min<int>(getY() + 1, height - 1);
 
     std::vector<Coord> neigbours;
-    for (unsigned int y = yMin; y <= yMax; y++)
-        for (unsigned int x = xMin; x <= xMax; x++)
+    for (int y = yMin; y <= yMax; y++)
+        for (int x = xMin; x <= xMax; x++)
             if (x != getX() || y != getY())
                 neigbours.push_back(Coord(x, y));
     return neigbours;

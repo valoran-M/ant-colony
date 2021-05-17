@@ -6,12 +6,14 @@
 Ant::Ant(
     int number,
     Coord pos,
-    unsigned int colony) : _colony(colony),
-                           _number(number),
-                           _lifePoint(10),
-                           _energy(5),
-                           _sugar(0),
-                           _pos(pos)
+    unsigned int colony,
+    Coord rotation) : _colony(colony),
+                      _number(number),
+                      _lifePoint(10),
+                      _energy(5),
+                      _sugar(0),
+                      _pos(pos),
+                      _rotation(rotation)
 {
 }
 

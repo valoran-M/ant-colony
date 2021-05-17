@@ -246,6 +246,19 @@ private:
      **/
     void _antBirth(char colony);
 
+
+    /**
+     * add new ant
+     * 
+     * @param Coord& position of ant
+     * @param char colony
+     * 
+     * @return void
+     * 
+     * @confidence 2 
+     **/
+    void _newAnt(Coord &pos, char colony);
+
 public:
     /**
      * constructor of manager
@@ -256,6 +269,7 @@ public:
      * @param unsigned long number of sugar
      * @param int cell dimention
      * @param Coord grid dimention
+     * @param bool textur activate
      *  
      * @confidence 2
      **/
@@ -264,7 +278,8 @@ public:
             unsigned int colony,
             unsigned int sugar,
             int cellDim,
-            Coord gridDim);
+            Coord gridDim,
+            bool texture);
 
     /**
      * start simulation

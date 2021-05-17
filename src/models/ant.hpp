@@ -12,6 +12,7 @@ private:
     int _energy;
     Coord _pos;
     Coord _direction;
+    Coord _rotation;
 
 public:
     //predicat
@@ -36,7 +37,8 @@ public:
     int getLifePoint() const { return _lifePoint; }
     int getSugar() const { return _sugar; }
     int getEnergy() const { return _energy; }
+    Coord &getRotation() { return _rotation; }
 
     //constructeur
-    Ant(int number, Coord pos, unsigned int colony);
+    Ant(int number, Coord pos, unsigned int colony, Coord rotation);
 };

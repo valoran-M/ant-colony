@@ -2,9 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
 
-Display::Display() : _antDataCoef(NULL),
-                     _colontyDataCoef(NULL),
-                     _sugarDataCase(NULL)
+Display::Display(bool texture) : _antDataCoef(NULL),
+                                 _colontyDataCoef(NULL),
+                                 _sugarDataCase(NULL),
+                                 _textures(texture)
 {
 }
 
@@ -19,13 +20,21 @@ void Display::display_init(Data *data,
     _caseSize = caseSize;
     _rectangle.setOutlineThickness(0);
 
+    _texture.create(_caseSize, _caseSize);
+    _texture.loadFromFile("./ant.png");
+    _texture.setSmooth(true);
+    _sprite.setTexture(_texture);
+
     _intitWindow();
+
+    _sprite.setScale(0.25 * caseSize * 0.03, 0.25 * caseSize * 0.03);
+
     _rectangleData.setSize(sf::Vector2f(_dataX, _window.getSize().y));
     _rectangleData.setOutlineThickness(1);
     _rectangleData.setOutlineColor(_lineColor);
     _rectangleData.setFillColor(_backgroundColor);
     _rectangleData.setPosition(_window.getSize().x - _dataX,
-                               _most / 2);
+                               _mostL / 2);
     _colorNeast(_data->numberOfColony);
 
     if (!_font.loadFromFile("./font/Monospace.ttf"))
@@ -37,13 +46,16 @@ void Display::display_init(Data *data,
 void Display::_intitWindow()
 {
     if (_caseSize > 0)
-        _window.create(sf::VideoMode(_height * _caseSize + _most + _dataX,
-                                     _width * _caseSize + _most),
+        _window.create(sf::VideoMode(_height * _caseSize + _mostR + _dataX,
+                                     _width * _caseSize + _mostL),
                        "Ant",
                        sf::Style::Close);
     else
+    {
+        _caseSize = (1080 - _mostL / 2) / _data->width;
         _window.create(sf::VideoMode(1920, 1080),
                        "ant", sf::Style::Fullscreen);
+    }
     _window.setActive(true);
     _window.setFramerateLimit(60);
 }
@@ -99,8 +111,8 @@ Coord Display::getNestCreation()
                     break;
                 }
             case sf::Event::MouseButtonPressed:
-                unsigned int xGrid = (_event.mouseButton.x - _most) / _caseSize;
-                unsigned int yGrid = (_event.mouseButton.y - _most) / _caseSize;
+                unsigned int xGrid = (_event.mouseButton.x - _mostR) / _caseSize;
+                unsigned int yGrid = (_event.mouseButton.y - _mostL) / _caseSize;
                 if (xGrid > _data->width || yGrid > _data->height)
                     yGrid = xGrid = -1;
                 else

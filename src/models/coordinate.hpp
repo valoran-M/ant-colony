@@ -6,22 +6,22 @@
 class Coord
 {
 private:
-    unsigned int _x;
-    unsigned int _y;
+    int _x;
+    int _y;
 
 public:
-    unsigned int &operator[](unsigned i);
-    unsigned int getX() const { return _x; }
-    unsigned int getY() const { return _y; }
+    int &operator[](unsigned i);
+    int getX() const { return _x; }
+    int getY() const { return _y; }
     bool operator==(Coord const &other) const;
     bool operator!=(Coord const &other) const;
-    std::vector<Coord> getNeigbour(unsigned int xMax, unsigned int yMax) const;
+    std::vector<Coord> getNeigbour(int xMax, int yMax) const;
     Coord() {}
-    Coord(unsigned int x, unsigned int y);
-    Coord(unsigned int xMin,
-          unsigned int xMax,
-          unsigned int yMin,
-          unsigned int yMax);
+    Coord(int x, int y);
+    Coord(int xMin,
+          int xMax,
+          int yMin,
+          int yMax);
     bool isIn(std::vector<Coord> &tab) const;
 };
 

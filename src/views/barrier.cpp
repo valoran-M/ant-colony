@@ -31,8 +31,8 @@ void Display::_addbarrier()
                     pressR = true;
                 break;
             case sf::Event::MouseButtonReleased:
-                xGrid = (_event.mouseButton.x - _most) / _caseSize;
-                yGrid = (_event.mouseButton.y - _most) / _caseSize;
+                xGrid = (_event.mouseButton.x - _mostR) / _caseSize;
+                yGrid = (_event.mouseButton.y - _mostL) / _caseSize;
                 if (xGrid > _data->width || yGrid > _data->height)
                     ;
                 else if (_event.mouseButton.button == sf::Mouse::Left)
@@ -52,8 +52,8 @@ void Display::_addbarrier()
             case sf::Event::MouseMoved:
                 if (pressL)
                 {
-                    xGrid = (_event.mouseMove.x - _most) / _caseSize;
-                    yGrid = (_event.mouseMove.y - _most) / _caseSize;
+                    xGrid = (_event.mouseMove.x - _mostR) / _caseSize;
+                    yGrid = (_event.mouseMove.y - _mostL) / _caseSize;
                     if (xGrid > _data->width || yGrid > _data->height)
                         break;
                     if (_grid->getCase(xGrid, yGrid).isEmpty())
@@ -61,8 +61,8 @@ void Display::_addbarrier()
                 }
                 else if (pressR)
                 {
-                    xGrid = (_event.mouseMove.x - _most) / _caseSize;
-                    yGrid = (_event.mouseMove.y - _most) / _caseSize;
+                    xGrid = (_event.mouseMove.x - _mostR) / _caseSize;
+                    yGrid = (_event.mouseMove.y - _mostL) / _caseSize;
                     if (xGrid > _data->width || yGrid > _data->height)
                         break;
                     _grid->getCase(xGrid, yGrid).removeBarrier();

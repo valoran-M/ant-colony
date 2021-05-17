@@ -100,17 +100,38 @@ void Manager::_randomMove(Ant &antEntity)
 
 void Manager::_antBirth(char colony)
 {
-    if(_data.colonies[colony].sugar > 15)
+    if (_data.colonies[colony].sugar > 15)
     {
-        for(Coord &spawn: _data.colonies[colony].spawnableCase)
+        for (Coord &spawn : _data.colonies[colony].spawnableCase)
         {
-            if(_grid.getCase(spawn).isEmpty())
+            if (_grid.getCase(spawn).isEmpty())
             {
                 _data.colonies[colony].sugar -= 10;
-                _data.colonies[colony].ants.push_back(Ant(_data.colonies[colony].ants.size(), spawn, colony));
-                _grid.getCase(spawn).putAnt(_data.colonies[colony].ants.size() - 1, colony);
+                _newAnt(spawn, colony);
                 return;
             }
         }
     }
+}
+
+void Manager::_newAnt(Coord &pos, char colony)
+{
+    Coord &base = _data.colonies[colony].base;
+    Coord rotate = Coord(0, 0);
+    if (base.getX() < pos.getX() - 1)
+        rotate[0] = 1;
+    else if (base.getX() > pos.getX())
+        rotate[0] = -1;
+    else
+        rotate[0] = 0;
+
+    if (base.getY() < pos.getY() - 1)
+        rotate[1] = -1;
+    else if (base.getY() > pos.getY())
+        rotate[1] = 1;
+    else
+        rotate[1] = 0;
+
+    _data.colonies[colony].ants.push_back(Ant(_data.colonies[colony].ants.size(), pos, colony, rotate));
+    _grid.getCase(pos).putAnt(_data.colonies[colony].ants.size() - 1, colony);
 }

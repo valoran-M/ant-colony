@@ -141,15 +141,12 @@ void Manager::_spawnableCase(Coord const &coord, char colony)
 {
     std::vector<Coord> neigbours = coord.getNeigbour(_data.height,
                                                      _data.width);
-    for (Coord const &neigbour : neigbours)
+    for (Coord &neigbour : neigbours)
         if (!(neigbour.isIn(_data.colonies[colony].nest) ||
               neigbour.isIn(_data.colonies[colony].spawnableCase)))
         {
             _data.colonies[colony].spawnableCase.push_back(neigbour);
-            _data.colonies[colony].addAnt(neigbour);
-            _grid.getCase(neigbour).putAnt(
-                _data.colonies[colony].ants.size() - 1,
-                colony);
+            _newAnt(neigbour, colony);
         }
 }
 

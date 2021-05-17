@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
     unsigned int sugar = 0, colony = 0;
     int cellDim = -1;
     Coord gridDim(0, 0);
-    bool man = false;
+    bool man = false, texture = false;
 
     for (int i = 1; i < argc; i++)
     {
@@ -32,8 +32,10 @@ int main(int argc, char const *argv[])
             cellDim = atoi(argv[++i]);
         else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "--dimension") == 0)
             gridDim[0] = atoi(argv[++i]), gridDim[1] = atoi(argv[++i]);
+        else if (strcmp(argv[i], "-t") == 0 || strcmp(argv[i], "--textures") == 0)
+            texture = true;
     }
-    Manager simulation(1e9, man, colony, sugar, cellDim, gridDim);
+    Manager simulation(1e9, man, colony, sugar, cellDim, gridDim, texture);
     simulation.start();
     return 0;
 }
@@ -47,6 +49,7 @@ void help()
               << "\tant-colony [OPTION] ...\n\n"
               << "OPTIONS \n"
               << "\t-h / --help\n\t\tshow command\n"
+              << "\t-t / --textures\n\t\tactive textures"
               << "\t-m / --man\n\t\tplace colony manualy\n"
               << "\t-c / --colony number\n\t\tnumber of colony\n"
               << "\t-s / --sugar number\n\t\tnumber of sugar\n"

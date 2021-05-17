@@ -45,8 +45,8 @@ Display::events Display::manageEvent()
                 break;
             }
         case sf::Event::MouseButtonPressed:
-            xGrid = (_event.mouseButton.x - _most) / _caseSize;
-            yGrid = (_event.mouseButton.y - _most) / _caseSize;
+            xGrid = (_event.mouseButton.x - _mostR) / _caseSize;
+            yGrid = (_event.mouseButton.y - _mostL) / _caseSize;
             if (xGrid > _data->width || yGrid > _data->height)
                 break;
 
@@ -85,8 +85,8 @@ Display::events Display::manageEvent()
         case sf::Event::MouseMoved:
             if (pressL)
             {
-                xGrid = (_event.mouseMove.x - _most) / _caseSize;
-                yGrid = (_event.mouseMove.y - _most) / _caseSize;
+                xGrid = (_event.mouseMove.x - _mostR) / _caseSize;
+                yGrid = (_event.mouseMove.y - _mostL) / _caseSize;
                 if (xGrid > _data->width || yGrid > _data->height)
                     break;
                 if (!_grid->getCase(xGrid, yGrid).isEmpty())
