@@ -23,6 +23,7 @@ void Manager::_antManger(unsigned int colony, unsigned int ant)
 void Manager::_moveAnt(Ant &antEntity,
                        Coord &newCase)
 {
+    antEntity.getRotation() = newCase - antEntity.getCoord();
     _grid.getCase(antEntity.getCoord()).removeAnt();
     _grid.getCase(newCase).putAnt(antEntity.getNumber(),
                                   antEntity.getColony());

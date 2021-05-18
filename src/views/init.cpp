@@ -28,6 +28,7 @@ void Display::display_init(Data *data,
     _intitWindow();
 
     _sprite.setScale(0.25 * caseSize * 0.03, 0.25 * caseSize * 0.03);
+    _sprite.setOrigin(_sprite.getTexture()->getSize().x / 2, _sprite.getTexture()->getSize().y / 2);
 
     _rectangleData.setSize(sf::Vector2f(_dataX, _window.getSize().y));
     _rectangleData.setOutlineThickness(1);
@@ -39,7 +40,7 @@ void Display::display_init(Data *data,
 
     if (!_font.loadFromFile("./utility/Monospace.ttf"))
         exit(EXIT_FAILURE);
-    
+
     _menu.init(_window.getSize().x, _window.getSize().y, &_window, &_font);
     setGird();
 }
@@ -65,7 +66,7 @@ void Display::_colorNeast(unsigned int numberColoy)
 {
     for (unsigned int colony = 0; colony < numberColoy; colony++)
     {
-        srand(colony * 200);
+        srand((colony + 1) * 200);
         _colonyColor.push_back(sf::Color(rand() % 255,
                                          rand() % 255,
                                          rand() % 255));

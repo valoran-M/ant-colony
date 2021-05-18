@@ -26,3 +26,4 @@ public:
 };
 
 std::ostream &operator<<(std::ostream &out, Coord const coord);
+Coord operator-(Coord const &coord1, Coord const &coord2);

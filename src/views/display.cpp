@@ -33,19 +33,9 @@ void Display::updataCell(Coord &coord)
     }
 }
 
-#include <iostream>
-
 float Display::_vectToRot(Coord &rotation)
 {
-    float rotat = 0.;
-    if (rotation[0] == 1)
-        rotat = 90. - rotation[1] * 45. + 90.;
-    if (rotation[0] == 0)
-        rotat = 90. - rotation[1] * 90.;
-    else
-        rotat = 270. + rotation[1] * 45. + 90.;
-    std::cout << rotat << std::endl;
-    return rotat;
+    return (rotation[0] == 0) ? 90. - rotation[1] * 90. : (90. - rotation[1] * 45.) * rotation[0];
 }
 
 void Display::_drawAnt(Coord &pos, sf::Color &color)
@@ -61,13 +51,12 @@ void Display::_drawAnt(Coord &pos, sf::Color &color)
     else
     {
         _sprite.setColor(color);
-        _sprite.setPosition(_caseSize * pos[0] + _caseSize / 3,
-                            _caseSize * pos[1] + _caseSize / 5);
-        _sprite.setRotation(0.);
-        _sprite.rotate(_vectToRot(
+        _sprite.setRotation(_vectToRot(
             _data->colonies[_grid->getCase(pos).getColony()]
                 .ants[_grid->getCase(pos).getAnt()]
                 .getRotation()));
+        _sprite.setPosition(_caseSize * pos[0] + _caseSize / 2,
+                            _caseSize * pos[1] + _caseSize / 2);
 
         _window.draw(_sprite);
     }

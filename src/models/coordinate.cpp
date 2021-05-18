@@ -118,3 +118,8 @@ bool Coord::isIn(std::vector<Coord> &tab) const
             return true;
     return false;
 }
+
+Coord operator-(Coord const &coord1, Coord const &coord2)
+{
+    return Coord(coord1.getX() - coord2.getX(), coord2.getY() - coord1.getY());
+}
