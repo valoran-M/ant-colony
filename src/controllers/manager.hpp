@@ -164,6 +164,17 @@ private:
     void _moveAnt(Ant &antEntity, Coord &newCase);
 
     /**
+     * check if ant entity was near to other ant
+     * 
+     * @param Ant& antEntity
+     * 
+     * @return bool true if ant kill other ant
+     * 
+     * @confidence 2
+     **/
+    bool _enemyKill(Ant &antEntity);
+
+    /**
      * move ant
      * 
      * @param Ant& antEntity
@@ -196,6 +207,17 @@ private:
      * @confidence 2
      **/
     void _backHome(Ant &antEntity);
+
+    /**
+     * test if sugar phero is good
+     * 
+     * @param Ant& antEntity
+     * 
+     * @return bool true if find way
+     * 
+     * @confidence 2
+     **/
+    bool _sugarPheroMove(Ant &antEntity);
 
     /**
      * making a random movement to the antEntity

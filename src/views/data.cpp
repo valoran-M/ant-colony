@@ -102,7 +102,9 @@ void Display::_colonyDataDisplay()
     _window.draw(text);
 
     str_data = "  sugar: " + std::to_string(_colontyDataCoef->sugar) +
-               "\n  ant:   " + std::to_string(_colontyDataCoef->getNbAnt());
+               "\n  ant   :   " + std::to_string(_colontyDataCoef->getNbAnt()) +
+               "\n  ant L :   " + std::to_string(_colontyDataCoef->getNbAntInLife()) +
+               "\n  ant D :   " + std::to_string(_colontyDataCoef->getNbAntDead());
 
     text.setStyle(sf::Text::Regular);
     text.setString(str_data);

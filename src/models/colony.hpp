@@ -17,7 +17,9 @@ struct Colony
 
     //fonctions internes
     Colony(Coord base, char nom);
-    int getNbAnt() const { return ants.size(); }
     void addNest(Coord coord);
     void removeNest(Coord &coord);
+    int getNbAnt() const;
+    int getNbAntDead();
+    int getNbAntInLife();
 };

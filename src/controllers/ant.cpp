@@ -7,7 +7,9 @@ void Manager::_antManger(unsigned int colony, unsigned int ant)
 {
     Ant &antEntity = _data.colonies[colony].ants[ant];
     if (!antEntity.inLife())
-        return;
+        ;
+    else if (_enemyKill(antEntity))
+        ;
     else if (antEntity.getSugar() != 0)
     {
         if (!_putSugar(antEntity))
@@ -16,7 +18,8 @@ void Manager::_antManger(unsigned int colony, unsigned int ant)
     else
     {
         if (!_getSugar(antEntity))
-            _randomMove(antEntity);
+            if (!_sugarPheroMove(antEntity))
+                _randomMove(antEntity);
     }
 }
 
@@ -28,6 +31,27 @@ void Manager::_moveAnt(Ant &antEntity,
     _grid.getCase(newCase).putAnt(antEntity.getNumber(),
                                   antEntity.getColony());
     antEntity.go_to(newCase);
+}
+
+bool Manager::_enemyKill(Ant &antEntity)
+{
+    std::vector<Coord> neigbours =
+        antEntity.getCoord().getNeigbour(_data.width, _data.height);
+    Case closers;
+    float nestPheroMax = _grid.getCase(antEntity.getCoord()).getNestPhero(antEntity.getColony());
+    for (Coord &neigbour : neigbours)
+    {
+        if (_grid.getCase(neigbour).getColony() != antEntity.getColony() &&
+            _grid.getCase(neigbour).getAnt() != -1)
+        {
+            _data.colonies[_grid.getCase(neigbour).getColony()]
+                .ants[_grid.getCase(neigbour).getAnt()]
+                .kill();
+            _grid.getCase(neigbour).removeAnt();
+            return true;
+        }
+    }
+    return false;
 }
 
 bool Manager::_getSugar(Ant &antEntity)
@@ -81,6 +105,37 @@ void Manager::_backHome(Ant &antEntity)
         _moveAnt(antEntity, closer.getCoord());
     else
         _randomMove(antEntity);
+}
+
+bool Manager::_sugarPheroMove(Ant &antEntity)
+{
+    std::vector<Coord> neigbours =
+        antEntity.getCoord().getNeigbour(_data.width, _data.height);
+    std::vector<Case> closers;
+    float const sugarPheroAnt = _grid.getCase(antEntity.getCoord()).getSugarPhero(antEntity.getColony());
+    bool find = false;
+    for (Coord &neigbour : neigbours)
+    {
+        if (_grid.getCase(neigbour).getSugarPhero(antEntity.getColony()) < sugarPheroAnt &&
+            _grid.getCase(neigbour).getSugarPhero(antEntity.getColony()) != 0)
+        {
+            find = true;
+            closers.push_back(_grid.getCase(neigbour));
+        }
+    }
+    float most = 0;
+    Case mostCase;
+    for (int case_test = 0; case_test < closers.size(); case_test++)
+        if (closers[case_test].getSugarPhero(antEntity.getColony()) > most)
+        {
+            most = closers[case_test].getSugarPhero(antEntity.getColony());
+            mostCase = closers[case_test];
+        }
+    if (most > 0)
+        if (mostCase.isEmpty())
+            _moveAnt(antEntity, mostCase.getCoord());
+
+    return find;
 }
 
 void Manager::_randomMove(Ant &antEntity)

@@ -22,3 +22,22 @@ void Colony::removeNest(Coord &coord)
         if (nest[i] == coord)
             nest.erase(nest.begin() + i);
 }
+
+int Colony::getNbAnt() const
+{
+    return ants.size();
+}
+
+int Colony::getNbAntInLife()
+{
+    int count = 0;
+    for (Ant &ant : ants)
+        if(ant.inLife())
+            count++;
+    return count;
+}
+
+int Colony::getNbAntDead()
+{
+    return getNbAnt() - getNbAntInLife();
+}

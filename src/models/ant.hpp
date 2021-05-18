@@ -11,7 +11,6 @@ private:
     int _lifePoint;
     int _energy;
     Coord _pos;
-    Coord _direction;
     Coord _rotation;
 
 public:
