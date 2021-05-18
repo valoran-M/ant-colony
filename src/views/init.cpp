@@ -30,6 +30,10 @@ void Display::display_init(Data *data,
     _sprite.setScale(0.25 * caseSize * 0.03, 0.25 * caseSize * 0.03);
     _sprite.setOrigin(_sprite.getTexture()->getSize().x / 2, _sprite.getTexture()->getSize().y / 2);
 
+    _circle.setRadius(_caseSize / 3);
+    _circle.setOrigin(_circle.getRadius() + _caseSize / 3,
+                      _circle.getRadius() + _caseSize / 3);
+
     _rectangleData.setSize(sf::Vector2f(_dataX, _window.getSize().y));
     _rectangleData.setOutlineThickness(1);
     _rectangleData.setOutlineColor(_lineColor);
