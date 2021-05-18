@@ -12,10 +12,24 @@
   <img alt="Language grade: C/C++" src="https://img.shields.io/lgtm/grade/cpp/g/Valeran-MAYTIE/ant-colony.svg?logo=lgtm&logoWidth=18"/>
   </a>
 
-  <br />
-  <img alt="ant.gif" src="./utility/ant.gif"/>
-
 </h1>
+
+## Presentation
+
+For this project we had to make a simulation of an ant with several colonies. Here is the subject for those who speak French [subject](./subject.pdf). We have several additions and took some liberty on the subject.
+
+## Why Ant colony
+
+
+We did this project with [Livarg](https://github.com/Livarg) for the University of Paris Saclay in modular planning for the end of the first year of the bachelor's degree in math and computer science
+
+<div align="center">
+  <img alt="ant.gif" src="./utility/ant.gif"/>
+</div>
+
+<div align="center">
+  <img style="transform:rotate(180deg);" src="./utility/ant.png"/>
+</div>
 
 ## Get ant colony
 #### Required libs and tools:
@@ -57,6 +71,6 @@ We followed javadocs guidelines with an additional decorator:
 - 3: it works and has been tested
 - 4: it works, it has been tested and it is so simple that there is no doubt about it
 
-<h1 align="center">
-<img src="./utility/ant.png"/>
-</h1>
+<div align="center">
+  <img src="./utility/ant.png"/>
+</div>
