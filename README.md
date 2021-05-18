@@ -14,11 +14,13 @@
 
 </h1>
 
-## Presentation
+## Presentation 🐜
+
+### Subject
 
 For this project we had to make a simulation of an ant with several colonies. Here is the subject for those who speak French [subject](./subject.pdf). We have several additions and took some liberty on the subject.
 
-## Why Ant colony
+### Why Ant colony
 
 
 We did this project with [Livarg](https://github.com/Livarg) for the University of Paris Saclay in modular planning for the end of the first year of the bachelor's degree in math and computer science
@@ -32,6 +34,7 @@ We did this project with [Livarg](https://github.com/Livarg) for the University 
 </div>
 
 ## Get ant colony
+
 #### Required libs and tools:
 - cmake
 - pkg-config
@@ -44,6 +47,8 @@ We did this project with [Livarg](https://github.com/Livarg) for the University 
 cmake .
 make
 ```
+
+## Man
 
 #### Launching ant colony
 ```
