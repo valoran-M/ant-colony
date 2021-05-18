@@ -28,7 +28,7 @@ Case &Grid::getCase(Coord const &coord)
  * @author Valeran MAYTIE
  * @confidence 2
  **/
-bool Grid::initilize(unsigned int xMax,
+void Grid::initilize(unsigned int xMax,
                      unsigned int yMax,
                      unsigned int numberOfColony)
 {
@@ -41,7 +41,6 @@ bool Grid::initilize(unsigned int xMax,
         for (size_t y = 0; y < yMax; y++)
             grid[x][y] = Case(x, y, numberOfColony);
     }
-    return true;
 }
 
 void Grid::reset()

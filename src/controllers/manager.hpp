@@ -16,6 +16,8 @@ private:
     /**
      * initialize simulation
      *
+     * @place initialize.cpp
+     * 
      * @return void
      * 
      * @confidence 2
@@ -25,6 +27,8 @@ private:
     /**
      * reset simulation
      *
+     * @place initialize.cpp
+     * 
      * @return void
      * 
      * @confidence 2
@@ -34,6 +38,8 @@ private:
     /**
      * get data for the simulation
      *
+     * @place initialize.cpp
+     * 
      * @return void
      * 
      * @confidence 2
@@ -42,6 +48,8 @@ private:
 
     /**
      * teste if base is valid
+     * 
+     * @place initialize.cpp
      * 
      * @param Coord& base of nest
      * 
@@ -54,6 +62,8 @@ private:
     /**
      * generates colony
      *
+     * @place initialize.cpp
+     * 
      * @return void
      * 
      * @confidence 2
@@ -63,6 +73,8 @@ private:
     /**
      * generates random nest
      *
+     * @place initialize.cpp
+     * 
      * @param Colony& colony reference
      * @param std::vector<int>& vector refence
      * @param std::vector<int>& vector refence
@@ -78,6 +90,8 @@ private:
     /**
      * generates random nest
      *
+     * @place initialize.cpp
+     * 
      * @param Colony& colony reference
      * @param Coord base of nest
      * 
@@ -88,8 +102,10 @@ private:
     void _nestCreation(Colony &colony, Coord base);
 
     /**
-     * initailiser nest Pheromone
+     * initailise nest Pheromone
      *
+     * @place initialize.cpp
+     * 
      * @param char colony marker
      * 
      * @return void
@@ -101,6 +117,8 @@ private:
     /**
      * create sugar
      * 
+     * @place initialize.cpp
+     * 
      * @return void
      * 
      * @confidence 2
@@ -109,6 +127,8 @@ private:
 
     /**
      * initialize spanable case of coord in colony
+     * 
+     * @place initialize.cpp
      * 
      * @param Coord const& coord
      * @param char colony
@@ -122,6 +142,8 @@ private:
     /**
      * processes events
      * 
+     * @place simulation.cpp
+     * 
      * @param Display::events
      * 
      * @return void
@@ -133,6 +155,8 @@ private:
     /**
      * update lap
      * 
+     * @place simulation.cpp
+     * 
      * @return void
      * 
      * @confidence 2
@@ -141,6 +165,8 @@ private:
 
     /**
      * manage ant
+     * 
+     * @place ant.cpp
      * 
      * @param unsinged int colony
      * @param unsigned int ant
@@ -154,6 +180,8 @@ private:
     /**
      * move ant
      * 
+     * @place ant.cpp
+     * 
      * @param Ant& antEntity
      * @param Coord& newCase
      * 
@@ -166,6 +194,8 @@ private:
     /**
      * check if ant entity was near to other ant
      * 
+     * @place ant.cpp
+     * 
      * @param Ant& antEntity
      * 
      * @return bool true if ant kill other ant
@@ -176,6 +206,8 @@ private:
 
     /**
      * move ant
+     * 
+     * @place ant.cpp
      * 
      * @param Ant& antEntity
      * @param Coord& newCase
@@ -189,6 +221,8 @@ private:
     /**
      * ant put sugar in nest
      * 
+     * @place ant.cpp
+     * 
      * @param Ant& antEntity
      * 
      * @return bool true if ant put sugar in nest
@@ -199,6 +233,8 @@ private:
 
     /**
      * ant back to its nest
+     * 
+     * @place ant.cpp
      * 
      * @param Ant& antEntity
      * 
@@ -211,6 +247,8 @@ private:
     /**
      * test if sugar phero is good
      * 
+     * @place ant.cpp
+     * 
      * @param Ant& antEntity
      * 
      * @return bool true if find way
@@ -221,6 +259,8 @@ private:
 
     /**
      * making a random movement to the antEntity
+     * 
+     * @place ant.cpp
      * 
      * @param Ant& antEntity
      * 
@@ -233,6 +273,8 @@ private:
     /**
      * put sugar phermone in case where the ant is
      * 
+     * @place initialize.cpp
+     * 
      * @param Ant& antEntity
      * 
      * @return void
@@ -243,6 +285,8 @@ private:
 
     /**
      * Decrese sugar pheromone in grid
+     * 
+     * @place initialize.cpp
      * 
      * @return void
      * 
@@ -262,6 +306,8 @@ private:
     /**
      * birth of ant
      * 
+     * @place ant.cpp
+     * 
      * @return void
      * 
      * @confidence 2
@@ -271,6 +317,8 @@ private:
 
     /**
      * add new ant
+     * 
+     * @place ant.cpp
      * 
      * @param Coord& position of ant
      * @param char colony
@@ -283,7 +331,20 @@ private:
 
 public:
     /**
+     * start simulation
+     * 
+     * @place simulation.cpp
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
+    void start();
+
+    /**
      * constructor of manager
+     * 
+     * @place initialize.cpp
      * 
      * @param unsigned long delay
      * @param bool if colony spwan is manual
@@ -302,13 +363,4 @@ public:
             int cellDim,
             Coord gridDim,
             bool texture);
-
-    /**
-     * start simulation
-     * 
-     * @return void
-     * 
-     * @confidence 2
-     **/
-    void start();
 };

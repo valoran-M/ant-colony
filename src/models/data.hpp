@@ -26,10 +26,41 @@ struct Data
     float speed;
     float decrease;
 
+    /**
+     * add lap
+     * 
+     * @return void
+     *  
+     * @confidence 4
+     **/
     void addLap() { lap++; }
+
+    /**
+     * reset data
+     * 
+     * @return int
+     *  
+     * @confidence 4
+     **/
     void reset();
 
+    /**
+     * constructor
+     *  
+     * @confidence 4
+     **/
     Data();
+
+    /**
+     * constructor
+     * 
+     * @param usnigned int colony
+     * @param unsigned int sugar
+     * @param int cell dimm
+     * @param grid dim
+     *  
+     * @confidence 4
+     **/
     Data(unsigned int colony,
          unsigned int sugar,
          int cellDim,
