@@ -21,6 +21,7 @@ set(SRCS
     src/views/init.cpp
     src/views/event.cpp
     src/views/data.cpp
+    src/views/menu.cpp
 )
 
 set(HEADERS
@@ -35,6 +36,7 @@ set(HEADERS
     src/models/grid.hpp
 
     src/views/display.hpp
+    src/views/menu.hpp
 )
 
 set(TESTS

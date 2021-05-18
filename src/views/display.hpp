@@ -1,6 +1,7 @@
 #include "models/coordinate.hpp"
 #include "models/data.hpp"
 #include "models/colony.hpp"
+#include "views/menu.hpp"
 #include <SFML/Graphics.hpp>
 
 class Display
@@ -22,6 +23,7 @@ private:
     sf::RectangleShape _rectangle;
     sf::RectangleShape _rectangleData;
     sf::CircleShape _circle;
+    Menu _menu;
 
     unsigned int _caseSize;
     unsigned int _mostR = 6;

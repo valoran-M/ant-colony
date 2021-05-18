@@ -1,19 +1,20 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 #define MAX_NUMBER_OF_ITEMS 3
 
 class Menu
 {
 public:
-    Menu(float width, float height);
-
-    void draw(sf::RenderWindow &window);
-    void MoveUp();
-    void MoveDown();
+    Menu();
+    void init(float width, float height, sf::Window *_window, sf::Font *_font);
+    void start();
 
 private:
     int _index;
-    sf::Font _font;
+    sf::Window *_window;
+    sf::Font *_font;
     sf::Text _menu[MAX_NUMBER_OF_ITEMS];
+    void MoveUp();
+    void MoveDown();
 };

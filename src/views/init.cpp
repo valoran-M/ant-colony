@@ -39,7 +39,8 @@ void Display::display_init(Data *data,
 
     if (!_font.loadFromFile("./utility/Monospace.ttf"))
         exit(EXIT_FAILURE);
-
+    
+    _menu.init(_window.getSize().x, _window.getSize().y, &_window, &_font);
     setGird();
 }
 
