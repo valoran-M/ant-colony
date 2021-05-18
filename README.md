@@ -56,3 +56,7 @@ We followed javadocs guidelines with an additional decorator:
 - 2: it works but can't be tested
 - 3: it works and has been tested
 - 4: it works, it has been tested and it is so simple that there is no doubt about it
+
+<h1 align="center">
+<img src="./utility/ant.png"/>
+</h1>
