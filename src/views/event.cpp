@@ -15,7 +15,7 @@ Display::events Display::manageEvent()
             switch (_event.key.code)
             {
             case sf::Keyboard::Escape:
-                _menu.start();
+                return _menu.start();
             case sf::Keyboard::Up:
                 return speedUp;
             case sf::Keyboard::Down:
