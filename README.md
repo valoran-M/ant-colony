@@ -30,7 +30,7 @@ We did this project with [Livarg](https://github.com/Livarg) for the University 
 </div>
 
 <div align="center">
-  <img style="transform:rotate(180deg);" src="./utility/ant.png"/>
+  <img src="./utility/ant_180.png"/>
 </div>
 
 ## Get ant colony
