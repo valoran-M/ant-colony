@@ -21,7 +21,7 @@ Display::events Display::manageEvent()
                         break;
                     
                     case 1:
-                        return reset;
+                        return Display::events::reset;
                         break;
                     case 2:
                         _window.close();
