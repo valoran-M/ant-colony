@@ -1,3 +1,4 @@
+#pragma once
 #include "models/coordinate.hpp"
 #include "models/data.hpp"
 #include "models/colony.hpp"
@@ -152,7 +153,7 @@ private:
     void _addbarrier();
 
 public:
-    enum events
+    enum class events
     {
         pause,
         reset,

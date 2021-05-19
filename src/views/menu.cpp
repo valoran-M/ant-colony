@@ -73,7 +73,26 @@ int Menu::start()
                     break;
 
                 case sf::Keyboard::Return:
+<<<<<<< HEAD
                     return(_selectedItem());
+=======
+                    switch (_selectedItem())
+                    {
+                    case 0:
+                        return 0;
+                        break;
+
+                    case 1:
+                        return 1;
+
+
+                    case 2:
+                        _window->close();
+                        return 0;
+                        break;
+                    }
+                    break;
+>>>>>>> 694502f (wip)
                 }
                 break;
             }

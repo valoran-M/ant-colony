@@ -60,6 +60,10 @@ TEST_CASE("fucntion")
         CHECK(test1.lap == i);
         test1.addLap();
     }
+
+    test1.reset();
+
+    CHECK(test1.lap == 0);
 }
 
 DOCTEST_TEST_SUITE_END();
