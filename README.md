@@ -35,14 +35,14 @@ We did this project with [Livarg](https://github.com/Livarg) for the University 
 
 ## Get ant colony
 
-#### Required libs and tools:
+### Required libs and tools:
 - cmake
 - pkg-config
 - sfml 
 
 > If you are using nixos, you can just type ``nix-shell`` inside the directory to open a preconfigured shell
 
-#### Compilation
+### Compilation
 ```sh
 cmake .
 make
@@ -50,7 +50,7 @@ make
 
 ## Man
 
-#### Launching ant colony
+### Launching ant colony
 ```
 ./ant_colony [OPTION] ...
 ```
@@ -67,7 +67,7 @@ make
 
 ## Code conventions
 
-#### Docstrings
+### Docstrings
 We followed javadocs guidelines with an additional decorator:
 ``@confidence 0-4``
 - 0: it doesn't work
@@ -75,6 +75,12 @@ We followed javadocs guidelines with an additional decorator:
 - 2: it works but can't be tested
 - 3: it works and has been tested
 - 4: it works, it has been tested and it is so simple that there is no doubt about it
+
+## License
+
+You can contact me if you want to improve by optimizing or making new concrete focus.
+
+[Project license](./LICENSE.md)
 
 
 <div align="center">
