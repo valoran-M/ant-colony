@@ -4,7 +4,6 @@
 #include "models/case.hpp"
 #include <vector>
 
-//Constructeur
 Colony::Colony(Coord base, char nom) : base(base),
                                        team(nom),
                                        sugar(0)

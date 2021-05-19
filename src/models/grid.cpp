@@ -1,11 +1,5 @@
 #include "models/grid.hpp"
 
-/**
- * Constructor for grid
- * 
- * @author Valeran MAYTIE
- * @confidence  2
- **/
 Grid::Grid() : height(0),
                width(0),
                grid()
@@ -17,17 +11,6 @@ Case &Grid::getCase(Coord const &coord)
     return grid[coord.getX()][coord.getY()];
 }
 
-/**
- * Initalise grid
- * 
- * @param std::size_t width
- * @param std::size_t heiight
- * 
- * @return bool true if initilize corect
- * 
- * @author Valeran MAYTIE
- * @confidence 2
- **/
 void Grid::initilize(unsigned int xMax,
                      unsigned int yMax,
                      unsigned int numberOfColony)

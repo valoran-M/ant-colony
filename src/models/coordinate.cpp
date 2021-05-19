@@ -4,29 +4,11 @@
 #include <stdexcept>
 #include <vector>
 
-/**
- * Constructor for Coor
- * @param std::size_t x
- * @param std::size_t y
- * 
- * @author Valeran MAYTIE
- * @condifence 5 
- **/
 Coord::Coord(int x, int y) : _x(x),
                              _y(y)
 {
 }
 
-/**
- * random constructor Coord
- * @param std::size_t xMin
- * @param std::size_t xMax
- * @param std::size_t yMin
- * @param std::size_t yMax
- * 
- * @author Valeran MAYHTIE
- * @confidence 2
- **/
 Coord::Coord(int xMin,
              int xMax,
              int yMin,
@@ -37,14 +19,6 @@ Coord::Coord(int xMin,
     _y = random_index(yMin, yMax);
 }
 
-/**
- * opetor [] for Coor
- * @param unsigned accesseur
- * 
- * @return std::size_t & adress of x or y coordinate
- * @author Valeran MAYTIE
- * @condifence 5 
- **/
 int &Coord::operator[](unsigned i)
 {
     if (i == 0)
@@ -55,27 +29,11 @@ int &Coord::operator[](unsigned i)
         throw std::invalid_argument("The coordinates are in 2 dimension");
 }
 
-/**
- * opetor == for Coor
- * @param Coor const & other Coor
- * 
- * @return bool true if this == other
- * @author Valeran MAYTIE
- * @condifence 5 
- **/
 bool Coord::operator==(Coord const &other) const
 {
     return _x == other.getX() && _y == other.getY();
 }
 
-/**
- * opetor != for Coor
- * @param Coor const & other Coor
- * 
- * @return bool true if this != other
- * @author Valeran MAYTIE
- * @condifence 5 
- **/
 bool Coord::operator!=(Coord const &other) const
 {
     return _x != other.getX() || _y != other.getY();
@@ -87,15 +45,6 @@ std::ostream &operator<<(std::ostream &out, Coord const cord)
     return out;
 }
 
-/** 
- * return neigbour of Coord
- * @param std::size_t max x in table
- * @param std::size_t max y in table
- * 
- * @return std::vecotr<Coord> set of coord
- * @author Valeran MAYTIE
- * @condifence 5 
- **/
 std::vector<Coord> Coord::getNeigbour(int width, int height) const
 {
     int xMin = std::max<int>(getX() - 1, 0);
