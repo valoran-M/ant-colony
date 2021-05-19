@@ -17,7 +17,7 @@ void Grid::initilize(unsigned int xMax,
 {
     width = xMax;
     height = yMax;
-    grid = std::vector<std::vector<Case>>(yMax);
+    grid = std::vector<std::vector<Case>>(xMax);
     for (size_t x = 0; x < xMax; x++)
     {
         grid[x] = std::vector<Case>(yMax);
