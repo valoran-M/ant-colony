@@ -8,7 +8,7 @@ class Menu
 public:
     Menu();
     void init(float width, float height, sf::Window *_window, sf::Font *_font);
-    void start();
+    int start();
 
 private:
     int _index;

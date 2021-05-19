@@ -52,8 +52,8 @@ void Display::display_init(Data *data,
 void Display::_intitWindow()
 {
     if (_caseSize > 0)
-        _window.create(sf::VideoMode(_height * _caseSize + _mostR + _dataX,
-                                     _width * _caseSize + _mostL),
+        _window.create(sf::VideoMode(_width * _caseSize + _mostR + _dataX,
+                                     _height * _caseSize + _mostL),
                        "Ant",
                        sf::Style::Close);
     else

@@ -24,8 +24,7 @@ void Manager::_getData()
 {
     unsigned int max;
     while ((_data.width < 20 || _data.width > 1000) ||
-           (_data.height < 20 || _data.height > 1000) ||
-           _data.height != _data.width)
+           (_data.height < 20 || _data.height > 1000))
     {
         std::cout << "Shape of grid (x, y) : ";
         std::cin >> _data.width;
@@ -76,9 +75,8 @@ void Manager::_colonnyGeneration()
         {
             Coord base;
             do
-            {
                 base = _display.getNestCreation();
-            } while (!_baseTest(base));
+            while (!_baseTest(base));
 
             _nestCreation(_data.colonies[colony], base);
             _display.setGird();
@@ -156,10 +154,10 @@ void Manager::_nestPheroInit(char colony)
     int x, y, neigI, size;
     float max, maxPheroCase, casePhero;
     bool stable = false;
-    size = std::min(_data.height, _data.width);
+    size = std::max(_data.height, _data.width);
     for (y = 0; y < _data.height; y++)
         for (x = 0; x < _data.width; x++)
-            _grid.getCase(y, x).removeNestPhero(colony);
+            _grid.getCase(x, y).removeNestPhero(colony);
     std::cout << "Colony " << int(colony) << " "
               << ":";
     while (!stable)
@@ -169,7 +167,7 @@ void Manager::_nestPheroInit(char colony)
         for (y = 0; y < _data.height; y++)
             for (x = 0; x < _data.width; x++)
             {
-                Case &p = _grid.getCase(y, x);
+                Case &p = _grid.getCase(x, y);
                 if ((casePhero = p.getNestPhero(colony)) < 1)
                 {
                     neig = p.getCoord().getNeigbour(_data.width,
