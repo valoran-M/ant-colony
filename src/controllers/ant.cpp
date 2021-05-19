@@ -10,7 +10,7 @@ void Manager::_antManger(unsigned int colony, unsigned int ant)
         ;
     else if (_enemyKill(antEntity))
         ;
-    else if (antEntity.getSugar() != 0)
+    else if (antEntity.backHome())
     {
         if (!_putSugar(antEntity))
             _backHome(antEntity);

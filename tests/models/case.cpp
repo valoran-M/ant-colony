@@ -49,6 +49,17 @@ TEST_CASE("modifier")
                         std::invalid_argument);
         caseForTest.removeSugar();
         CHECK(caseForTest.getSugar() == 0);
+
+        caseForTest.putSugar(5);
+        for (int x = 4; x > 0; x--)
+        {
+            caseForTest.decreasesSugar();
+            CHECK(caseForTest.getSugar() == x);
+            CHECK(caseForTest.containsSugar());
+        }
+        caseForTest.decreasesSugar();
+        CHECK(caseForTest.getSugar() == 0);
+        CHECK_FALSE(caseForTest.containsSugar());
     }
     caseForTest = Case(0, 0, 3);
     SUBCASE("Neats")
@@ -83,6 +94,15 @@ TEST_CASE("modifier")
         CHECK(caseForTest.getSugarPhero(0) == 25);
         caseForTest.decreasesSugarPheromone(0, 50);
         CHECK(caseForTest.getSugarPhero(0) == 0);
+    }
+
+    SUBCASE("put barrier")
+    {
+        CHECK_FALSE(caseForTest.getBarrier());
+        caseForTest.putBarrier();
+        CHECK(caseForTest.getBarrier());
+        caseForTest.removeBarrier();
+        CHECK_FALSE(caseForTest.getBarrier());
     }
 }
 

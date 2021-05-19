@@ -6,8 +6,9 @@
 
 Colony::Colony(Coord base, char nom) : base(base),
                                        team(nom),
-                                       sugar(0)
+                                       sugar(10)
 {
+    nest.push_back(base);
 }
 
 void Colony::addNest(Coord coord)

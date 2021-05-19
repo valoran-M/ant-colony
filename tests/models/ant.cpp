@@ -8,8 +8,8 @@ DOCTEST_TEST_SUITE_BEGIN("ant test");
 
 TEST_CASE("constructor")
 {
-    Ant testFourmis = Ant(0, Coord(0,0), 1, Coord(0, 0));
-    CHECK(testFourmis.getCoord() == Coord(0,0));
+    Ant testFourmis = Ant(0, Coord(0, 0), 1, Coord(0, 0));
+    CHECK(testFourmis.getCoord() == Coord(0, 0));
     CHECK(testFourmis.getLifePoint() == 10);
     CHECK(testFourmis.getNumber() == 0);
     CHECK(testFourmis.getEnergy() == 5);
@@ -18,7 +18,7 @@ TEST_CASE("constructor")
 
 TEST_CASE("modifier")
 {
-    Ant testFourmis = Ant(0, Coord(0,0), 1, Coord(0, 0));
+    Ant testFourmis = Ant(0, Coord(0, 0), 1, Coord(0, 0));
     SUBCASE("takeSugar")
     {
         testFourmis.takeSugar();
@@ -47,23 +47,47 @@ TEST_CASE("modifier")
 
     SUBCASE("move")
     {
-        testFourmis.move(1 , 1);
-        CHECK(testFourmis.getCoord() == Coord(1 , 1));
-        testFourmis.move(1 , 0);
-        CHECK(testFourmis.getCoord() == Coord(2 , 1));
-        testFourmis.move(0 , 1);
-        CHECK(testFourmis.getCoord() == Coord(2 , 2));
-        testFourmis.move(-1 , -1);
-        CHECK(testFourmis.getCoord() == Coord(1 , 1));
+        testFourmis.move(1, 1);
+        CHECK(testFourmis.getCoord() == Coord(1, 1));
+        testFourmis.move(1, 0);
+        CHECK(testFourmis.getCoord() == Coord(2, 1));
+        testFourmis.move(0, 1);
+        CHECK(testFourmis.getCoord() == Coord(2, 2));
+        testFourmis.move(-1, -1);
+        CHECK(testFourmis.getCoord() == Coord(1, 1));
+    }
+
+    SUBCASE("Rotation")
+    {
+        CHECK(testFourmis.getRotation() == Coord(0, 0));
+        testFourmis.getRotation() = Coord(1, 1);
+        CHECK(testFourmis.getRotation() == Coord(1, 1));
+        testFourmis.getRotation() = Coord(0, 1);
+        CHECK(testFourmis.getRotation() == Coord(0, 1));
+        testFourmis.getRotation() = Coord(-1, -1);
+        CHECK(testFourmis.getRotation() == Coord(-1, -1));
+    }
+
+    SUBCASE("go to")
+    {
+        Coord test1 = Coord(1, 1);
+        Coord test2 = Coord(10, 3);
+        CHECK(testFourmis.getCoord() == Coord(0, 0));
+        testFourmis.go_to(test1);
+        CHECK(testFourmis.getCoord() == test1);
+        testFourmis.go_to(test2);
+        CHECK(testFourmis.getCoord() == test2);
     }
 }
 
 TEST_CASE("Predicat")
 {
-    Ant testFourmis = Ant(0, Coord(0,0), 1, Coord(0, 0));
+    Ant testFourmis = Ant(0, Coord(0, 0), 1, Coord(0, 0));
     SUBCASE("inLife")
     {
-        CHECK(testFourmis.inLife() == true);
+        CHECK(testFourmis.inLife());
+        testFourmis.kill();
+        CHECK_FALSE(testFourmis.inLife());
     }
 
     SUBCASE("haveSugar")
