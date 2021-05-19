@@ -13,9 +13,23 @@ void Menu::init(float width, float height, sf::RenderWindow *window, sf::Font *f
     _window = window;
     _font = font;
     _index = 0;
+
+
+    _texture.loadFromFile("./utility/ant.png");
+    _texture.setSmooth(true);
+
+
+    _sprite.setTexture(_texture);
+    _sprite.setRotation(90.f);
+    _sprite.setScale(1, 1);
+    _sprite.setOrigin(_sprite.getTexture()->getSize().x / 2, _sprite.getTexture()->getSize().y / 2);
+    _sprite.setColor(sf::Color(255,0,0));
+    _sprite.setPosition(sf::Vector2f(width / 3 - 100, height / (MAX_NUMBER_OF_ITEMS + 1) * 1  + 25));
+
     _menu[0].setFont(*_font);
     _menu[0].setString("Restart");
-    _menu[0].setFillColor(sf::Color(0,0,255));
+    _menu[0].setFillColor(sf::Color(255,0,0));
+    _menu[0].setOutlineColor(sf::Color(100,100,255));
     _menu[0].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 1));
 
     _menu[1].setFont(*_font);
@@ -35,7 +49,9 @@ void Menu::_moveUp()
     {
         _menu[_index].setFillColor(sf::Color(255,255,255));
         _index--;
-        _menu[_index].setFillColor(sf::Color(0,0,255));
+        _sprite.setPosition(sf::Vector2f(_window->getSize().x / 3 - 100, _window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1) * (_index + 1) + 25));
+        _menu[_index].setFillColor(sf::Color(255,0,0));
+        _menu[_index].setOutlineColor(sf::Color(100,100,255));
     }
 }
 
@@ -45,18 +61,18 @@ void Menu::_moveDown()
     {
         _menu[_index].setFillColor(sf::Color(255,255,255));
         _index++;
-        _menu[_index].setFillColor(sf::Color(0,0,255));
+        _sprite.setPosition(sf::Vector2f(_window->getSize().x / 3 - 100, _window->getSize().y / (MAX_NUMBER_OF_ITEMS + 1) * (_index + 1) + 25));
+        _menu[_index].setFillColor(sf::Color(255,0,0));
+        _menu[_index].setOutlineColor(sf::Color(100,100,255));
     }
 }
 
 int Menu::start()
 {
-    int compteur = 0;
-    _drawMenu(compteur);
+    _drawMenu();
     sf::Event event;
     while (true)
     {
-        compteur += 1;
         while (_window->pollEvent(event))
         {
             switch (event.type)
@@ -79,21 +95,22 @@ int Menu::start()
             }
             break;
         }
-        _drawMenu(compteur);
+        _drawMenu();
         _window->display();
     }
     return 0;
 }
 
-void Menu::_drawMenu(int compteur)
+void Menu::_drawMenu()
 {
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(_window->getSize().x, _window->getSize().y));
-    rectangle.setOutlineColor(sf::Color::Blue);
+    rectangle.setOutlineColor(sf::Color::Red);
     rectangle.setOutlineThickness(5);
-    rectangle.setFillColor(sf::Color((0 + compteur) % 255,(0 + compteur * 2) % 255,(0 + compteur * 3) % 255,2));
+    rectangle.setFillColor(sf::Color( 75,75,75));
     rectangle.setPosition(0, 0);
     _window->draw(rectangle);
+    _window->draw(_sprite);
     for(int i = 0; i < MAX_NUMBER_OF_ITEMS; i++)
     {
         _window->draw(_menu[i]);
