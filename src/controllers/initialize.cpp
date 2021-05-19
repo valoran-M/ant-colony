@@ -2,15 +2,13 @@
 #include "controllers/manager.hpp"
 #include "models/colony.hpp"
 #include "models/grid.hpp"
+
 #include <iostream>
 #include <ctime>
 #include <vector>
-#include <math.h>
 
 void Manager::_initialize()
 {
-    _data.decrease = 1 / std::sqrt(float(_data.width * _data.width + _data.height * _data.height));
-    _data.decrease /= 2;
     _grid.initilize(_data.width, _data.height, _data.numberOfColony);
     _display.display_init(&_data,
                           &_grid,

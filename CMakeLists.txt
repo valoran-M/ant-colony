@@ -46,6 +46,7 @@ set(TESTS
     tests/models/case.cpp
     tests/models/coordinate.cpp
     tests/models/colony.cpp
+    tests/models/data.cpp
 )
 
 set(LIBS

@@ -1,5 +1,7 @@
 #include "models/data.hpp"
 
+#include <math.h>
+
 Data::Data() : state(menu),
                colonies(),
                lap(0),
@@ -20,6 +22,9 @@ Data::Data(unsigned int colony,
                             width(gridDim[0]),
                             height(gridDim[1])
 {
+
+    decrease = 1 / std::sqrt(float(width * width + height * height));
+    decrease /= 2;
 }
 
 void Data::reset()
