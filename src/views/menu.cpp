@@ -49,7 +49,7 @@ void Menu::_moveDown()
     }
 }
 
-Display::events Menu::start()
+int Menu::start()
 {
     _drawMenu();
     sf::Event event;
@@ -73,16 +73,16 @@ Display::events Menu::start()
                     switch (_selectedItem())
                     {
                     case 0:
-                        return Display::events::nothing;
+                        return 0;
                         break;
 
                     case 1:
-                        return Display::events::reset;
+                        return 1;
 
 
                     case 2:
                         _window->close();
-                        return Display::events::nothing;
+                        return 0;
                         break;
                     }
                     break;
@@ -92,7 +92,7 @@ Display::events Menu::start()
         _drawMenu();
         _window->display();
     }
-    return Display::events::nothing;
+    return 0;
 }
 
 void Menu::_drawMenu()

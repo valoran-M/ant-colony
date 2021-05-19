@@ -14,20 +14,19 @@ Display::events Display::manageEvent()
         case sf::Event::KeyPressed:
             switch (_event.key.code)
             {
-            case sf::Keyboard::Escape:
-                return _menu.start();
+            case sf::Keyboard::Escape:; //return _menu.start();
             case sf::Keyboard::Up:
-                return speedUp;
+                return Display::events::speedUp;
             case sf::Keyboard::Down:
-                return speedDown;
+                return Display::events::speedDown;
             case sf::Keyboard::Q:
                 _window.close();
                 break;
             case sf::Keyboard::B:
                 _addbarrier();
-                return pheroUpdate;
+                return Display::events::pheroUpdate;
             case sf::Keyboard::N:
-                return pheroUpdate;
+                return Display::events::pheroUpdate;
             case sf::Keyboard::G:
                 if (_rectangle.getOutlineThickness() == 1)
                     _rectangle.setOutlineThickness(0);
@@ -36,9 +35,9 @@ Display::events Display::manageEvent()
                 setGird();
                 break;
             case sf::Keyboard::R:
-                return reset;
+                return Display::events::reset;
             case sf::Keyboard::P:
-                return pause;
+                return Display::events::pause;
             case sf::Keyboard::H:
                 sf::Thread help(&_help);
                 help.launch();
@@ -98,7 +97,7 @@ Display::events Display::manageEvent()
         }
     _window.display();
     sf::sleep(sf::seconds(1.f / 60.f));
-    return nothing;
+    return Display::events::nothing;
 }
 
 static void _help()
