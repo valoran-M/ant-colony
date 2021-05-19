@@ -15,6 +15,8 @@ private:
     sf::Window *_window;
     sf::Font *_font;
     sf::Text _menu[MAX_NUMBER_OF_ITEMS];
-    void MoveUp();
-    void MoveDown();
+    void moveUp();
+    void moveDown();
+    int selectedItem() { return _index; }
+    void draw(sf::Window *_window);
 };

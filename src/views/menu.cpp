@@ -13,6 +13,7 @@ void Menu::init(float width, float height, sf::Window *window, sf::Font *font)
     _menu[0].setFont(*_font);
     _menu[0].setFillColor(sf::Color::Red);
     _menu[0].setString("Restart");
+    _menu[0].setFillColor(sf::Color(255,0,0));
     _menu[0].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 1));
 
     _menu[1].setFont(*_font);
