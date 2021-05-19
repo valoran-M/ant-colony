@@ -47,4 +47,19 @@ TEST_CASE("constructor")
     CHECK(test2.decrease == decrease);
 }
 
+TEST_CASE("fucntion")
+{
+    unsigned int colony = 1, sugar = 10;
+    int cellDim = 10;
+    Coord gridDim = Coord(20, 20);
+
+    Data test1 = Data(colony, sugar, cellDim, gridDim);
+
+    for (int i = 0; i < 20; i++)
+    {
+        CHECK(test1.lap == i);
+        test1.addLap();
+    }
+}
+
 DOCTEST_TEST_SUITE_END();
