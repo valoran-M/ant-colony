@@ -1,6 +1,9 @@
 #include "doctest.h"
 #include "models/coordinate.hpp"
 
+#include <sstream>
+#include <iostream>
+
 TEST_SUITE_BEGIN("");
 
 TEST_CASE("Constructor and [] operator")
@@ -92,8 +95,8 @@ TEST_CASE("is in")
     Coord const test6 = Coord(6, 4);
 
     std::vector<Coord> tab = {Coord(0, 0),
-                               Coord(1, 1),
-                               Coord(1, 3)};
+                              Coord(1, 1),
+                              Coord(1, 3)};
     CHECK(test1.isIn(tab));
     CHECK(test2.isIn(tab));
     CHECK(test3.isIn(tab));
@@ -101,6 +104,54 @@ TEST_CASE("is in")
     CHECK_FALSE(test4.isIn(tab));
     CHECK_FALSE(test5.isIn(tab));
     CHECK_FALSE(test6.isIn(tab));
+}
+
+TEST_CASE("Operator")
+{
+    Coord test1 = Coord(0, 0);
+    Coord test2 = Coord(10, 2);
+    Coord test3 = Coord(4, 0);
+    Coord test4 = Coord(0, 5);
+
+    SUBCASE("operator <<")
+    {
+        std::ostringstream ch;
+
+        ch << test1;
+        CHECK(ch.str() == "(0, 0)");
+        
+        ch.str("");
+        ch << test2;
+        CHECK(ch.str() == "(10, 2)");
+        
+        ch.str("");
+        ch << test3;
+        CHECK(ch.str() == "(4, 0)");
+        
+        ch.str("");
+        ch << test4;
+        CHECK(ch.str() == "(0, 5)");
+    }
+
+    SUBCASE("Operator -")
+    {
+        CHECK(test1 - test2 == Coord(-10, 2));
+        CHECK(test1 - test3 == Coord(-4, 0));
+        CHECK(test1 - test4 == Coord(0, 5));
+
+        CHECK(test2 - test1 == Coord(10, -2));
+        CHECK(test2 - test3 == Coord(6, -2));
+        CHECK(test2 - test4 == Coord(10, 3));
+
+        CHECK(test3 - test1 == Coord(4, 0));
+        CHECK(test3 - test2 == Coord(-6, 2));
+        CHECK(test3 - test4 == Coord(4, 5));
+
+        CHECK(test4 - test1 == Coord(0, -5));
+        CHECK(test4 - test2 == Coord(-10, -3));
+        CHECK(test4 - test3 == Coord(-4, -5));
+
+    }
 }
 
 TEST_SUITE_END();
