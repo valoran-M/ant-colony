@@ -17,5 +17,5 @@ private:
     void _moveUp();
     void _moveDown();
     int _selectedItem() { return _index; }
-    void _drawMenu();
+    void _drawMenu(int compteur);
 };
