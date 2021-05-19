@@ -9,7 +9,7 @@ TEST_CASE("constructor")
     CHECK(test.sugar == 10);
     CHECK(test.base == Coord(0, 0));
     CHECK(test.team == 0);
-    CHECK(test.nest == std::vector<Coord>{Coord(0, 0)});
+    CHECK(test.nest == std::vector<Coord>{});
 }
 
 TEST_CASE("Modifier")
@@ -22,6 +22,7 @@ TEST_CASE("Modifier")
         Coord test2 = Coord(0, 2);
         Coord test3 = Coord(0, 3);
 
+        test.addNest(base);
         test.addNest(test1);
         test.addNest(test2);
         test.addNest(test3);

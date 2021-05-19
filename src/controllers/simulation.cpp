@@ -5,13 +5,14 @@ void Manager::start()
 {
     _initialize();
 
+    _data.state == Data::State::running;
     std::chrono::high_resolution_clock::time_point previousTime = std::chrono::high_resolution_clock::now();
     while (_display.isOpen())
     {
         _eventTraitment(_display.manageEvent());
 
         long delay = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - previousTime).count();
-        if (delay < _delay * _data.speed || _data.state == Data::paused)
+        if (delay < _delay * _data.speed || _data.state == Data::State::paused)
             continue;
         previousTime = std::chrono::high_resolution_clock::now();
 
