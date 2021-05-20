@@ -308,6 +308,28 @@ private:
     void _decreaseSugarPhero();
 
     /**
+     * ant take sugar of other ant
+     * 
+     * @place ant.cpp
+     * 
+     * @return bool if take sugar
+     * 
+     * @confidence 2 
+     **/
+    bool _sugarTakeToAnt(Ant &antEntity);
+
+    /**
+     * ant get sugar of other ant
+     * 
+     * @place ant.cpp
+     * 
+     * @return bool if take sugar
+     * 
+     * @confidence 2 
+     **/
+    bool _sugarGetToAnt(Ant &antEntity);
+
+    /**
      * reset nest pheromone
      * 
      * @return void
@@ -326,7 +348,6 @@ private:
      * @confidence 2
      **/
     void _antBirth(char colony);
-
 
     /**
      * add new ant

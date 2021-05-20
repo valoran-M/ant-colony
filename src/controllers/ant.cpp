@@ -13,14 +13,16 @@ void Manager::_antManger(unsigned int colony, unsigned int ant)
     else if (antEntity.backHome())
     {
         if (!_putSugar(antEntity))
-            _backHome(antEntity);
+            if (!_sugarTakeToAnt(antEntity))
+                _backHome(antEntity);
     }
     else
     {
         if (!_getSugar(antEntity))
-            if (!_sugarPheroMove(antEntity))
-                if (!_directionMove(antEntity))
-                    _randomMove(antEntity);
+            if (!_sugarGetToAnt(antEntity))
+                if (!_sugarPheroMove(antEntity))
+                    if (!_directionMove(antEntity))
+                        _randomMove(antEntity);
     }
 }
 
@@ -50,6 +52,50 @@ bool Manager::_enemyKill(Ant &antEntity)
                 .kill();
             _grid.getCase(neigbour).removeAnt();
             return true;
+        }
+    }
+    return false;
+}
+
+bool Manager::_sugarTakeToAnt(Ant &antEntity)
+{
+    std::vector<Coord> neigbours =
+        antEntity.getCoord().getNeigbour(_data.width, _data.height);
+    Case closers;
+    float nestPheroMax = _grid.getCase(antEntity.getCoord()).getNestPhero(antEntity.getColony());
+    for (Coord &neigbour : neigbours)
+    {
+        if (_grid.getCase(neigbour).getAnt() != -1 && _grid.getCase(neigbour).getColony() == antEntity.getColony())
+        {
+            if (!_data.colonies[_grid.getCase(neigbour).getColony()].ants[_grid.getCase(neigbour).getAnt()].haveSugar() &&
+                _grid.getCase(neigbour).getNestPhero(antEntity.getColony()) > _grid.getCase(antEntity.getCoord()).getNestPhero(antEntity.getColony()))
+            {
+                _data.colonies[antEntity.getColony()].ants[_grid.getCase(neigbour).getAnt()].takeSugar(1);
+                antEntity.dropSugar();
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool Manager::_sugarGetToAnt(Ant &antEntity)
+{
+    std::vector<Coord> neigbours =
+        antEntity.getCoord().getNeigbour(_data.width, _data.height);
+    Case closers;
+    float nestPheroMax = _grid.getCase(antEntity.getCoord()).getNestPhero(antEntity.getColony());
+    for (Coord &neigbour : neigbours)
+    {
+        if (_grid.getCase(neigbour).getAnt() != -1 && _grid.getCase(neigbour).getColony() == antEntity.getColony())
+        {
+            if (_data.colonies[_grid.getCase(neigbour).getColony()].ants[_grid.getCase(neigbour).getAnt()].haveSugar() &&
+                _grid.getCase(neigbour).getNestPhero(antEntity.getColony()) < _grid.getCase(antEntity.getCoord()).getNestPhero(antEntity.getColony()))
+            {
+                _data.colonies[antEntity.getColony()].ants[_grid.getCase(neigbour).getAnt()].dropSugar();
+                antEntity.takeSugar(1);
+                return true;
+            }
         }
     }
     return false;
@@ -200,7 +246,7 @@ void Manager::_randomMove(Ant &antEntity)
 
 void Manager::_antBirth(char colony)
 {
-    if (_data.colonies[colony].sugar > _data.colonies[colony].getNbAntInLife() * 2 && 
+    if (_data.colonies[colony].sugar > _data.colonies[colony].getNbAntInLife() * 2 &&
         _data.colonies[colony].sugar > 5)
     {
         for (Coord &spawn : _data.colonies[colony].spawnableCase)
