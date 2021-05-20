@@ -4,11 +4,11 @@
 void Manager::start()
 {
     _initialize();
-
-    if(_display.startMenu() == 2)
-        _display.close();
-    else
-        _display.setGird();
+    if (!_manual)
+        if (_display.startMenu() == 2)
+            _display.close();
+        else
+            _display.setGird();
 
     _data.state = Data::State::running;
     std::chrono::high_resolution_clock::time_point previousTime = std::chrono::high_resolution_clock::now();
