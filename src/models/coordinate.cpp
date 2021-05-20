@@ -72,3 +72,9 @@ Coord operator-(Coord const &coord1, Coord const &coord2)
 {
     return Coord(coord1.getX() - coord2.getX(), coord2.getY() - coord1.getY());
 }
+
+Coord operator+(Coord const &coord1, Coord const &coord2)
+{
+    return Coord(coord1.getX() + coord2.getX(), coord1.getY() - coord2.getY());
+}
+

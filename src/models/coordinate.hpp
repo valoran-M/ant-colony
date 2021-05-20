@@ -140,3 +140,15 @@ std::ostream &operator<<(std::ostream &out, Coord const coord);
  * @confidence 4
  **/
 Coord operator-(Coord const &coord1, Coord const &coord2);
+
+/**
+ * operator+
+ * 
+ * @param Coord const & coord1
+ * @param Coord const & coord2
+ * 
+ * @return Coord
+ * 
+ * @confidence 4
+ **/
+Coord operator+(Coord const &coord1, Coord const &coord2);

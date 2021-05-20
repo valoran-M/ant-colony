@@ -258,6 +258,19 @@ private:
     bool _sugarPheroMove(Ant &antEntity);
 
     /**
+     * making a direction move for ant
+     * 
+     * @place ant.cpp
+     * 
+     * @param Ant& antEntity
+     * 
+     * @return void
+     * 
+     * @confidence 2
+     **/
+    bool _directionMove(Ant &antEntity);
+
+    /**
      * making a random movement to the antEntity
      * 
      * @place ant.cpp

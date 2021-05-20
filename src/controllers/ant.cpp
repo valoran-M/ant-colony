@@ -19,7 +19,8 @@ void Manager::_antManger(unsigned int colony, unsigned int ant)
     {
         if (!_getSugar(antEntity))
             if (!_sugarPheroMove(antEntity))
-                _randomMove(antEntity);
+                if (!_directionMove(antEntity))
+                    _randomMove(antEntity);
     }
 }
 
@@ -136,6 +137,46 @@ bool Manager::_sugarPheroMove(Ant &antEntity)
             _moveAnt(antEntity, mostCase.getCoord());
 
     return find;
+}
+
+#include <iostream>
+
+bool Manager::_directionMove(Ant &antEntity)
+{
+    std::vector<Coord> moveCoord;
+    Coord direction = antEntity.getRotation();
+    moveCoord.push_back(antEntity.getCoord() + direction);
+    if (direction[0] == 0)
+    {
+        moveCoord.push_back(antEntity.getCoord() + Coord(1, direction[1]));
+        moveCoord.push_back(antEntity.getCoord() + Coord(-1, direction[1]));
+    }
+    else if (direction[1] == 0)
+    {
+        moveCoord.push_back(antEntity.getCoord() + Coord(direction[0], 1));
+        moveCoord.push_back(antEntity.getCoord() + Coord(direction[0], -1));
+    }
+    else
+    {
+        moveCoord.push_back(antEntity.getCoord() + Coord(direction[0], 0));
+        moveCoord.push_back(antEntity.getCoord() + Coord(0, direction[1]));
+    }
+
+    while (moveCoord.size() > 0)
+    {
+        int random = random_index(0, moveCoord.size() - 1);
+        if (moveCoord[random].getX() < 0 || moveCoord[random].getX() > _data.width ||
+            moveCoord[random].getY() < 0 || moveCoord[random].getY() > _data.height)
+            ;
+        else if (_grid.getCase(moveCoord[random]).isEmpty())
+        {
+            _moveAnt(antEntity, moveCoord[random]);
+            return true;
+        }
+        moveCoord.erase(moveCoord.begin() + random);
+    }
+
+    return false;
 }
 
 void Manager::_randomMove(Ant &antEntity)
