@@ -10,7 +10,7 @@ void Manager::start()
     else
         _display.setGird();
 
-    _data.state == Data::State::running;
+    _data.state = Data::State::running;
     std::chrono::high_resolution_clock::time_point previousTime = std::chrono::high_resolution_clock::now();
     while (_display.isOpen())
     {
