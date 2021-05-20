@@ -19,8 +19,8 @@ void Manager::_antManger(unsigned int colony, unsigned int ant)
     {
         if (!_getSugar(antEntity))
             if (!_sugarPheroMove(antEntity))
-                if (!_directionMove(antEntity))
-                    _randomMove(antEntity);
+                //if (!_directionMove(antEntity))
+                _randomMove(antEntity);
     }
 }
 
@@ -168,8 +168,8 @@ bool Manager::_directionMove(Ant &antEntity)
     while (moveCoord.size() > 0)
     {
         int random = random_index(0, moveCoord.size() - 1);
-        if (moveCoord[random].getX() < 0 || moveCoord[random].getX() > _data.width ||
-            moveCoord[random].getY() < 0 || moveCoord[random].getY() > _data.height)
+        if (moveCoord[random].getX() < 0 || moveCoord[random].getX() > _data.width - 1 ||
+            moveCoord[random].getY() < 0 || moveCoord[random].getY() > _data.height - 1)
             ;
         else if (_grid.getCase(moveCoord[random]).isEmpty())
         {
@@ -207,7 +207,7 @@ void Manager::_antBirth(char colony)
             if (_grid.getCase(spawn).isEmpty())
             {
                 _data.colonies[colony].sugar -=
-                    _data.colonies[colony].getNbAntInLife()  + 1;
+                    _data.colonies[colony].getNbAntInLife() + 1;
                 _newAnt(spawn, colony);
                 return;
             }
