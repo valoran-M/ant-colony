@@ -26,7 +26,7 @@ void Display::updataCell(Coord &coord)
                  _grid->getCase(cell.getCoord()).getNestPhero(_colontyDataCoef->team) * 100);
     if (cell.getAnt() != -1)
     {
-        if (&_data->colonies[cell.getColony()].ants[cell.getAnt()] == _antDataCoef)
+        if (_antDataCoef != NULL && _data->colonies[cell.getColony()].ants[cell.getAnt()].getNumber() == _antDataCoef->getNumber())
             _drawAnt(cell.getCoord(), _red);
         else
             _drawAnt(cell.getCoord(), _colonyColor[cell.getColony()]);
