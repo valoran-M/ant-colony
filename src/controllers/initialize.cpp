@@ -21,35 +21,34 @@ void Manager::_initialize()
 void Manager::_getData()
 {
     unsigned int max;
-    while ((_data.width < 20 || _data.width > 1000) ||
-           (_data.height < 20 || _data.height > 1000) ||
-           _data.height != _data.width)
+    if ((_data.width < 20 || _data.width > 1000) ||
+        (_data.height < 20 || _data.height > 1000) ||
+        _data.height != _data.width)
     {
-        std::cout << "Shape of grid (x, y) : ";
-        std::cin >> _data.width;
-        std::cin >> _data.height;
+        std::cout << "Error : Enter grid dim [20, 1000] height == width\n\t./ant-colony -d number number\n";
+        exit(EXIT_FAILURE);
     };
 
-    while (_data.caseSize > 30)
+    if (_data.caseSize > 30)
     {
-        std::cout << "size of case (max = 30) : ";
-        std::cin >> _data.caseSize;
+        std::cout << "Error : Enter case Size\n\t./ant-colony -l number \n";
+        exit(EXIT_FAILURE);
     };
 
     max = std::min(_data.width, _data.height) / 4;
     while (_data.numberOfColony > max ||
            _data.numberOfColony <= 0)
     {
-        std::cout << "Number of colony max(" << max << "): ";
-        std::cin >> _data.numberOfColony;
+        std::cout << "Error : Enter case Size\n\t./ant-colony -l number \n";
+        exit(EXIT_FAILURE);
     };
     max = ((_data.height * _data.width) -
            (_data.numberOfColony * 16)) /
           30;
     while (_data.sugar > max)
     {
-        std::cout << "Number of sugar max(" << max << "): ";
-        std::cin >> _data.sugar;
+        std::cout << "Error : Enter sugar number\n\t./ant-colony -s number \n";
+        exit(EXIT_FAILURE);
     };
 }
 

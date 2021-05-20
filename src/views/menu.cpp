@@ -109,7 +109,5 @@ void Menu::_drawMenu()
     _window->draw(rectangle);
     _window->draw(_sprite);
     for (int i = 0; i < MAX_NUMBER_OF_ITEMS; i++)
-    {
         _window->draw(_menu[i]);
-    }
 }
