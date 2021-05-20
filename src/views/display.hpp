@@ -251,6 +251,15 @@ public:
      * @confidence 2
      **/
     Coord getNestCreation();
+
+    /**
+     * start menu
+     * 
+     * @return void
+     *  
+     * @confidence 2
+     **/
+    int startMenu() { return _menu.start(); };
 };
 
 static void _help();

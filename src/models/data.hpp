@@ -23,6 +23,7 @@ struct Data
     unsigned int numberOfColony;
     unsigned int caseSize;
     unsigned int sugar;
+    unsigned int sugarCount;
     float speed;
     float decrease;
 

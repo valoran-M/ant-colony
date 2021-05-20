@@ -192,15 +192,17 @@ void Manager::_nestPheroInit(char colony)
 
 void Manager::_sugarCreation()
 {
-    unsigned int sugar = 0;
     Coord sugarCoord;
-    while (sugar < _data.sugar)
+    while (_data.sugarCount < _data.sugar)
     {
+        int i = 0;
+
         while (!_grid.getCase(sugarCoord = Coord(random_index(0, _data.width - 1),
                                                  random_index(0, _data.width - 1)))
-                    .isEmpty())
-            ;
-        _grid.getCase(sugarCoord).putSugar(10);
-        sugar++;
+                    .isEmpty() &&
+               i < 100)
+            i++;
+        _grid.getCase(sugarCoord).putSugar(20);
+        _data.sugarCount++;
     }
 }

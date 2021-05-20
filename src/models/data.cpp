@@ -20,7 +20,8 @@ Data::Data(unsigned int colony,
                             sugar(sugar),
                             caseSize(cellDim),
                             width(gridDim[0]),
-                            height(gridDim[1])
+                            height(gridDim[1]),
+                            sugarCount(0)
 {
 
     decrease = 1 / std::sqrt(float(width * width + height * height));

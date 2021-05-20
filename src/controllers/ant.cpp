@@ -63,6 +63,11 @@ bool Manager::_getSugar(Ant &antEntity)
         if (_grid.getCase(neigbour).getSugar() > 0)
         {
             _grid.getCase(neigbour).decreasesSugar();
+            if (_grid.getCase(neigbour).getSugar() == 0)
+            {
+                _data.sugarCount--;
+                _sugarCreation();
+            }
             antEntity.takeSugar(1);
             return true;
         }
@@ -138,8 +143,6 @@ bool Manager::_sugarPheroMove(Ant &antEntity)
 
     return find;
 }
-
-#include <iostream>
 
 bool Manager::_directionMove(Ant &antEntity)
 {

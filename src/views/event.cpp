@@ -87,6 +87,7 @@ Display::events Display::manageEvent()
                 pressL = true;
                 _grid->getCase(xGrid, yGrid).putSugar(20);
                 updataCell(_grid->getCase(xGrid, yGrid).getCoord());
+                _data->sugarCount++;
                 break;
             }
             break;
