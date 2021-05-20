@@ -15,17 +15,17 @@ Display::events Display::manageEvent()
             switch (_event.key.code)
             {
             case sf::Keyboard::Escape:
-                switch(_menu.start())
+                switch (_menu.start())
                 {
-                    case 0:
-                        break;
-                    
-                    case 1:
-                        return Display::events::reset;
-                        break;
-                    case 2:
-                        _window.close();
-                        break;
+                case 0:
+                    break;
+
+                case 1:
+                    return Display::events::reset;
+                    break;
+                case 2:
+                    _window.close();
+                    break;
                 }
             case sf::Keyboard::Up:
                 return Display::events::speedUp;
@@ -105,6 +105,7 @@ Display::events Display::manageEvent()
                     break;
                 _grid->getCase(xGrid, yGrid).putSugar(20);
                 updataCell(_grid->getCase(xGrid, yGrid).getCoord());
+                _data->sugarCount++;
                 break;
             }
         }

@@ -192,6 +192,7 @@ void Manager::_nestPheroInit(char colony)
 
 void Manager::_sugarCreation()
 {
+    std::cout << _data.sugarCount << std::endl;
     Coord sugarCoord;
     while (_data.sugarCount < _data.sugar)
     {
