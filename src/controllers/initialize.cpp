@@ -22,7 +22,8 @@ void Manager::_getData()
 {
     unsigned int max;
     while ((_data.width < 20 || _data.width > 1000) ||
-           (_data.height < 20 || _data.height > 1000))
+           (_data.height < 20 || _data.height > 1000) ||
+           _data.height != _data.width)
     {
         std::cout << "Shape of grid (x, y) : ";
         std::cin >> _data.width;
