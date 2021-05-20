@@ -19,8 +19,8 @@ void Manager::_antManger(unsigned int colony, unsigned int ant)
     {
         if (!_getSugar(antEntity))
             if (!_sugarPheroMove(antEntity))
-                //if (!_directionMove(antEntity))
-                _randomMove(antEntity);
+                if (!_directionMove(antEntity))
+                    _randomMove(antEntity);
     }
 }
 
