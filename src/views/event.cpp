@@ -137,6 +137,6 @@ static void _help()
               << std::endl
               << "DOWN  :   speed down"
               << std::endl
-              << "ECHAP :   pause"
+              << "ESCAPE:   menu pause"
               << std::endl;
 }

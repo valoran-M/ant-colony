@@ -65,6 +65,25 @@ make
 | -l / --largeness *number* | cell dimension |
 | -d / --dimension *number number* | grid dimension |
 
+### In simulation
+
+  >right click on an entity displays its data
+
+  >left click on an empty case put a sugar
+
+  |key|dedescriptions|
+|:-:|:-:|
+| h | show command in terminal |
+| g | display or delete borders |
+| r | reset |
+| p | pause |
+| q | quit |
+| b | barrier mode click for add barrier |
+| n | nest phero update |
+| UP | speed up |
+| DOWN | speed down |
+| ESCAPE | show pause menu |
+
 ## Code conventions
 
 ### Docstrings
