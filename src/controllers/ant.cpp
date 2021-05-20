@@ -200,7 +200,8 @@ void Manager::_randomMove(Ant &antEntity)
 
 void Manager::_antBirth(char colony)
 {
-    if (_data.colonies[colony].sugar > _data.colonies[colony].getNbAntInLife() * 2)
+    if (_data.colonies[colony].sugar > _data.colonies[colony].getNbAntInLife() * 2 && 
+        _data.colonies[colony].sugar > 5)
     {
         for (Coord &spawn : _data.colonies[colony].spawnableCase)
         {
