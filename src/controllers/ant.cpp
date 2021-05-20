@@ -207,7 +207,7 @@ void Manager::_antBirth(char colony)
             if (_grid.getCase(spawn).isEmpty())
             {
                 _data.colonies[colony].sugar -=
-                    _data.colonies[colony].getNbAntInLife();
+                    _data.colonies[colony].getNbAntInLife()  + 1;
                 _newAnt(spawn, colony);
                 return;
             }
