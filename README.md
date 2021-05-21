@@ -101,6 +101,9 @@ You can contact me if you want to improve by optimizing or making new concrete f
 
 [Project license](./LICENSE.md)
 
+## thanks
+
+Thanks to [Louis](https://github.com/MLouis8) for the idea of ​​the sugar pass between ants
 
 <div align="center">
   <img src="./utility/ant.png"/>
