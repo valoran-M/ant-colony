@@ -6,10 +6,10 @@ void help();
 
 int main(int argc, char const *argv[])
 {
-    unsigned int sugar = 0, colony = 0;
-    int cellDim = -1;
-    Coord gridDim(0, 0);
-    bool man = false, texture = false;
+    unsigned int sugar = 2, colony = 2;
+    int cellDim = 30;
+    Coord gridDim(30, 30);
+    bool man = false, texture = true;
 
     for (int i = 1; i < argc; i++)
     {
